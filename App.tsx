@@ -9,21 +9,15 @@ import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   useColorScheme,
-
 } from 'react-native';
 
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import Login from './src/BeforeLogin/Login';
 import SplashScreen from './src/BeforeLogin/Splash';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
 
 function App(): JSX.Element {

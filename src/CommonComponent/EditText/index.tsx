@@ -5,12 +5,11 @@ import {
   StyleSheet,
   TextStyle,
   KeyboardTypeOptions,
-  Text,
 } from 'react-native';
 import COLOR from '../../Util/Color';
 import { scale, verticalScale } from 'react-native-size-matters';
 import User from 'react-native-vector-icons/FontAwesome';
-import Password from 'react-native-vector-icons/MaterialCommunityIcons'
+import Password from 'react-native-vector-icons/MaterialCommunityIcons';
 interface Props {
   Placholder?: string;
   Value: string | undefined;
@@ -34,7 +33,7 @@ const EditText = (props: Props) => {
     ReturnKeyType,
     OnSubmit,
     KeyboradType,
-    showImg
+    showImg,
   } = props;
 
   return (
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: scale(6)
-  }
+  },
 });
 
 export default EditText;
