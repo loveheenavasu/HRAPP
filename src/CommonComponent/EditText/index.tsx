@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  View,
   TextInput,
   StyleSheet,
   TextStyle,
@@ -21,7 +20,7 @@ interface Props {
   OnSubmit?(): void;
 }
 
-const EditText = (props: Props) => {
+function EditText(props: Props): JSX.Element {
   const {
     Placholder,
     Value,
@@ -47,7 +46,7 @@ const EditText = (props: Props) => {
       keyboardType={KeyboradType}
     />
   );
-};
+}
 
 const styles = StyleSheet.create({
   main: {

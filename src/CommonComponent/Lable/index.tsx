@@ -7,7 +7,6 @@ interface Props {
   title: string;
   style?: TextStyle;
 }
-
 const Label = (props: Props) => {
   const {title, style} = props;
   return <Text style={[styles.main, {...style}]}>{title}</Text>;
