@@ -29,7 +29,7 @@ export default CustomButton;
 const styles = StyleSheet.create({
   btn: {
     alignSelf: 'center',
-    width: '90%',
+    width: '100%',
     backgroundColor: COLOR.GREEN,
     paddingVertical: verticalScale(12),
     alignItems: 'center',

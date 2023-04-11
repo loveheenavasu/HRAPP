@@ -31,7 +31,7 @@ const SplashScreen = () => {
           autoPlay
         />
       </View>
-      <CustomButton name="Login" btnStyle={{marginBottom: verticalScale(30)}} />
+      <CustomButton name="Login" btnStyle={styles.button_Con} />
     </>
   );
 };
@@ -46,6 +46,11 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     alignSelf: 'center',
     marginTop: verticalScale(20),
+  },
+  button_Con: {
+    width: '90%',
+    marginHorizontal: '5%',
+    marginBottom: verticalScale(30),
   },
 });
 
