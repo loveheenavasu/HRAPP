@@ -15,10 +15,14 @@ import FastImage from 'react-native-fast-image';
 import Images from '../../Util/Images';
 import ToastMsg from '../../CommonComponent/Toast/CustomToast';
 import {isEmailValid} from '../../Util/Validator';
-import * as Storage from '../../Service/Storage';
-import {UserData, UserId} from '../../Util/StorageKey';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserLogin} from '../../Redux/Action/loginReducer';
+import {RootState} from '../../Redux/store';
+import Loader from '../../CommonComponent/Loader';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const mUserData = useSelector((state: RootState) => state.loginReducer);
   const [email, setEmail] = useState<string>('');
   const [password, setpassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -45,8 +49,11 @@ const Login = () => {
         msg: 'Please enter password',
       });
     } else {
-      Storage.storeData(UserId, '1');
-      Storage.storeData(UserData, JSON.stringify({email: email}));
+      dispatch(
+        getUserLogin({email: email, name: 'Test Kumar', password: password}),
+      );
+      // Storage.storeData(UserId, '1');
+      // Storage.storeData(UserData, JSON.stringify({email: email}));
     }
   };
 
@@ -54,6 +61,7 @@ const Login = () => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.main_Con}>
+      {mUserData?.hideLoader && <Loader />}
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.main}>
           <Label title="Login to your Account" style={styles.title} />

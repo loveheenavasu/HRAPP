@@ -6,8 +6,11 @@ import Label from '../../CommonComponent/Lable';
 import * as Storage from '../../Service/Storage';
 import {UserData} from '../../Util/StorageKey';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useDispatch} from 'react-redux';
+import {logOut} from '../../Redux/Action/loginReducer';
 
 function CustomDrawerContent({navigation}) {
+  const dispatch = useDispatch();
   const [appVersion, setAppVersion] = useState<string>('1.0');
 
   useEffect(() => {
@@ -23,7 +26,13 @@ function CustomDrawerContent({navigation}) {
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
+      {
+        text: 'OK',
+        onPress: () => {
+          Storage.clearAsyncStorage();
+          dispatch(logOut());
+        },
+      },
     ]);
   };
 

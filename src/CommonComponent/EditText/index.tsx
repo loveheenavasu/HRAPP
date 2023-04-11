@@ -53,9 +53,13 @@ function EditText(props: Props): JSX.Element {
         {showImg && (
           <View style={styles.imgBox}>
             {Placholder == 'Email id' ? (
-              <User name="user" size={20} />
+              <User name="user" size={20} color={COLOR.LIGHT_GREY} />
             ) : (
-              <Password name="cellphone-key" size={20} />
+              <Password
+                name="cellphone-key"
+                size={20}
+                color={COLOR.LIGHT_GREY}
+              />
             )}
           </View>
         )}

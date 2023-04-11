@@ -5,10 +5,12 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import Login from './BeforeLogin/Login';
 import Dashboard from './AfterLogin/Dashboard';
 import * as Storage from './Service/Storage';
-import {UserId} from './Util/StorageKey';
+import {UserData} from './Util/StorageKey';
 import CustomDrawerContent from './AfterLogin/CustomDrawer';
 import {scale} from 'react-native-size-matters';
 import Loader from './CommonComponent/Loader';
+import {useSelector, useDispatch} from 'react-redux';
+import {setUserCredential} from './Redux/Action/loginReducer';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
@@ -21,6 +23,10 @@ const BeforeStack = () => {
           headerShown: false,
         }}>
         <beforeLoginStack.Screen component={Login} name="login" />
+        <beforeLoginStack.Screen
+          component={AfterLoginStack}
+          name="AfterLoginStack"
+        />
       </beforeLoginStack.Navigator>
     </NavigationContainer>
   );
@@ -45,14 +51,31 @@ const AfterLoginStack = () => {
 };
 
 const Navigator = () => {
+  const dispatch = useDispatch();
+  const mUserData = useSelector(state => state.loginReducer);
   const [userId, setUserId] = useState('');
   const [showLoader, setShowLoader] = useState(true);
+
   useEffect(() => {
-    Storage.getData(UserId).then(res => {
-      setUserId(res);
-      setShowLoader(false);
+    Storage.getData(UserData).then(res => {
+      let mdata = JSON.parse(res);
+      if (res) {
+        dispatch(setUserCredential({...mdata, userId: '1'}));
+        setUserId('1');
+        setShowLoader(false);
+      } else {
+        setShowLoader(false);
+      }
     });
   }, []);
+
+  useEffect(() => {
+    if (mUserData?.userId) {
+      setUserId(mUserData?.userId);
+    } else {
+      setUserId('');
+    }
+  }, [mUserData?.userId]);
 
   return (
     <>
