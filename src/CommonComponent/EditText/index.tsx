@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  View,
   TextInput,
   StyleSheet,
   TextStyle,
   KeyboardTypeOptions,
+  View
 } from 'react-native';
 import COLOR from '../../Util/Color';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -23,7 +23,7 @@ interface Props {
   showImg?: boolean;
 }
 
-const EditText = (props: Props) => {
+function EditText(props: Props): JSX.Element {
   const {
     Placholder,
     Value,
@@ -68,7 +68,7 @@ const EditText = (props: Props) => {
 
 
   );
-};
+}
 
 const styles = StyleSheet.create({
   main: {

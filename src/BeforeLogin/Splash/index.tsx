@@ -1,22 +1,21 @@
-import { View, StyleSheet, Text } from 'react-native'
-import { useRef, useEffect } from 'react'
+import {View, StyleSheet, Text} from 'react-native';
+import {useRef, useEffect} from 'react';
 import Lottie from 'lottie-react-native';
-import { scale, verticalScale } from 'react-native-size-matters';
+import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import CustomButton from '../../CommonComponent/CustomButton';
 
 const SplashScreen = () => {
-  const lottieRef = useRef('')
+  const lottieRef = useRef();
 
   const _finish = () => {
-    lottieRef.current.pause();
+    lottieRef.current?.pause();
   };
 
   useEffect(() => {
     let stopAnim = setTimeout(() => {
       _finish();
     }, 60000);
-
     return () => {
       clearTimeout(stopAnim);
     };
@@ -32,29 +31,22 @@ const SplashScreen = () => {
           autoPlay
         />
       </View>
-      <CustomButton
-        name='Login'
-        btnStyle={{ marginBottom: verticalScale(30) }}
-      />
+      <CustomButton name="Login" btnStyle={{marginBottom: verticalScale(30)}} />
     </>
-  )
-
-
-}
-
-export default SplashScreen
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
   },
   title: {
-    position: 'absolute',
-    fontSize: scale(20),
-    top: verticalScale(30),
-    left: scale(21),
+    fontSize: scale(17),
     color: COLOR.GREEN,
-    fontWeight: '800'
+    fontWeight: '800',
+    alignSelf: 'center',
+    marginTop: verticalScale(20),
   },
+});
 
-})
+export default SplashScreen;
