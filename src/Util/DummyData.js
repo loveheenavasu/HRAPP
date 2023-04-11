@@ -18,6 +18,10 @@ export const celebrationArr = [
     {id:7,event:'Happy Birthday !',name:'Karan Singh',date:'7 Nov 1992'},
 ]
 
-// export const NewHireArr = [
-//     {id:1,name:'Vishal',}
-// ]
+export const NewHireArr = [
+    {id:1,name:'Virat Kohli', date:'08 May 2023',dept:'Designing'},
+    {id:2,name:'John Cena', date:'01 March 2023',dept:'Web Devlopment'},
+    {id:3,name:'Rahul Gandhi', date:'18 Jan 2023',dept:'Business Development'},
+    {id:4,name:'Mithilesh Kumar', date:'28 Sept 2023',dept:'Mobile Development'},
+   
+]

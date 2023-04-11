@@ -6,7 +6,10 @@ import Calender from 'react-native-vector-icons/AntDesign'
 import User from 'react-native-vector-icons/EvilIcons'
 import Attach from 'react-native-vector-icons/Ionicons'
 import CustomButton from '../../CommonComponent/CustomButton'
-
+import NoHire from 'react-native-vector-icons/AntDesign'
+import ThumbUp from 'react-native-vector-icons/FontAwesome'
+import Chat from 'react-native-vector-icons/Ionicons'
+import EditText from '../../CommonComponent/EditText'
 interface Props {
     upcomingLeave?: boolean,
     leaveArr?: object[],
@@ -14,13 +17,22 @@ interface Props {
     celebration?: boolean,
     celebrationArr?: object[],
     companyLinks?: boolean,
-    companyLinkArr?:object[],
-    newHire?:boolean,
-    newHireArr?:object[]
+    companyLinkArr?: object[],
+    newHire?: boolean,
+    newHireArr?: object[],
+    happines?: boolean
 }
 
 const EventCard = (props: Props) => {
-    const { upcomingLeave, leaveArr, publicHolidayArr, celebration, celebrationArr, companyLinks,companyLinkArr,newHire,newHireArr} = props
+    const { upcomingLeave, leaveArr, publicHolidayArr, celebration, celebrationArr,
+        companyLinks, companyLinkArr, newHire, newHireArr, happines } = props
+
+    const _Hline = () => {
+        return (
+            <View style={styles.hLine}></View>
+        )
+    }
+
     return (
         <View style={styles.maincard}>
             {/*Upcoming Leaves Info Card*/}
@@ -50,7 +62,7 @@ const EventCard = (props: Props) => {
                                     renderItem={({ item }) => {
                                         return (
                                             <TouchableOpacity style={styles.rowView} onPress={() => null}>
-                                                <Calender name='calendar' size={50} />
+                                                <Calender name='calendar' size={30} />
                                                 <View style={styles.coloumView}>
                                                     <Label title={item?.holiday} style={styles.blackTxt} />
                                                     <Label title={item?.date} style={styles.blackTxt} />
@@ -58,6 +70,7 @@ const EventCard = (props: Props) => {
                                             </TouchableOpacity>
                                         )
                                     }}
+                                 ItemSeparatorComponent={_Hline}   
                                 />
                             ) :
                                 <Label title='No Upcoming Public Holiday' style={styles.leaveTxt} />
@@ -81,7 +94,7 @@ const EventCard = (props: Props) => {
                                         renderItem={({ item }) => {
                                             return (
                                                 <TouchableOpacity style={styles.rowView} onPress={() => null}>
-                                                    <User name='user' size={100} style={styles.userImg} />
+                                                    <User name='user' size={50} style={styles.userImg} />
                                                     <View style={[styles.coloumView,
                                                     {
                                                         marginLeft: scale(15),
@@ -97,6 +110,7 @@ const EventCard = (props: Props) => {
                                                 </TouchableOpacity>
                                             )
                                         }}
+                                        ItemSeparatorComponent={_Hline}
                                     />
                                 ) :
                                 <Label title='No Celebration' style={styles.leaveTxt} />
@@ -112,51 +126,100 @@ const EventCard = (props: Props) => {
                 companyLinks && (
                     <>
                         <Label title='Company Links' style={styles.heading} />
-                        { !companyLinkArr?.length ?
+                        {!companyLinkArr?.length ?
                             <>
-                               <TouchableOpacity>
-                            <Attach name='document-attach-sharp' size={100} color={COLOR.NAVY} style={styles.attachImg} />
-                        </TouchableOpacity>
-                        <Label title='No Links available' style={styles.leaveTxt} />
-                        <Label title='Why Dont you add some links today?' style={styles.leaveTxt} />
-                        <View style={[styles.rowView, { justifyContent: 'space-around' }]}>
-                            <CustomButton name='Add' btnStyle={styles.Btn} addLogo
-                                txtStyle={{ marginLeft: scale(11) }} />
-                            <CustomButton name='Edit' btnStyle={{
-                                backgroundColor: COLOR.NAVY,
-                                width: '30%',
-                            }} />
-                        </View>
+                                <TouchableOpacity>
+                                    <Attach name='document-attach-sharp' size={50} color={COLOR.NAVY} style={styles.attachImg} />
+                                </TouchableOpacity>
+                                <Label title='No Links available' style={styles.leaveTxt} />
+                                <Label title='Why Dont you add some links today?' style={styles.leaveTxt} />
+                                <View style={[styles.rowView, { justifyContent: 'space-around' }]}>
+                                    <CustomButton name='Add' btnStyle={styles.Btn} addLogo
+                                        txtStyle={{ marginLeft: scale(11) }} />
+                                    <CustomButton name='Edit' btnStyle={{
+                                        backgroundColor: COLOR.NAVY,
+                                        width: '25%',
+                                        paddingVertical: verticalScale(7),
+
+                                    }} />
+                                </View>
                             </>
                             :
                             <Text>Links will come here</Text>
                         }
-                     
+
                     </>
                 )
             }
 
-    {/*New Hire Info Card*/}
-    {
-        newHire && (
-         <>
-          <Label title='New Hires' style={styles.heading} />
-          {
-            newHireArr?.length ? (
-                <>
-                
-                </>
-            ) :
-            (
-                <>
-                
-                </>
-            )
-          }
-         </>
-         )
-    }
+            {/*New Hire Info Card*/}
+            {
+                newHire && (
+                    <>
+                        <Label title='New Hires' style={styles.heading} />
+                        {
+                            newHireArr?.length ? (
+                                <>
+                                    <FlatList
+                                        data={newHireArr}
+                                        keyExtractor={item => item?.id}
+                                        renderItem={({ item }) => {
+                                            return (
+                                                <TouchableOpacity style={styles.rowView} onPress={() => null}>
+                                                    <User name='user' size={50} style={styles.userImg} />
+                                                    <View style={[styles.coloumView,
+                                                    {
+                                                        marginLeft: scale(15),
+                                                        borderLeftWidth: 2,
+                                                        borderLeftColor: COLOR.NAVY,
+                                                        paddingLeft: scale(20)
+                                                    }]}>
+                                                        <Label title={item?.name} style={styles.blackTxt} />
+                                                        <Label title={item?.dept} style={styles.greyTxt} />
+                                                        <Label title={item?.date} style={styles.greyTxt} />
+                                                    </View>
+                                                </TouchableOpacity>
+                                            )
+                                        }}
+                                        ItemSeparatorComponent={_Hline}
+                                    />
 
+                                </>
+                            ) :
+                                (
+                                    <>
+                                        <NoHire name='contacts' size={90} color={COLOR.NAVY} style={styles.noHireImg} />
+                                        <Label title='Aww...No New hires today' style={styles.hireTxt} />
+                                    </>
+                                )
+                        }
+                    </>
+                )
+            }
+            {/*Happiness*/}
+
+            {
+                happines && (
+                    <>
+                        <Label title='Happiness' style={styles.heading} />
+                        <Label title='How are you feeling recently? Tell us' style={styles.leaveTxt} />
+                        <View style={[styles.rowView, { justifyContent: 'space-around' }]}>
+                            <TouchableOpacity>
+                                <ThumbUp name='thumbs-up' size={30} color={COLOR.GREEN} />
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <ThumbUp name='thumbs-down' size={30} color={COLOR.RED} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.hLine}></View>
+                        <View style={styles.rowView}>
+                            <Chat name='chatbubbles-sharp' size={30} color={COLOR.NAVY} />
+                            <Label title='Hmm.. What are you thinking?' style={styles.chatTxt} />
+                        </View>
+                        <EditText Placholder='Enter your thoughts' outerBoxStyle={{ marginTop: verticalScale(5) }} />
+                    </>
+                )
+            }
         </View>
     )
 
@@ -170,7 +233,7 @@ const styles = StyleSheet.create({
         marginTop: verticalScale(10)
     },
     heading: {
-        fontSize: scale(16),
+        fontSize: scale(14),
         textAlign: 'center',
         color: COLOR.NAVY,
         fontWeight: '600'
@@ -201,16 +264,36 @@ const styles = StyleSheet.create({
         paddingLeft: scale(11)
     },
     userImg: {
-        height: 100,
+        height: 60,
     },
     attachImg: {
         alignSelf: 'center'
     },
     Btn: {
         backgroundColor: COLOR.NAVY,
-        width: '30%',
+        width: '25%',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        paddingLeft: scale(7)
+        paddingLeft: scale(7),
+        paddingVertical: verticalScale(7)
+    },
+    noHireImg: {
+        alignSelf: 'center'
+    },
+    hireTxt: {
+        textAlign: 'center',
+        fontSize: scale(15),
+        color: COLOR.BLACK,
+        fontWeight: '600'
+    },
+    hLine: {
+        height: scale(1),
+        width: '95%',
+        backgroundColor: COLOR.GREY,
+        alignSelf: 'center',
+        marginTop: verticalScale(2)
+    },
+    chatTxt: {
+        marginLeft: scale(7)
     }
 })

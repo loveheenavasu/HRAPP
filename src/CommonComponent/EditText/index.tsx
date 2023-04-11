@@ -4,7 +4,8 @@ import {
   StyleSheet,
   TextStyle,
   KeyboardTypeOptions,
-  View
+  View,
+  ViewStyle,
 } from 'react-native';
 import COLOR from '../../Util/Color';
 import { scale, verticalScale } from 'react-native-size-matters';
@@ -21,6 +22,7 @@ interface Props {
   ReturnKeyType?: 'default' | 'go' | 'google' | 'next' | 'done';
   OnSubmit?(): void;
   showImg?: boolean;
+  outerBoxStyle?:ViewStyle
 }
 
 function EditText(props: Props): JSX.Element {
@@ -34,11 +36,12 @@ function EditText(props: Props): JSX.Element {
     OnSubmit,
     KeyboradType,
     showImg,
+    outerBoxStyle,
   } = props;
 
   return (
     <>
-      <View style={styles.inputBox}>
+      <View style={[styles.inputBox,{...outerBoxStyle}]}>
         {
           showImg && (
             <View style={styles.imgBox}>
