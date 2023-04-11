@@ -17,6 +17,8 @@ interface Props {
   companyLinkArr?: object[];
   newHire?: boolean;
   newHireArr?: object[];
+  happines?: boolean
+
 }
 
 const EventCard = (props: Props) => {
@@ -30,6 +32,7 @@ const EventCard = (props: Props) => {
     companyLinkArr,
     newHire,
     newHireArr,
+    happines
   } = props;
   return (
     <View style={styles.maincard}>
@@ -148,7 +151,37 @@ const EventCard = (props: Props) => {
           )}
         </>
       )}
+      {/*Happiness*/}
 
+      {happines && (
+        <>
+          <Label title="Happiness" style={styles.heading} />
+          <Label
+            title="How are you feeling recently? Tell us"
+            style={styles.leaveTxt}
+          />
+          <View style={[styles.rowView, {justifyContent: 'space-around'}]}>
+            <TouchableOpacity>
+              <ThumbUp name="thumbs-up" size={30} color={COLOR.GREEN} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <ThumbUp name="thumbs-down" size={30} color={COLOR.RED} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.hLine}></View>
+          <View style={styles.rowView}>
+            <Chat name="chatbubbles-sharp" size={30} color={COLOR.NAVY} />
+            <Label
+              title="Hmm.. What are you thinking?"
+              style={styles.chatTxt}
+            />
+          </View>
+          <EditText
+            Placholder="Enter your thoughts"
+            outerBoxStyle={{marginTop: verticalScale(5)}}
+          />
+        </>
+      )}
       {/*New Hire Info Card*/}
       {newHire && (
         <>

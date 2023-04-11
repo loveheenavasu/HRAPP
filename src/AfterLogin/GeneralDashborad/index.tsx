@@ -2,7 +2,12 @@ import {ScrollView, View} from 'react-native';
 import styles from './styles';
 import EventCard from './EventCard';
 import Label from '../../CommonComponent/Lable';
-import {Arr, celebrationArr, pubHoliArr} from '../../Util/DummyData';
+import {
+  Arr,
+  celebrationArr,
+  pubHoliArr,
+  NewHireArr,
+} from '../../Util/DummyData';
 const GeneralDashboard = () => {
   return (
     <ScrollView style={styles.main}>
@@ -10,7 +15,8 @@ const GeneralDashboard = () => {
       <EventCard upcomingLeave leaveArr={Arr} publicHolidayArr={pubHoliArr} />
       <EventCard celebration celebrationArr={celebrationArr} />
       <EventCard companyLinks companyLinkArr={[]} />
-      <EventCard newHire newHireArr={[]} />
+      <EventCard newHire newHireArr={NewHireArr} />
+      <EventCard happines />
     </ScrollView>
   );
 };

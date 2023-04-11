@@ -5,6 +5,7 @@ import {
   TextStyle,
   KeyboardTypeOptions,
   View,
+  ViewStyle,
   TouchableOpacity,
 } from 'react-native';
 import COLOR from '../../Util/Color';
@@ -26,6 +27,7 @@ interface Props {
   showEye?: boolean;
   onClickSecure?: () => void;
   SecureText?: boolean;
+  outerBoxStyle?: ViewStyle;
 }
 
 function EditText(props: Props): JSX.Element {
@@ -42,21 +44,18 @@ function EditText(props: Props): JSX.Element {
     showEye,
     onClickSecure,
     SecureText,
+    outerBoxStyle,
   } = props;
 
   return (
     <>
-      <View style={styles.inputBox}>
+      <View style={[styles.inputBox, {...outerBoxStyle}]}>
         {showImg && (
           <View style={styles.imgBox}>
-            {Placholder === 'Email id' ? (
-              <User name="user" size={scale(20)} color={COLOR.LIGHT_GREY} />
+            {Placholder == 'Email id' ? (
+              <User name="user" size={20} />
             ) : (
-              <Password
-                name="cellphone-key"
-                size={scale(20)}
-                color={COLOR.LIGHT_GREY}
-              />
+              <Password name="cellphone-key" size={20} />
             )}
           </View>
         )}
