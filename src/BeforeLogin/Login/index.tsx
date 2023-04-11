@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -13,11 +13,42 @@ import styles from './styles';
 import CustomButton from '../../CommonComponent/CustomButton';
 import FastImage from 'react-native-fast-image';
 import Images from '../../Util/Images';
+import ToastMsg from '../../CommonComponent/Toast/CustomToast';
+import {isEmailValid} from '../../Util/Validator';
+import * as Storage from '../../Service/Storage';
+import {UserId} from '../../Util/StorageKey';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setpassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const submit = () => {
+    if (!email?.trim() && !password?.trim()) {
+      ToastMsg({
+        status: 'error',
+        msg: 'All fields are required',
+      });
+    } else if (!email.trim()) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please enter Email',
+      });
+    } else if (!isEmailValid(email.trim())) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please enter valid Email',
+      });
+    } else if (!password.trim()) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please enter password',
+      });
+    } else {
+      Storage.storeData(UserId, '1');
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -33,7 +64,7 @@ const Login = () => {
           <EditText
             Placholder="Email id"
             Value={email}
-            OnChangeText={e => setEmail(e)}
+            OnChangeText={e => setEmail(e.trim())}
             showImg
           />
           <EditText
@@ -48,7 +79,7 @@ const Login = () => {
           <TouchableOpacity style={styles.forgotTxtBox}>
             <Text style={styles.forgotTxt}>Forgot My Password</Text>
           </TouchableOpacity>
-          <CustomButton name="Login" />
+          <CustomButton name="Login" onPress={() => submit()} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

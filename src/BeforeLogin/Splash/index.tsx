@@ -1,5 +1,5 @@
+import React, {useRef, useEffect} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import {useRef, useEffect} from 'react';
 import Lottie from 'lottie-react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
