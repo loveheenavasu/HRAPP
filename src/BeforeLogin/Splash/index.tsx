@@ -3,7 +3,6 @@ import {View, StyleSheet, Text} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
-import CustomButton from '../../CommonComponent/CustomButton';
 
 const SplashScreen = () => {
   const lottieRef = useRef();
@@ -31,7 +30,6 @@ const SplashScreen = () => {
           autoPlay
         />
       </View>
-      <CustomButton name="Login" btnStyle={styles.button_Con} />
     </>
   );
 };
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
     color: COLOR.GREEN,
     fontWeight: '800',
     alignSelf: 'center',
-    marginTop: verticalScale(20),
+    marginTop: verticalScale(40),
   },
   button_Con: {
     width: '90%',

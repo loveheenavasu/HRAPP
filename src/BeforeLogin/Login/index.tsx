@@ -16,7 +16,7 @@ import Images from '../../Util/Images';
 import ToastMsg from '../../CommonComponent/Toast/CustomToast';
 import {isEmailValid} from '../../Util/Validator';
 import * as Storage from '../../Service/Storage';
-import {UserId} from '../../Util/StorageKey';
+import {UserData, UserId} from '../../Util/StorageKey';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
@@ -46,6 +46,7 @@ const Login = () => {
       });
     } else {
       Storage.storeData(UserId, '1');
+      Storage.storeData(UserData, JSON.stringify({email: email}));
     }
   };
 
