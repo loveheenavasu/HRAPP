@@ -48,7 +48,9 @@ function CustomDrawerContent({navigation}) {
         </View>
         <Label style={styles.home_Label} title="Home" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.second_Child}>
+      <TouchableOpacity
+        style={styles.second_Child}
+        onPress={() => navigation.navigate('GeneralDashboard')}>
         <View style={styles.leave_circle_Con}>
           <Entypo name="calendar" color={COLOR.WHITE} size={scale(18)} />
         </View>

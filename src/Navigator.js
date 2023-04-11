@@ -11,6 +11,7 @@ import {scale} from 'react-native-size-matters';
 import Loader from './CommonComponent/Loader';
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserCredential} from './Redux/Action/loginReducer';
+import GeneralDashboard from './AfterLogin/GeneralDashborad';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
@@ -45,6 +46,10 @@ const AfterLoginStack = () => {
           headerShown: false,
         }}>
         <afterDrawerLoginStack.Screen component={Dashboard} name="Dashboard" />
+        <afterDrawerLoginStack.Screen
+          component={GeneralDashboard}
+          name="GeneralDashboard"
+        />
       </afterDrawerLoginStack.Navigator>
     </NavigationContainer>
   );
