@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: scale(17),
-    color: COLOR.GREEN,
+    color: COLOR.PRIMARY,
     fontWeight: '800',
     alignSelf: 'center',
     marginTop: verticalScale(40),

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   btn: {
     alignSelf: 'center',
     width: '100%',
-    backgroundColor: COLOR.GREEN,
+    backgroundColor: COLOR.PRIMARY,
     paddingVertical: verticalScale(12),
     alignItems: 'center',
     borderRadius: 7,

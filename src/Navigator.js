@@ -8,6 +8,7 @@ import * as Storage from './Service/Storage';
 import {UserId} from './Util/StorageKey';
 import CustomDrawerContent from './AfterLogin/CustomDrawer';
 import {scale} from 'react-native-size-matters';
+import Loader from './CommonComponent/Loader';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
@@ -45,13 +46,19 @@ const AfterLoginStack = () => {
 
 const Navigator = () => {
   const [userId, setUserId] = useState('');
+  const [showLoader, setShowLoader] = useState(true);
   useEffect(() => {
     Storage.getData(UserId).then(res => {
       setUserId(res);
+      setShowLoader(false);
     });
   }, []);
 
-  return <>{userId ? <AfterLoginStack /> : <BeforeStack />}</>;
+  return (
+    <>
+      {showLoader ? <Loader /> : userId ? <AfterLoginStack /> : <BeforeStack />}
+    </>
+  );
 };
 
 export default Navigator;

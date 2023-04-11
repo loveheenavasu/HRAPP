@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   forgotTxt: {
     textAlign: 'right',
-    color: COLOR.GREEN,
+    color: COLOR.PRIMARY,
     fontSize: scale(12),
     textDecorationLine: 'underline',
   },
