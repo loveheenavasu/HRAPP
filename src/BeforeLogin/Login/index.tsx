@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  Keyboard,
 } from 'react-native';
 import EditText from '../../CommonComponent/EditText';
 import Label from '../../CommonComponent/Lable';
@@ -19,6 +20,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../../Redux/Action/loginReducer';
 import {RootState} from '../../Redux/store';
 import Loader from '../../CommonComponent/Loader';
+import {verticalScale} from 'react-native-size-matters';
+import {TextInput} from 'react-native-gesture-handler';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,6 +29,10 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setpassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const emailRef = useRef();
+  // const passwordRef = useRef();
+  const passwordRef = useRef<TextInput | null>(null);
 
   const submit = () => {
     if (!email?.trim() && !password?.trim()) {
@@ -75,8 +82,11 @@ const Login = () => {
             Value={email}
             OnChangeText={e => setEmail(e.trim())}
             showImg
+            OnSubmit={() => passwordRef?.current.focus()}
+            ReturnKeyType="next"
           />
           <EditText
+            inputRef={passwordRef}
             Placholder="Password"
             Value={password}
             OnChangeText={e => setpassword(e)}
@@ -84,11 +94,19 @@ const Login = () => {
             showEye={true}
             onClickSecure={() => setShowPassword(!showPassword)}
             SecureText={showPassword}
+            OnSubmit={() => Keyboard.dismiss()}
+            ReturnKeyType="done"
           />
           <TouchableOpacity style={styles.forgotTxtBox}>
             <Text style={styles.forgotTxt}>Forgot My Password</Text>
           </TouchableOpacity>
-          <CustomButton name="Login" onPress={() => submit()} />
+          <CustomButton
+            name="Login"
+            onPress={() => submit()}
+            btnStyle={{
+              height: verticalScale(34),
+            }}
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

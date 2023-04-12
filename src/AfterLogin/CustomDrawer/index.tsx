@@ -8,6 +8,7 @@ import {UserData} from '../../Util/StorageKey';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../Redux/Action/loginReducer';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 function CustomDrawerContent({navigation}) {
   const dispatch = useDispatch();
@@ -42,7 +43,9 @@ function CustomDrawerContent({navigation}) {
         <Label style={styles.short_Name_Label} title="MK" />
       </View>
       <Label style={styles.name_Label} title="Mith Kumar" />
-      <TouchableOpacity style={styles.first_Child}>
+      <TouchableOpacity
+        style={styles.first_Child}
+        onPress={() => navigation.navigate('Dashboard')}>
         <View style={styles.circle_Con}>
           <Entypo name="home" color={COLOR.WHITE} size={scale(18)} />
         </View>
@@ -55,6 +58,18 @@ function CustomDrawerContent({navigation}) {
           <Entypo name="calendar" color={COLOR.WHITE} size={scale(18)} />
         </View>
         <Label style={styles.home_Label} title="Leave" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.second_Child}
+        onPress={() => navigation.navigate('ChangePassword')}>
+        <View style={styles.circle_Con}>
+          <FontAwesome
+            name="expeditedssl"
+            color={COLOR.WHITE}
+            size={scale(22)}
+          />
+        </View>
+        <Label style={styles.home_Label} title="ChangePassword" />
       </TouchableOpacity>
       <View style={styles.logout_Con}>
         <TouchableOpacity onPress={() => logOutAlert()}>

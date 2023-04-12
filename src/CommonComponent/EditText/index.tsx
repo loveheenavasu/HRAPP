@@ -17,10 +17,9 @@ interface Props {
   Placholder?: string;
   Value: string | undefined;
   Style?: TextStyle;
-  PlaceHolder?: string;
   OnChangeText?: (txt: any) => void;
   KeyboradType?: KeyboardTypeOptions | undefined;
-  ref?: string;
+  inputRef?: any;
   ReturnKeyType?: 'default' | 'go' | 'google' | 'next' | 'done';
   OnSubmit?(): void;
   showImg?: boolean;
@@ -36,7 +35,7 @@ function EditText(props: Props): JSX.Element {
     Value,
     OnChangeText,
     Style,
-    ref,
+    inputRef,
     ReturnKeyType,
     OnSubmit,
     KeyboradType,
@@ -64,7 +63,7 @@ function EditText(props: Props): JSX.Element {
           </View>
         )}
         <TextInput
-          ref={ref}
+          ref={inputRef}
           placeholder={Placholder}
           value={Value}
           onChangeText={OnChangeText}

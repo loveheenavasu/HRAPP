@@ -6,7 +6,6 @@ export default styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: COLOR.GREY,
-    paddingHorizontal: scale(7),
   },
   title: {
     fontSize: scale(21),

@@ -22,7 +22,7 @@ const CustomButton = (props: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.btn, {...btnStyle}]}>
       {addLogo && (
-        <Plus name='plus' size={20} color={COLOR.WHITE}/>
+        <Plus name='plus' size={scale(11)} color={COLOR.WHITE}/>
       )}
       <Text style={[styles.txt, {...txtStyle}]}>{name}</Text>
     </TouchableOpacity>
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     backgroundColor: COLOR.PRIMARY,
-    paddingVertical: verticalScale(12),
     alignItems: 'center',
+    justifyContent:"center",
     borderRadius: 7,
   },
   txt: {
