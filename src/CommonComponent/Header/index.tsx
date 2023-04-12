@@ -4,18 +4,22 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../Lable';
 import Feather from 'react-native-vector-icons/Feather';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
-  title: string;
+  title?: string;
   navigation?: any;
 }
 
 const Header = (props: Props) => {
-  const {title, navigation} = props;
+  const {title} = props;
+  const navigation = useNavigation();
 
   return (
     <View style={styles.main}>
-      <TouchableOpacity style={styles.first_Child}>
+      <TouchableOpacity
+        style={styles.first_Child}
+        onPress={() => navigation?.toggleDrawer()}>
         <Feather name="menu" size={scale(22)} color={COLOR.PRIMARY} />
       </TouchableOpacity>
       <View style={styles.second_Child}>
@@ -31,6 +35,8 @@ const styles = StyleSheet.create({
     height: verticalScale(45),
     backgroundColor: COLOR.WHITE,
     flexDirection: 'row',
+    borderBottomColor: COLOR.LIGHT_GREY,
+    borderBottomWidth: scale(0.6),
   },
   first_Child: {
     width: '15%',

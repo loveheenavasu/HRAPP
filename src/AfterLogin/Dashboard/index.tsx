@@ -1,13 +1,19 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
+import styles from './styles';
+import DashboardCard from './DashboardCard';
 import Header from '../../CommonComponent/Header';
-
-const Dashboard = (navigation: any) => {
+import {NextpubHoli, lastLeaveData, pubHoliArr, upcomingLeave} from '../../Util/DummyData'
+const Dashboard = () => {
   return (
-    <View style={{width: '100%', height: '100%'}}>
-      <Header title="Dashboard" navigation={navigation} />
-      <Text>mith</Text>
-    </View>
+    <ScrollView style={styles.main}>
+      <Header/>
+      <DashboardCard title='Dashboard' titleStyle={styles.title}/>
+      <DashboardCard title='UPCOMING LEAVE' titleStyle={styles.normalTitle} rightLogo DataArr={upcomingLeave}/>
+      <DashboardCard title='LAST LEAVE TAKEN' titleStyle={styles.normalTitle} rightLogo  DataArr={lastLeaveData}/>
+      <DashboardCard title='NEXT PUBLIC HOLIDAY' titleStyle={styles.normalTitle}rightLogo DataArr={NextpubHoli}/> 
+      <DashboardCard leave={true}/>
+    </ScrollView>
   );
 };
 

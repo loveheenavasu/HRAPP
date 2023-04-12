@@ -25,3 +25,20 @@ export const NewHireArr = [
     {id:4,name:'Mithilesh Kumar', date:'28 Sept 2023',dept:'Mobile Development'},
    
 ]
+
+export const upcomingLeave = [
+    {id:1, date:'08 May 2023',day:'Tuesday'},
+    {id:2, date:'28 June 2023',day:'Wednesday'},
+    {id:3, date:'03 May 2023',day:'Monday'},
+    {id:4, date:'30 Sept 2023',day:'Friday'},
+    {id:5, date:'07 Aug 2023',day:'wednesday'},
+    {id:6, date:'04 Nov 2023',day:'Tuesday'},
+]
+
+export const lastLeaveData = [
+    {id:1, days:'2 Days',fromTo:'10/2/2023 - 12/2/2023',type:'Annual'},
+]
+
+export const NextpubHoli = [
+    {id:1, on:'22/4/2023',name:'Eid al-Fitr'},
+]
