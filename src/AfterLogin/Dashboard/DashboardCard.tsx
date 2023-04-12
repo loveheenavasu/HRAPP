@@ -9,22 +9,22 @@ import CustomButton from "../../CommonComponent/CustomButton";
 import Summary from 'react-native-vector-icons/Ionicons';
 import Adjust from 'react-native-vector-icons/Feather';
 
-interface MyObject {
-    id?: number;
-    date?: string;
-    day?: string;
-    type?: string;
-    fromTo?: string;
-    days?: string;
-    name?: string;
-    on?: string;
-}
+// interface MyObject {
+//     id?: number;
+//     date?: string;
+//     day?: string;
+//     type?: string;
+//     fromTo?: string;
+//     days?: string;
+//     name?: string;
+//     on?: string;
+// }
 
 interface Props {
     title?: string;
     titleStyle?: TextStyle;
     rightLogo?: boolean;
-    DataArr?: MyObject[];
+    DataArr?: object[];
     leave?: boolean;
 }
 
