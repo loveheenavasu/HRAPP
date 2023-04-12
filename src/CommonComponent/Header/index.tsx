@@ -7,7 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
 interface Props {
-  title: string;
+  title?: string;
   navigation?: any;
 }
 

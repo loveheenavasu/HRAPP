@@ -4,7 +4,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 
 interface Props {
-  title: string;
+  title?: string;
   style?: TextStyle;
 }
 const Label = (props: Props) => {
