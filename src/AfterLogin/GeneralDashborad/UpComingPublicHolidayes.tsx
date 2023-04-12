@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: scale(2),
     marginBottom: 0,
     color: COLOR.BLACK,
-    opacity: 0.7,
+    opacity: 0.4,
   },
 });
 

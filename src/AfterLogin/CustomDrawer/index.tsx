@@ -40,9 +40,9 @@ function CustomDrawerContent({navigation}) {
   return (
     <View style={styles.main}>
       <View style={styles.profile_Icon_Con}>
-        <Label style={styles.short_Name_Label} title="MK" />
+        <Label style={styles.short_Name_Label} title="TK" />
       </View>
-      <Label style={styles.name_Label} title="Mith Kumar" />
+      <Label style={styles.name_Label} title="Profile Name" />
       <TouchableOpacity
         style={styles.first_Child}
         onPress={() => navigation.navigate('Dashboard')}>

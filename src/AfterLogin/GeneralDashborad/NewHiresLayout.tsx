@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     fontSize: scale(11),
     color: COLOR.BLACK,
-    opacity: 0.6,
+    opacity: 0.4,
   },
   empty_Con: {
     width: '100%',

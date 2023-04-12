@@ -29,9 +29,7 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setpassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const emailRef = useRef();
-  // const passwordRef = useRef();
+  
   const passwordRef = useRef<TextInput | null>(null);
 
   const submit = () => {
@@ -104,7 +102,7 @@ const Login = () => {
             name="Login"
             onPress={() => submit()}
             btnStyle={{
-              height: verticalScale(34),
+              height: verticalScale(38),
             }}
           />
         </View>

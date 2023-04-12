@@ -1,19 +1,37 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import styles from './styles';
-import DashboardCard from './DashboardCard';
 import Header from '../../CommonComponent/Header';
-import {NextpubHoli, lastLeaveData, pubHoliArr, upcomingLeave} from '../../Util/DummyData'
+import {
+  NextpubHoli,
+  lastLeaveData,
+  pubHoliArr,
+  upcomingLeave,
+} from '../../Util/DummyData';
+import DashboardLayout from './DashboardLayout';
+import {scale, verticalScale} from 'react-native-size-matters';
+import UpComingLeaveLayout from './UpcomingLeaveLayout';
+import LastLeaveTakenLayout from './LastLeaveTakenLayout';
+import PublicHolidayLayout from './PublicHolidayLayout';
+import LeaveLayout from './LeaveLayout';
 const Dashboard = () => {
   return (
-    <ScrollView style={styles.main}>
-      <Header/>
-      <DashboardCard title='Dashboard' titleStyle={styles.title}/>
-      <DashboardCard title='UPCOMING LEAVE' titleStyle={styles.normalTitle} rightLogo DataArr={upcomingLeave}/>
-      <DashboardCard title='LAST LEAVE TAKEN' titleStyle={styles.normalTitle} rightLogo  DataArr={lastLeaveData}/>
-      <DashboardCard title='NEXT PUBLIC HOLIDAY' titleStyle={styles.normalTitle}rightLogo DataArr={NextpubHoli}/> 
-      <DashboardCard leave={true}/>
-    </ScrollView>
+    <>
+      <Header title="Dashboard" />
+      <ScrollView
+        style={styles.main}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: verticalScale(100),
+          paddingHorizontal: scale(10),
+        }}>
+        <DashboardLayout />
+        <UpComingLeaveLayout list={upcomingLeave} />
+        <LastLeaveTakenLayout list={lastLeaveData} />
+        <PublicHolidayLayout list={NextpubHoli} />
+        <LeaveLayout />
+      </ScrollView>
+    </>
   );
 };
 

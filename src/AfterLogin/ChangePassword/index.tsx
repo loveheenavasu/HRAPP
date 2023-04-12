@@ -111,11 +111,11 @@ const ChangePassword = () => {
             name="Update"
             btnStyle={styles.button_Con}
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.delete_Con}
             onPress={() => deleteAlert()}>
             <Label title="Delete Account" style={styles.delete_Label} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </>
       </ScrollView>
     </KeyboardAvoidingView>

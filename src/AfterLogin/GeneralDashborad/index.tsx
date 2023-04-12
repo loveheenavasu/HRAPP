@@ -1,7 +1,4 @@
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import styles from './styles';
-import EventCard from './EventCard';
-import Label from '../../CommonComponent/Lable';
 import {
   Arr,
   celebrationArr,
@@ -39,15 +36,6 @@ const GeneralDashboard = () => {
           <CompanyLinkLayout />
           <NewHiresLayout list={NewHireArr} />
           <HappinesLayout />
-          {/* <EventCard
-            upcomingLeave
-            leaveArr={Arr}
-            publicHolidayArr={pubHoliArr}
-          />
-          <EventCard celebration celebrationArr={celebrationArr} />
-          <EventCard companyLinks companyLinkArr={[]} />
-          <EventCard newHire newHireArr={NewHireArr} />
-          <EventCard happines /> */}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
