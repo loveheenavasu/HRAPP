@@ -67,7 +67,7 @@ const AfterLoginStack = () => {
           component={LeaveSummary}
           name="LeaveSummary"
         />
-         <afterDrawerLoginStack.Screen
+        <afterDrawerLoginStack.Screen
           component={LeaveAdjustment}
           name="LeaveAdjustment"
         />
