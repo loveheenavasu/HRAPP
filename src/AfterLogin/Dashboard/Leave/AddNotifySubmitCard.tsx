@@ -5,7 +5,7 @@ import EditText from "../../../CommonComponent/EditText"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import Add from 'react-native-vector-icons/AntDesign'
 import { useState } from "react"
-import DropDown from "../../../CommonComponent/DropDown"
+import DropDownSelect from "../../../CommonComponent/DropDownSelect"
 import { HrMailngData } from "../../../Util/DummyData"
 
 const AddNotifySubmitCard = ()=>{
@@ -14,7 +14,7 @@ const AddNotifySubmitCard = ()=>{
     <View style={commonStyle.main}>
       <Label title="Notify Person" style={commonStyle.headingTxt}/>
       <View style={commonStyle.rowView}>
-       <DropDown
+       <DropDownSelect
        Data={HrMailngData}
        onSelect={(selectedItem:any)=>{
         Alert.alert('selected item-->',selectedItem)
