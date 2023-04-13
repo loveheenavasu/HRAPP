@@ -79,3 +79,14 @@ export const lastLeaveData = [
 ];
 
 export const NextpubHoli = [{id: 1, on: '22/4/2023', name: 'Eid al-Fitr'}];
+
+export const LeaveDetailsArr = [
+  {id:1,date:'10 Apr 2023',day:'1 days'},
+  {id:2,date:'23 May 2023',day:'0.5 days'},
+]
+
+export const LeaveUnit = ["Egypt", "Canada", "Australia", "Ireland"]
+
+export const LeaveDays = ['1 Day','0.5 Day']
+
+export const HrMailngData = ['hr1@gmail.com','hr2@gmail.com','hr3@gmail.com','hr4@gmail.com'];

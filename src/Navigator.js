@@ -13,6 +13,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setUserCredential} from './Redux/Action/loginReducer';
 import GeneralDashboard from './AfterLogin/GeneralDashborad';
 import ChangePassword from './AfterLogin/ChangePassword';
+import ApplyLeave from './AfterLogin/Dashboard/Leave/ApplyLeave';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
@@ -54,6 +55,10 @@ const AfterLoginStack = () => {
         <afterDrawerLoginStack.Screen
           component={ChangePassword}
           name="ChangePassword"
+        />
+         <afterDrawerLoginStack.Screen
+          component={ApplyLeave}
+          name="ApplyLeave"
         />
       </afterDrawerLoginStack.Navigator>
     </NavigationContainer>
