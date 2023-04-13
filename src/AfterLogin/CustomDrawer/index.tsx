@@ -45,7 +45,7 @@ function CustomDrawerContent({navigation}) {
       <Label style={styles.name_Label} title="Profile Name" />
       <TouchableOpacity
         style={styles.first_Child}
-        onPress={() => navigation.navigate('ApplyLeave')}>
+        onPress={() => navigation.navigate('Dashboard')}>
         <View style={styles.circle_Con}>
           <Entypo name="home" color={COLOR.WHITE} size={scale(18)} />
         </View>
