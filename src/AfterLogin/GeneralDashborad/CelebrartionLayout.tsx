@@ -14,11 +14,17 @@ const CelebrationLayout = (props: Props) => {
 
   return (
     <View style={styles.main}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
       <Label style={styles.title_Label} title="Upcoming Leave" />
+        <TouchableOpacity>
+          <Label style={styles.viewAll_Label} title="View ALL" />
+        </TouchableOpacity>
+        </View>
+      
       <FlatList
-        nestedScrollEnabled={true}
+        nestedScrollEnabled={false}
         showsVerticalScrollIndicator={false}
-        data={list}
+        data={list?.slice(0,3)}
         keyExtractor={item => item?.id}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}
         renderItem={({item}) => {
@@ -65,6 +71,12 @@ const styles = StyleSheet.create({
     color: COLOR.NAVY,
     fontWeight: 'bold',
     fontSize: scale(15),
+    opacity: 0.8,
+  },
+  viewAll_Label: {
+    color: COLOR.NAVY,
+    fontWeight: 'bold',
+    fontSize: scale(11),
     opacity: 0.8,
   },
   rowView: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import COLOR from '../../Util/Color';
 import {verticalScale, scale} from 'react-native-size-matters';
@@ -14,11 +14,16 @@ const UpcomingLeave = (props: Props) => {
 
   return (
     <View style={styles.main}>
-      <Label style={styles.title_Label} title="Upcoming Leave" />
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Label style={styles.title_Label} title="Upcoming Leave" />
+        <TouchableOpacity>
+          <Label style={styles.viewAll_Label} title="View ALL" />
+        </TouchableOpacity>
+      </View>
       <FlatList
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
-        data={list}
+        data={list?.slice(0,3)}
         renderItem={({item, index}) => {
           return (
             <View style={styles.list_Main}>
@@ -70,6 +75,12 @@ const styles = StyleSheet.create({
     color: COLOR.NAVY,
     fontWeight: 'bold',
     fontSize: scale(15),
+    opacity: 0.8,
+  },
+  viewAll_Label: {
+    color: COLOR.NAVY,
+    fontWeight: 'bold',
+    fontSize: scale(11),
     opacity: 0.8,
   },
   empty_Con: {

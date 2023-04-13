@@ -17,10 +17,13 @@ const UpComingLeaveLayout = (props: Props) => {
     <View style={styles.main}>
       <View style={styles.header_Con}>
         <Label title="UPCOMING LEAVE" style={styles.s_Title} />
-        <Home name="home" size={scale(23)} color={COLOR.LIGHT_GREY} />
+        {/* <Home name="home" size={scale(23)} color={COLOR.LIGHT_GREY} /> */}
+        <TouchableOpacity>
+          <Label style={styles.viewAll_Label} title="View ALL" />
+        </TouchableOpacity>
       </View>
       <FlatList
-        data={list}
+        data={list?.slice(0,3)}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => {
           return (
@@ -75,6 +78,12 @@ const styles = StyleSheet.create({
     fontSize: scale(12),
     fontWeight: '500',
     color: COLOR.NAVY,
+  },
+  viewAll_Label: {
+    color: COLOR.NAVY,
+    fontWeight: 'bold',
+    fontSize: scale(11),
+    opacity: 0.8,
   },
   rowView: {
     flexDirection: 'row',

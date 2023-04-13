@@ -21,7 +21,7 @@ const HappinesLayout = (props: Props) => {
         title="How are you feeling recently? Tell us"
         style={styles.subTitle_Label}
       />
-      <View style={styles.rowView('space-around')}>
+      <View style={styles.rowViewHand}>
         <TouchableOpacity>
           <ThumbUp name="thumbs-up" size={30} color={COLOR.GREEN} />
         </TouchableOpacity>
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: scale(15),
     opacity: 0.8,
-    alignSelf: 'center',
   },
   subTitle_Label: {
     fontSize: scale(12),
@@ -82,6 +81,15 @@ const styles = StyleSheet.create({
     paddingLeft: scale(5),
     marginVertical: verticalScale(5),
   }),
+  rowViewHand: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: scale(5),
+    marginVertical: verticalScale(5),
+    width: '40%',
+    alignSelf: 'center',
+  },
   hLine: {
     height: scale(1),
     width: '95%',

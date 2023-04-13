@@ -14,11 +14,16 @@ const NewHiresLayout = (props: Props) => {
 
   return (
     <View style={styles.main}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
       <Label style={styles.title_Label} title="New Hires" />
+        <TouchableOpacity>
+          <Label style={styles.viewAll_Label} title="View ALL" />
+        </TouchableOpacity>
+      </View>
       <FlatList
-        nestedScrollEnabled={true}
+        nestedScrollEnabled={false}
         showsVerticalScrollIndicator={false}
-        data={list}
+        data={list?.splice(0,3)}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}
         renderItem={({item}) => {
           return (
@@ -76,6 +81,12 @@ const styles = StyleSheet.create({
     fontSize: scale(15),
     opacity: 0.8,
     alignSelf: 'center',
+  },
+  viewAll_Label: {
+    color: COLOR.NAVY,
+    fontWeight: 'bold',
+    fontSize: scale(11),
+    opacity: 0.8,
   },
   f_Child: {
     width: '100%',

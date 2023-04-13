@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import COLOR from '../../Util/Color';
 import {verticalScale, scale} from 'react-native-size-matters';
@@ -14,10 +14,15 @@ const UpcomingPublicHolidays = (props: Props) => {
 
   return (
     <View style={styles.main}>
-      <Label style={styles.title_Label} title="Upcoming Public Holiday" />
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Label style={styles.title_Label} title="Upcoming Public Holiday" />
+        <TouchableOpacity>
+          <Label style={styles.viewAll_Label} title="View ALL" />
+        </TouchableOpacity>
+      </View>
       <FlatList
         style={{width: '100%'}}
-        data={public_Holiday_List}
+        data={public_Holiday_List?.slice(0,3)}
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}
@@ -75,6 +80,12 @@ const styles = StyleSheet.create({
     color: COLOR.NAVY,
     fontWeight: 'bold',
     fontSize: scale(15),
+    opacity: 0.8,
+  },
+  viewAll_Label: {
+    color: COLOR.NAVY,
+    fontWeight: 'bold',
+    fontSize: scale(11),
     opacity: 0.8,
   },
   empty_Con: {

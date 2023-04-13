@@ -74,6 +74,7 @@ function EditText(props: Props): JSX.Element {
           keyboardType={KeyboradType}
           autoFocus={false}
           secureTextEntry={SecureText}
+          placeholderTextColor={COLOR.LIGHT_GREY}
         />
         {showEye && (
           <TouchableOpacity style={styles.eyeBox} onPress={onClickSecure}>
@@ -94,6 +95,7 @@ const styles = StyleSheet.create({
     height: verticalScale(40),
     fontSize: scale(13),
     flex: 1,
+    color : COLOR.BLACK
   },
   inputBox: {
     flexDirection: 'row',

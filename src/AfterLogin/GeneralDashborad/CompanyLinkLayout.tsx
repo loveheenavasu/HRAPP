@@ -9,7 +9,12 @@ import CustomButton from '../../CommonComponent/CustomButton';
 const UpComingLink = () => {
   return (
     <View style={styles.main}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
       <Label style={styles.title_Label} title="Company Links" />
+        <TouchableOpacity>
+          <Label style={styles.viewAll_Label} title="View ALL" />
+        </TouchableOpacity>
+      </View>
       <>
         <TouchableOpacity>
           <Attach
@@ -61,6 +66,12 @@ const styles = StyleSheet.create({
     fontSize: scale(15),
     opacity: 0.8,
     alignSelf: 'center',
+  },
+  viewAll_Label: {
+    color: COLOR.NAVY,
+    fontWeight: 'bold',
+    fontSize: scale(11),
+    opacity: 0.8,
   },
   attachImg: {
     alignSelf: 'center',
