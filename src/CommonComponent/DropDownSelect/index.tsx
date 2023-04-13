@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-const DropDown = (props: Props) => {
+const DropDownSelect = (props: Props) => {
     const { Data, onSelect,dropDownStyle,dropTxtStyle,displayTxt} = props;
 
     const _dropDownIcon = () => {
@@ -36,7 +36,7 @@ const DropDown = (props: Props) => {
     )
 }
 
-export default DropDown
+export default DropDownSelect
 
 const styles = StyleSheet.create({
     dropBtn: {

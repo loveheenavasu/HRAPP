@@ -3,7 +3,7 @@ import COLOR from "../../../Util/Color"
 import { scale, verticalScale } from "react-native-size-matters"
 import Label from "../../../CommonComponent/Lable"
 import Calender from 'react-native-vector-icons/AntDesign'
-import DropDown from "../../../CommonComponent/DropDown"
+import DropDownSelect from "../../../CommonComponent/DropDownSelect"
 import { LeaveDays,LeaveUnit } from "../../../Util/DummyData"
 
 interface Props {
@@ -26,7 +26,7 @@ const LeaveDetailsLayout = (props: Props) => {
 
       </View>
       <Label title='Leave Unit' style={styles.headingTxt} />
-      <DropDown
+      <DropDownSelect
         Data={LeaveUnit}
         displayTxt='Select leave unit'
         onSelect={(selectedItem: any) => {
@@ -51,7 +51,7 @@ const LeaveDetailsLayout = (props: Props) => {
             return (
               <View style={styles.rowView} key={index}>
                 <Label title={i?.date} style={styles.smallTxt} />
-                <DropDown
+                <DropDownSelect
                   Data={LeaveDays}
                   displayTxt='Select'
                   onSelect={(selectedItem: any) => {
