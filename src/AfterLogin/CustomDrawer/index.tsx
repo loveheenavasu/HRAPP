@@ -69,7 +69,7 @@ function CustomDrawerContent({navigation}) {
             size={scale(22)}
           />
         </View>
-        <Label style={styles.home_Label} title="ChangePassword" />
+        <Label style={styles.home_Label} title="Change Password" />
       </TouchableOpacity>
       <View style={styles.logout_Con}>
         <TouchableOpacity onPress={() => logOutAlert()}>

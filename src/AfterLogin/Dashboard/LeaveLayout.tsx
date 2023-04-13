@@ -6,26 +6,44 @@ import Adjust from 'react-native-vector-icons/Feather';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
+import {useNavigation} from '@react-navigation/native';
 
 let mArray = ['Apply Leave', 'Leave Summary', 'Leave Adjustment'];
 
 const LeaveLayout = () => {
+  const navigation = useNavigation<any>();
+
   return (
     <View style={styles.main}>
       <View style={[styles.rowView, {justifyContent: 'space-around'}]}>
         {mArray.map((item, index) => {
           return (
-            <TouchableOpacity key={index} style={styles.Leave_Menu_wrap}>
+            <TouchableOpacity
+              key={index}
+              style={styles.Leave_Menu_wrap}
+              onPress={() =>
+                navigation.navigate(
+                  index === 0
+                    ? 'ApplyLeave'
+                    : index === 1
+                    ? 'LeaveSummary'
+                    : 'LeaveAdjustment',
+                )
+              }>
               {index === 0 ? (
-                <Calender name="calendar" size={22} style={{opacity: 0.6}} />
+                <Calender
+                  name="calendar"
+                  size={scale(21)}
+                  style={{opacity: 0.6}}
+                />
               ) : index === 1 ? (
                 <Summary
                   name="document-text-outline"
-                  size={scale(22)}
+                  size={scale(23)}
                   style={{opacity: 0.6}}
                 />
               ) : (
-                <Adjust name="edit" size={scale(22)} style={{opacity: 0.6}} />
+                <Adjust name="edit" size={scale(20)} style={{opacity: 0.6}} />
               )}
               <Label title={item} style={styles.leaveTxt} />
             </TouchableOpacity>
