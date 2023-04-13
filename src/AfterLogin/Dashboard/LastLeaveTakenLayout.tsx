@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     maxHeight: verticalScale(500),
-    marginTop: verticalScale(6),
+    marginVertical: verticalScale(3),
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
     backgroundColor: COLOR.WHITE,
