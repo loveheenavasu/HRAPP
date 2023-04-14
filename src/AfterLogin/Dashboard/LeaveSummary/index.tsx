@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
-import Label from '../../../CommonComponent/Lable';
 import DropdownLayout from './DropdownLayout';
 import AnnualLeaveLayout from './AnnualLeaveLayout';
+import HospitalizeLeaveLayout from './HospitalizeLeaveLayout';
+import {verticalScale} from 'react-native-size-matters';
+import SickLeaveLayout from './SickLeaveLayout';
 
 const LeaveSummary = () => {
   const [showYearDropDown, setShowYearDropDown] = useState<boolean>(false);
@@ -13,15 +15,21 @@ const LeaveSummary = () => {
   return (
     <>
       <Header showBackButton={true} title="Leave Summary" />
-      <ScrollView style={styles.main}>
+      <ScrollView
+        contentContainerStyle={{paddingBottom: verticalScale(100)}}
+        style={styles.main}>
         <View style={styles.sub_Main}>
           <DropdownLayout
             selectedValue={selectedYear}
             showDropdown={showYearDropDown}
             onClick={() => setShowYearDropDown(!showYearDropDown)}
-            onClickYear={txt => setSelectedYear(txt?.year)}
+            onClickYear={txt => {
+              setSelectedYear(txt?.year), setShowYearDropDown(false);
+            }}
           />
           <AnnualLeaveLayout />
+          <HospitalizeLeaveLayout />
+          <SickLeaveLayout />
         </View>
       </ScrollView>
     </>
@@ -34,8 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.GREY,
   },
   sub_Main: {
-    width: '90%',
-    marginHorizontal: '5%',
+    width: '95%',
+    marginHorizontal: '2.5%',
     height: '100%',
     backgroundColor: COLOR.GREY,
   },

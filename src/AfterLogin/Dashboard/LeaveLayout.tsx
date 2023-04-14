@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(10),
   },
   leaveTxt: {
-    marginVertical: verticalScale(3),
+    marginTop: verticalScale(3),
+    marginBottom:0,
     color: COLOR.BLACK,
     opacity: 0.9,
     fontSize: scale(12),

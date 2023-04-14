@@ -9,10 +9,10 @@ const pieData = [
   {value: 16, color: COLOR.PRIMARY, text: '54%'},
   {value: 3.5, color: COLOR.NAVY, text: '30%'},
 ];
-const AnnualLeaveLayout = () => {
+const SickLeaveLayout = () => {
   return (
     <View style={styles.main}>
-      <Label title="Annual Leave" style={styles.title_Label} />
+      <Label title="Sick Leave" style={styles.title_Label} />
       <View style={styles.day_Con}>
         <Label title="3.5 Days" style={styles.day_Label} />
         <Label title="balance" style={styles.balance_Label} />
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnnualLeaveLayout;
+export default SickLeaveLayout;
