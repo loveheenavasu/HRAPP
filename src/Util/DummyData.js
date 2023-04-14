@@ -89,4 +89,11 @@ export const LeaveUnit = ["Egypt", "Canada", "Australia", "Ireland"]
 
 export const LeaveDays = ['1 Day','0.5 Day']
 
-export const HrMailngData = ['hr1@gmail.com','hr2@gmail.com','hr3@gmail.com','hr4@gmail.com'];
+export const HrMailngData = [
+  {id:1,email:'Shika_Mankotia@gmail.com'},
+  {id:2,email:'Ritika_sharma@gmail.com'},
+  {id:3,email:'Rohit_chugh@gmail.com'},
+  {id:4,email:'Harshit_vaid@gmail.com'},
+  {id:5,email:'Love_trivedi@gmail.com'}
+
+];
