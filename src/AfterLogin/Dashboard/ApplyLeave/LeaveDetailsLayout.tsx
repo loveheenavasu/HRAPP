@@ -4,7 +4,8 @@ import { scale, verticalScale } from "react-native-size-matters"
 import Label from "../../../CommonComponent/Lable"
 import Calender from 'react-native-vector-icons/AntDesign'
 import DropDownSelect from "../../../CommonComponent/DropDownSelect"
-import { LeaveDays,LeaveUnit } from "../../../Util/DummyData"
+import { LeaveDays, LeaveUnit } from "../../../Util/DummyData"
+import commonStyle from "./commonStyle"
 
 interface Props {
   leaveDetails: object[]
@@ -13,9 +14,9 @@ interface Props {
 const LeaveDetailsLayout = (props: Props) => {
   const { leaveDetails } = props;
   return (
-    <View style={styles.main}>
-      <Label title='Leave Type' style={styles.headingTxt} />
-      <View style={styles.rowView}>
+    <View style={commonStyle.main}>
+      <Label title='Leave Type' style={commonStyle.headingTxt} />
+      <View style={commonStyle.rowView}>
         <View style={styles.leaveType_Box}>
           <Label title='Annual' style={styles.leaveType_txt} />
         </View>
@@ -25,7 +26,7 @@ const LeaveDetailsLayout = (props: Props) => {
         </View>
 
       </View>
-      <Label title='Leave Unit' style={styles.headingTxt} />
+      <Label title='Leave Unit' style={commonStyle.headingTxt} />
       <DropDownSelect
         Data={LeaveUnit}
         displayTxt='Select leave unit'
@@ -33,7 +34,7 @@ const LeaveDetailsLayout = (props: Props) => {
           Alert.alert('selected-->', selectedItem)
         }}
       />
-      <Label title='Leave Period' style={styles.headingTxt} />
+      <Label title='Leave Period' style={commonStyle.headingTxt} />
       <TouchableOpacity style={styles.calenderBtn}>
         <View style={{ width: '90%' }}>
           <Label title='10/04/2023 - 10/04/2023' style={styles.peroidTxt} />
@@ -42,21 +43,20 @@ const LeaveDetailsLayout = (props: Props) => {
           <Calender name="calendar" size={scale(17)} color={COLOR.LIGHT_GREY} />
         </View>
       </TouchableOpacity>
-      <Label title='Total leave days' style={styles.headingTxt} />
+      <Label title='Total leave days' style={commonStyle.headingTxt} />
       <Label title='2 days' style={styles.smallTxt} />
-      <Label title='Leave Details' style={styles.headingTxt} />
+      <Label title='Leave Details' style={commonStyle.headingTxt} />
       <ScrollView style={styles.leave_Details_View}>
         {
           leaveDetails?.map((i, index) => {
             return (
-              <View style={styles.rowView} key={index}>
+              <View style={commonStyle.rowView} key={index}>
                 <Label title={i?.date} style={styles.smallTxt} />
                 <DropDownSelect
                   Data={LeaveDays}
                   displayTxt='Select'
                   onSelect={(selectedItem: any) => {
-                    Alert.alert('day selected-->',selectedItem)
-                  //  setLeaveDay(selectedItem)
+                    Alert.alert('day selected-->', selectedItem)
                   }}
                   dropDownStyle={styles.small_DropDown}
                 />
@@ -66,7 +66,7 @@ const LeaveDetailsLayout = (props: Props) => {
           })
         }
       </ScrollView>
-      <Label title='❗This excludes pubic holidays,non working days and taken leaves.' style={styles.warning_Txt}/>
+      <Label title='❗This excludes pubic holidays,non working days and taken leaves.' style={styles.warning_Txt} />
     </View>
   )
 }
@@ -74,35 +74,6 @@ const LeaveDetailsLayout = (props: Props) => {
 export default LeaveDetailsLayout
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: COLOR.WHITE,
-    width: '100%',
-    maxHeight: verticalScale(500),
-    marginTop: verticalScale(6),
-    borderRadius: scale(6),
-    paddingHorizontal: scale(10),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.32,
-    shadowRadius: 5.46,
-    elevation: 9,
-    paddingBottom: scale(10),
-    paddingTop: scale(2)
-
-  },
-  rowView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    // paddingLeft: scale(5),
-    marginVertical: verticalScale(6),
-    borderBottomColor: COLOR.GREY,
-    borderBottomWidth: 1,
-    paddingBottom: scale(10),
-  },
   leaveType_Box: {
     borderWidth: 1,
     width: '45%',
@@ -111,12 +82,6 @@ const styles = StyleSheet.create({
   },
   leaveType_txt: {
     marginLeft: scale(9),
-  },
-  headingTxt: {
-    marginVertical: verticalScale(1),
-    fontSize: scale(13),
-    fontWeight: '600',
-    color: COLOR.DARK_GRAY
   },
   smallTxt: {
     marginVertical: verticalScale(1)
@@ -165,14 +130,15 @@ const styles = StyleSheet.create({
   leave_Details_View: {
     borderColor: COLOR.GREY,
     borderWidth: 1,
-    paddingHorizontal:scale(3),
-    marginTop:verticalScale(3)
+    paddingHorizontal: scale(3),
+    marginTop: verticalScale(3)
   },
   small_DropDown: {
     width: '30%',
     height: '100%',
   },
-  warning_Txt:{
-    fontSize:scale(10),marginVertical:verticalScale(1)}
+  warning_Txt: {
+    fontSize: scale(10), marginVertical: verticalScale(1)
+  }
 }
 )

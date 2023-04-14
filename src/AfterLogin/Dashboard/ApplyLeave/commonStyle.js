@@ -26,8 +26,7 @@ export default CommonStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // paddingLeft: scale(5),
-        marginVertical: verticalScale(6),
+       
         borderBottomColor: COLOR.GREY,
         borderBottomWidth: 1,
         paddingBottom: scale(10),

@@ -27,6 +27,7 @@ interface Props {
   onClickSecure?: () => void;
   SecureText?: boolean;
   outerBoxStyle?: ViewStyle;
+  multiline?: boolean;
 }
 
 function EditText(props: Props): JSX.Element {
@@ -44,6 +45,7 @@ function EditText(props: Props): JSX.Element {
     onClickSecure,
     SecureText,
     outerBoxStyle,
+    multiline,
   } = props;
 
   return (
@@ -75,6 +77,8 @@ function EditText(props: Props): JSX.Element {
           autoFocus={false}
           secureTextEntry={SecureText}
           placeholderTextColor={COLOR.LIGHT_GREY}
+          multiline={multiline}
+          numberOfLines={multiline ? 3 : 1}
         />
         {showEye && (
           <TouchableOpacity style={styles.eyeBox} onPress={onClickSecure}>
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     height: verticalScale(40),
     fontSize: scale(13),
     flex: 1,
-    color : COLOR.BLACK
+    color: COLOR.BLACK,
   },
   inputBox: {
     flexDirection: 'row',
