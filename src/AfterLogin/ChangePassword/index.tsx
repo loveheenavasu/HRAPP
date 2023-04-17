@@ -1,11 +1,9 @@
 import React, {useRef, useState} from 'react';
 import {
-  Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import Header from '../../CommonComponent/Header';
 import Label from '../../CommonComponent/Lable';
@@ -48,23 +46,12 @@ const ChangePassword = () => {
         status: 'error',
         msg: 'Please enter confirm password',
       });
-    } else if (newPassword != confirmPassword) {
+    } else if (newPassword !== confirmPassword) {
       ToastMsg({
         status: 'error',
         msg: 'New Password and confirm password did not match!',
       });
     }
-  };
-
-  const deleteAlert = () => {
-    Alert.alert('', 'Are you sure you want to delete your account', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
   };
 
   return (
@@ -111,11 +98,6 @@ const ChangePassword = () => {
             name="Update"
             btnStyle={styles.button_Con}
           />
-          {/* <TouchableOpacity
-            style={styles.delete_Con}
-            onPress={() => deleteAlert()}>
-            <Label title="Delete Account" style={styles.delete_Label} />
-          </TouchableOpacity> */}
         </>
       </ScrollView>
     </KeyboardAvoidingView>

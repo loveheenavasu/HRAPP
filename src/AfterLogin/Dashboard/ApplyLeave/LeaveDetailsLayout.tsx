@@ -1,77 +1,84 @@
-import { Alert, StyleSheet, View, TouchableOpacity, ScrollView } from "react-native"
-import COLOR from "../../../Util/Color"
-import { scale, verticalScale } from "react-native-size-matters"
-import Label from "../../../CommonComponent/Lable"
-import Calender from 'react-native-vector-icons/AntDesign'
-import DropDownSelect from "../../../CommonComponent/DropDownSelect"
-import { LeaveDays, LeaveUnit } from "../../../Util/DummyData"
-import commonStyle from "./commonStyle"
+import React from 'react';
+import {
+  Alert,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import COLOR from '../../../Util/Color';
+import {scale, verticalScale} from 'react-native-size-matters';
+import Label from '../../../CommonComponent/Lable';
+import Calender from 'react-native-vector-icons/AntDesign';
+import DropDownSelect from '../../../CommonComponent/DropDownSelect';
+import {LeaveDays, LeaveUnit} from '../../../Util/DummyData';
+import commonStyle from './commonStyle';
 
 interface Props {
-  leaveDetails: object[]
+  leaveDetails: object[];
 }
 
 const LeaveDetailsLayout = (props: Props) => {
-  const { leaveDetails } = props;
+  const {leaveDetails} = props;
   return (
     <View style={commonStyle.main}>
-      <Label title='Leave Type' style={commonStyle.headingTxt} />
+      <Label title="Leave Type" style={commonStyle.headingTxt} />
       <View style={commonStyle.rowView}>
         <View style={styles.leaveType_Box}>
-          <Label title='Annual' style={styles.leaveType_txt} />
+          <Label title="Annual" style={styles.leaveType_txt} />
         </View>
         <View>
           <Label title="Annual Balance" style={styles.smallTxt} />
           <Label title="5.5 days" style={styles.smallTxt} />
         </View>
-
       </View>
-      <Label title='Leave Unit' style={commonStyle.headingTxt} />
+      <Label title="Leave Unit" style={commonStyle.headingTxt} />
       <DropDownSelect
         Data={LeaveUnit}
-        displayTxt='Select leave unit'
+        displayTxt="Select leave unit"
         onSelect={(selectedItem: any) => {
-          Alert.alert('selected-->', selectedItem)
+          Alert.alert('selected-->', selectedItem);
         }}
       />
-      <Label title='Leave Period' style={commonStyle.headingTxt} />
+      <Label title="Leave Period" style={commonStyle.headingTxt} />
       <TouchableOpacity style={styles.calenderBtn}>
-        <View style={{ width: '90%' }}>
-          <Label title='10/04/2023 - 10/04/2023' style={styles.peroidTxt} />
+        <View style={{width: '90%'}}>
+          <Label title="10/04/2023 - 10/04/2023" style={styles.peroidTxt} />
         </View>
         <View style={styles.calender_icon_box}>
           <Calender name="calendar" size={scale(17)} color={COLOR.LIGHT_GREY} />
         </View>
       </TouchableOpacity>
-      <Label title='Total leave days' style={commonStyle.headingTxt} />
-      <Label title='2 days' style={styles.smallTxt} />
-      <Label title='Leave Details' style={commonStyle.headingTxt} />
+      <Label title="Total leave days" style={commonStyle.headingTxt} />
+      <Label title="2 days" style={styles.smallTxt} />
+      <Label title="Leave Details" style={commonStyle.headingTxt} />
       <ScrollView style={styles.leave_Details_View}>
-        {
-          leaveDetails?.map((i, index) => {
-            return (
-              <View style={commonStyle.rowView} key={index}>
-                <Label title={i?.date} style={styles.smallTxt} />
-                <DropDownSelect
-                  Data={LeaveDays}
-                  displayTxt='Select'
-                  onSelect={(selectedItem: any) => {
-                    Alert.alert('day selected-->', selectedItem)
-                  }}
-                  dropDownStyle={styles.small_DropDown}
-                />
-                <Label title={i?.day} style={styles.smallTxt} />
-              </View>
-            )
-          })
-        }
+        {leaveDetails?.map((i, index) => {
+          return (
+            <View style={commonStyle.rowView} key={index}>
+              <Label title={i?.date} style={styles.smallTxt} />
+              <DropDownSelect
+                Data={LeaveDays}
+                displayTxt="Select"
+                onSelect={(selectedItem: any) => {
+                  Alert.alert('day selected-->', selectedItem);
+                }}
+                dropDownStyle={styles.small_DropDown}
+              />
+              <Label title={i?.day} style={styles.smallTxt} />
+            </View>
+          );
+        })}
       </ScrollView>
-      <Label title='❗This excludes pubic holidays,non working days and taken leaves.' style={styles.warning_Txt} />
+      <Label
+        title="❗This excludes pubic holidays,non working days and taken leaves."
+        style={styles.warning_Txt}
+      />
     </View>
-  )
-}
+  );
+};
 
-export default LeaveDetailsLayout
+export default LeaveDetailsLayout;
 
 const styles = StyleSheet.create({
   leaveType_Box: {
@@ -84,11 +91,11 @@ const styles = StyleSheet.create({
     marginLeft: scale(9),
   },
   smallTxt: {
-    marginVertical: verticalScale(1)
+    marginVertical: verticalScale(1),
   },
   boldsmallTxt: {
     fontSize: scale(12),
-    fontWeight: '500'
+    fontWeight: '500',
   },
   dropBtn: {
     // borderWidth:1,
@@ -96,10 +103,10 @@ const styles = StyleSheet.create({
     width: '95%',
     height: '10%',
     marginTop: verticalScale(7),
-    marginBottom: verticalScale(7)
+    marginBottom: verticalScale(7),
   },
   dropBtnTxt: {
-    fontSize: scale(12)
+    fontSize: scale(12),
   },
   calenderBtn: {
     flexDirection: 'row',
@@ -120,25 +127,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLOR.GREY,
     paddingVertical: verticalScale(7),
-    width: '10%'
+    width: '10%',
   },
   peroidTxt: {
     marginVertical: scale(1),
     marginLeft: scale(7),
-    fontSize: scale(12)
+    fontSize: scale(12),
   },
   leave_Details_View: {
     borderColor: COLOR.GREY,
     borderWidth: 1,
     paddingHorizontal: scale(3),
-    marginTop: verticalScale(3)
+    marginTop: verticalScale(3),
   },
   small_DropDown: {
     width: '30%',
     height: '100%',
   },
   warning_Txt: {
-    fontSize: scale(10), marginVertical: verticalScale(1)
-  }
-}
-)
+    fontSize: scale(10),
+    marginVertical: verticalScale(1),
+  },
+});

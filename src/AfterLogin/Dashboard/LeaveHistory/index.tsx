@@ -1,12 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {} from 'react-native';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
-import Label from '../../../CommonComponent/Lable';
 import StaffDropDownLayout from './StaffDropDown';
 import YearMonthDropDown from './YearMonthDropDown';
 import ToastMsg from '../../../CommonComponent/Toast/CustomToast';
+import CalendarListLayout from './CalendarListLayout';
+import Loader from '../../../CommonComponent/Loader';
+import CalenderYearlyLayout from './CalenderYearlyLayout';
+import {useIsFocused} from '@react-navigation/native';
+
+const monthArray: any = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'April',
+  'May',
+  'Jun',
+  'Jully',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 const LeaveHistory = () => {
   const [personalRadio, setPersonalRadio] = useState<boolean>(true);
@@ -18,6 +35,16 @@ const LeaveHistory = () => {
   const [showYearList, setShowYearList] = useState<boolean>(false);
   const [selectedYear, setSelectedYear] = useState<string>('');
   const [showMonthList, setShowMonthList] = useState<boolean>(false);
+  const [currentMonth, setCurrentMonth] = useState<string>('');
+  const [showLoader, setShowLoader] = useState<boolean>(false);
+
+  const mFocus = useIsFocused();
+
+  useEffect(() => {
+    setSelectedYear('');
+    setSelectedMonth('');
+    setCurrentMonth('');
+  }, [mFocus]);
 
   const clickApplyYear = () => {
     if (!selectedYear) {
@@ -26,7 +53,14 @@ const LeaveHistory = () => {
         msg: 'Please select year first',
       });
     } else {
+      setCurrentMonth('');
+      setShowLoader(true);
+      let monthName = selectedYear + '-' + '01' + '-' + '01';
       setShowYearList(false);
+      setTimeout(() => {
+        setCurrentMonth(monthName);
+        setShowLoader(false);
+      }, 1200);
     }
   };
   const clickApplyMonth = () => {
@@ -36,7 +70,20 @@ const LeaveHistory = () => {
         msg: 'Please select month first',
       });
     } else {
+      setShowLoader(true);
+      setCurrentMonth('');
+      const currentYear = new Date().getFullYear();
+      let monthName =
+        currentYear +
+        '-' +
+        parseInt(monthArray.indexOf(selectedMonth) + 1) +
+        '-' +
+        '01';
       setShowMonthList(false);
+      setTimeout(() => {
+        setCurrentMonth(monthName);
+        setShowLoader(false);
+      }, 1200);
     }
   };
 
@@ -45,6 +92,7 @@ const LeaveHistory = () => {
       <Header title="Leave History" showBackButton={true} />
       <ScrollView style={styles.main}>
         <View style={styles.sub_Main}>
+          {showLoader && <Loader />}
           <StaffDropDownLayout
             personal={personalRadio}
             staff={staffRadio}
@@ -63,12 +111,18 @@ const LeaveHistory = () => {
               setMonthlyRadio(false);
               setShowshowYearDropDown(true);
               setShowMonthList(false);
+              if (selectedYear) {
+                clickApplyYear();
+              }
             }}
             onClickMonthly={() => {
               setMonthlyRadio(true);
               setYearlyRadio(false);
               setShowshowYearDropDown(false);
               setShowYearList(false);
+              if (selectedMonth) {
+                clickApplyMonth();
+              }
             }}
           />
           <YearMonthDropDown
@@ -86,6 +140,15 @@ const LeaveHistory = () => {
             onClickYearApply={() => clickApplyYear()}
             onClickYearCancel={() => setShowYearList(false)}
           />
+          {currentMonth && selectedMonth && !showYearDropDown && (
+            <CalendarListLayout currentMonth={currentMonth} />
+          )}
+          {currentMonth && selectedYear && showYearDropDown && (
+            <CalenderYearlyLayout
+              currentMonth={currentMonth}
+              maxYear={selectedYear}
+            />
+          )}
         </View>
       </ScrollView>
     </>
