@@ -16,6 +16,7 @@ import ChangePassword from './AfterLogin/ChangePassword';
 import ApplyLeave from './AfterLogin/Dashboard/ApplyLeave';
 import LeaveSummary from './AfterLogin/Dashboard/LeaveSummary';
 import LeaveAdjustment from './AfterLogin/Dashboard/LeaveAdjustment';
+import LeaveHistory from './AfterLogin/Dashboard/LeaveHistory';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
@@ -70,6 +71,10 @@ const AfterLoginStack = () => {
         <afterDrawerLoginStack.Screen
           component={LeaveAdjustment}
           name="LeaveAdjustment"
+        />
+        <afterDrawerLoginStack.Screen
+          component={LeaveHistory}
+          name="LeaveHistory"
         />
       </afterDrawerLoginStack.Navigator>
     </NavigationContainer>

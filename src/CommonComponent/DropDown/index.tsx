@@ -12,12 +12,22 @@ interface Props {
   onClickValue: (txt: any) => void;
   list?: object[];
   title: string;
+  placeHolder: string;
 }
 
 const DropDown = (props: Props) => {
-  const {showDropdown, onClick, selectedValue, onClickValue, list, title} =
-    props;
+  const {
+    showDropdown,
+    onClick,
+    selectedValue,
+    onClickValue,
+    list,
+    title,
+    placeHolder,
+  } = props;
+
   const styles = dynamicStyles(selectedValue);
+
   return (
     <>
       <Label title={title} />
@@ -27,7 +37,7 @@ const DropDown = (props: Props) => {
         activeOpacity={0.6}>
         <View style={styles.value_Con}>
           <Label
-            title={selectedValue ? selectedValue : 'Please select Year'}
+            title={selectedValue ? selectedValue : placeHolder}
             style={styles.selected_Label}
           />
         </View>
@@ -39,19 +49,22 @@ const DropDown = (props: Props) => {
           />
         </View>
       </TouchableOpacity>
-      {showDropdown &&
-        list?.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              parseInt(selectedValue) === item?.year
-                ? styles.year_Value_ConTwo
-                : styles.year_Value_Con,
-            ]}
-            onPress={() => onClickValue(item)}>
-            <Label title={item.year.toString()} />
-          </TouchableOpacity>
-        ))}
+      {showDropdown && (
+        <View style={styles.show_DropDown_Con}>
+          {list?.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                parseInt(selectedValue) === item?.value
+                  ? styles.year_Value_ConTwo
+                  : styles.year_Value_Con,
+              ]}
+              onPress={() => onClickValue(item)}>
+              <Label title={item?.value.toString()} />
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
     </>
   );
 };
@@ -115,6 +128,13 @@ const dynamicStyles = (selectedValue: string) =>
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: COLOR.GREY,
+    },
+    show_DropDown_Con: {
+      borderWidth: scale(0.5),
+      borderColor: COLOR.LIGHT_GREY,
+      marginTop: verticalScale(5),
+      borderRadius: scale(5),
+      paddingHorizontal: scale(3),
     },
   });
 

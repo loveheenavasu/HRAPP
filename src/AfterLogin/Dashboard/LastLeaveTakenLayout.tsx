@@ -3,8 +3,9 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList, Alert} from 'react-native';
 import CustomButton from '../../CommonComponent/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   list?: object[];
@@ -12,6 +13,7 @@ interface Props {
 
 const LastLeaveTakenLayout = (props: Props) => {
   const {list} = props;
+  const navigation = useNavigation();
 
   return (
     <View style={styles.main}>
@@ -29,7 +31,11 @@ const LastLeaveTakenLayout = (props: Props) => {
               <Label title={item?.days} style={styles.bigTxt} />
               <Label title={item?.type} style={styles.normalTxt} />
               <Label title={item?.fromTo} style={styles.normalTxt} />
-              <CustomButton name="View History" btnStyle={styles.btn} />
+              <CustomButton
+                name="View History"
+                btnStyle={styles.btn}
+                onPress={() => navigation.navigate('LeaveHistory')}
+              />
             </>
           );
         }}
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
   btn: {
     width: scale(150),
     height: scale(35),
-    marginTop: verticalScale(20)
+    marginTop: verticalScale(20),
   },
 });
 export default LastLeaveTakenLayout;
