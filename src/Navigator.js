@@ -17,6 +17,8 @@ import ApplyLeave from './AfterLogin/Dashboard/ApplyLeave';
 import LeaveSummary from './AfterLogin/Dashboard/LeaveSummary';
 import LeaveAdjustment from './AfterLogin/Dashboard/LeaveAdjustment';
 import LeaveHistory from './AfterLogin/Dashboard/LeaveHistory';
+import UpComingViewAll from './AfterLogin/Dashboard/UpComingLeaveLayout/UpComingViewAll';
+import ViewPublicHolidayLayout from './AfterLogin/Dashboard/ViewPublicHoliday';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
@@ -75,6 +77,14 @@ const AfterLoginStack = () => {
         <afterDrawerLoginStack.Screen
           component={LeaveHistory}
           name="LeaveHistory"
+        />
+        <afterDrawerLoginStack.Screen
+          component={UpComingViewAll}
+          name="UpComingViewAll"
+        />
+        <afterDrawerLoginStack.Screen
+          component={ViewPublicHolidayLayout}
+          name="ViewPublicHolidayLayout"
         />
       </afterDrawerLoginStack.Navigator>
     </NavigationContainer>

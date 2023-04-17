@@ -15,7 +15,7 @@ const CelebrationLayout = (props: Props) => {
   return (
     <View style={styles.main}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      <Label style={styles.title_Label} title="Upcoming Leave" />
+      <Label style={styles.title_Label} title="Celebrations" />
         <TouchableOpacity>
           <Label style={styles.viewAll_Label} title="View ALL" />
         </TouchableOpacity>

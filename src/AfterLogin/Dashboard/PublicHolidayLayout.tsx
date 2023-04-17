@@ -5,6 +5,7 @@ import Gift from 'react-native-vector-icons/AntDesign';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import CustomButton from '../../CommonComponent/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   list?: object[];
@@ -12,6 +13,7 @@ interface Props {
 
 const PublicHolidayLayout = (props: Props) => {
   const {list} = props;
+  const navigation = useNavigation<any>();
 
   return (
     <View style={styles.main}>
@@ -27,7 +29,13 @@ const PublicHolidayLayout = (props: Props) => {
             <>
               <Label title={item?.name} style={styles.pubHolTxt} />
               <Label title={`On ${item?.on}`} style={styles.normalTxt} />
-              <CustomButton name="View Public Holiday" btnStyle={styles.btn} />
+              <CustomButton
+                onPress={() =>
+                  navigation.navigate('ViewPublicHolidayLayout', {list})
+                }
+                name="View Public Holiday"
+                btnStyle={styles.btn}
+              />
             </>
           );
         }}

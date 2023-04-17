@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
-import COLOR from '../../Util/Color';
-import Label from '../../CommonComponent/Lable';
-import Home from 'react-native-vector-icons/Entypo';
 import Calender from 'react-native-vector-icons/AntDesign';
+import Label from '../../../CommonComponent/Lable';
+import COLOR from '../../../Util/Color';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   list?: object[];
@@ -12,18 +12,19 @@ interface Props {
 
 const UpComingLeaveLayout = (props: Props) => {
   const {list} = props;
+  const navigation = useNavigation<any>();
 
   return (
     <View style={styles.main}>
       <View style={styles.header_Con}>
         <Label title="UPCOMING LEAVE" style={styles.s_Title} />
-        {/* <Home name="home" size={scale(23)} color={COLOR.LIGHT_GREY} /> */}
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('UpComingViewAll', {list: list})}>
           <Label style={styles.viewAll_Label} title="View ALL" />
         </TouchableOpacity>
       </View>
       <FlatList
-        data={list?.slice(0,3)}
+        data={list?.slice(0, 3)}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => {
           return (

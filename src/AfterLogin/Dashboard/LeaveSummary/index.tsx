@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
@@ -7,10 +7,27 @@ import AnnualLeaveLayout from './AnnualLeaveLayout';
 import HospitalizeLeaveLayout from './HospitalizeLeaveLayout';
 import {verticalScale} from 'react-native-size-matters';
 import SickLeaveLayout from './SickLeaveLayout';
+import {useIsFocused} from '@react-navigation/native';
+import Loader from '../../../CommonComponent/Loader';
 
 const LeaveSummary = () => {
+  const mFocus = useIsFocused();
   const [showYearDropDown, setShowYearDropDown] = useState<boolean>(false);
   const [selectedYear, setSelectedYear] = useState<string>('');
+  const [showLoader, setShowLoader] = useState<boolean>(false);
+
+  useEffect(() => {
+    setSelectedYear('');
+  }, [mFocus]);
+
+  const onClickYear = (props: any) => {
+    setShowLoader(true);
+    setSelectedYear(props?.value);
+    setShowYearDropDown(false);
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+  };
 
   return (
     <>
@@ -19,17 +36,20 @@ const LeaveSummary = () => {
         contentContainerStyle={{paddingBottom: verticalScale(100)}}
         style={styles.main}>
         <View style={styles.sub_Main}>
+          {showLoader && <Loader />}
           <DropdownLayout
             selectedValue={selectedYear}
             showDropdown={showYearDropDown}
             onClick={() => setShowYearDropDown(!showYearDropDown)}
-            onClickYear={txt => {
-              setSelectedYear(txt?.year), setShowYearDropDown(false);
-            }}
+            onClickYear={txt => onClickYear(txt)}
           />
-          <AnnualLeaveLayout />
-          <HospitalizeLeaveLayout />
-          <SickLeaveLayout />
+          {selectedYear && !showLoader && (
+            <>
+              <AnnualLeaveLayout />
+              <HospitalizeLeaveLayout />
+              <SickLeaveLayout />
+            </>
+          )}
         </View>
       </ScrollView>
     </>

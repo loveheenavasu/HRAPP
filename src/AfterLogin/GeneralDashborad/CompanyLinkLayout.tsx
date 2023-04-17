@@ -6,7 +6,13 @@ import COLOR from '../../Util/Color';
 import Attach from 'react-native-vector-icons/Ionicons';
 import CustomButton from '../../CommonComponent/CustomButton';
 
-const UpComingLink = () => {
+
+interface Props {
+  onClickAdd?:()=> void;
+}
+
+
+const UpComingLink = ({onClickAdd} : Props) => {
   return (
     <View style={styles.main}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -35,6 +41,7 @@ const UpComingLink = () => {
             btnStyle={styles.add_Button}
             addLogo
             txtStyle={{marginLeft: scale(7)}}
+            onPress={onClickAdd}
           />
           <CustomButton name="Edit" btnStyle={styles.edit_Button} />
         </View>

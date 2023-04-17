@@ -12,9 +12,13 @@ interface Props {
 }
 
 const currentYear = new Date().getFullYear();
-const mTempArray: {year: number; id: number; selectedValue: boolean}[] = [];
+const mTempArray: {value: number; id: number; selectedValue: boolean}[] = [];
 for (let index = 0; index < 5; index++) {
-  mTempArray.push({year: currentYear - index, id: index, selectedValue: false});
+  mTempArray.push({
+    value: currentYear - index,
+    id: index,
+    selectedValue: false,
+  });
 }
 
 const DropdownLayout = (props: Props) => {
@@ -29,6 +33,7 @@ const DropdownLayout = (props: Props) => {
         onClick={onClick}
         list={mTempArray}
         onClickValue={item => onClickYear(item)}
+        placeHolder="Please select year"
       />
     </View>
   );

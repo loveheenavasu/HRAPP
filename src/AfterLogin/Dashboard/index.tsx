@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import {ScrollView} from 'react-native';
 import styles from './styles';
 import Header from '../../CommonComponent/Header';
@@ -10,19 +10,18 @@ import {
 } from '../../Util/DummyData';
 import DashboardLayout from './DashboardLayout';
 import {scale, verticalScale} from 'react-native-size-matters';
-import UpComingLeaveLayout from './UpcomingLeaveLayout';
+import UpComingLeaveLayout from './UpComingLeaveLayout';
 import LastLeaveTakenLayout from './LastLeaveTakenLayout';
 import PublicHolidayLayout from './PublicHolidayLayout';
 import LeaveLayout from './LeaveLayout';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 
 const Dashboard = () => {
-
   const isFocused = useIsFocused();
-    const scrollRef = useRef('')
-    useEffect(() => {
-      scrollRef.current.scrollTo({ x: 0, y: 0, animated: true })
-    }, [isFocused])
+  const scrollRef = useRef('');
+  useEffect(() => {
+    scrollRef.current.scrollTo({x: 0, y: 0, animated: true});
+  }, [isFocused]);
 
   return (
     <>
