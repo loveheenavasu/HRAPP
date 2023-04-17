@@ -6,9 +6,10 @@ import COLOR from '../../../Util/Color';
 import Label from '../../../CommonComponent/Lable';
 import StaffDropDownLayout from './StaffDropDown';
 import YearMonthDropDown from './YearMonthDropDown';
+import ToastMsg from '../../../CommonComponent/Toast/CustomToast';
 
 const LeaveHistory = () => {
-  const [personalRadio, setPersonalRadio] = useState<boolean>(false);
+  const [personalRadio, setPersonalRadio] = useState<boolean>(true);
   const [staffRadio, setStaffRadio] = useState<boolean>(false);
   const [yearlyRadio, setYearlyRadio] = useState<boolean>(true);
   const [monthlyRadio, setMonthlyRadio] = useState<boolean>(false);
@@ -16,6 +17,28 @@ const LeaveHistory = () => {
   const [showYearDropDown, setShowshowYearDropDown] = useState<boolean>(true);
   const [showYearList, setShowYearList] = useState<boolean>(false);
   const [selectedYear, setSelectedYear] = useState<string>('');
+  const [showMonthList, setShowMonthList] = useState<boolean>(false);
+
+  const clickApplyYear = () => {
+    if (!selectedYear) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please select year first',
+      });
+    } else {
+      setShowYearList(false);
+    }
+  };
+  const clickApplyMonth = () => {
+    if (!selectedMonth) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please select month first',
+      });
+    } else {
+      setShowMonthList(false);
+    }
+  };
 
   return (
     <>
@@ -39,6 +62,7 @@ const LeaveHistory = () => {
               setYearlyRadio(true);
               setMonthlyRadio(false);
               setShowshowYearDropDown(true);
+              setShowMonthList(false);
             }}
             onClickMonthly={() => {
               setMonthlyRadio(true);
@@ -55,6 +79,12 @@ const LeaveHistory = () => {
             showYearList={showYearList}
             onClickYearValue={item => setSelectedYear(item?.value)}
             selectedYear={selectedYear}
+            onClickMonthDropDown={() => setShowMonthList(!showMonthList)}
+            showMonthList={showMonthList}
+            onClickMonthApply={() => clickApplyMonth()}
+            onClickMonthCancel={() => setShowMonthList(false)}
+            onClickYearApply={() => clickApplyYear()}
+            onClickYearCancel={() => setShowYearList(false)}
           />
         </View>
       </ScrollView>

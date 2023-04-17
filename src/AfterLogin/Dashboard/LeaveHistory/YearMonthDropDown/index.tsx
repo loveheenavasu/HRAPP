@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
 import DropDown from '../../../../CommonComponent/DropDown';
@@ -35,12 +28,18 @@ const monthArray = [
 
 interface Props {
   onClickMonthValue?: (item: any) => void;
-  selectedMonth?: string;
+  selectedMonth: string;
   showYear?: boolean;
   onClickDropDown?: () => void;
   showYearList?: boolean;
   onClickYearValue?: (item: any) => void;
   selectedYear: string;
+  showMonthList?: boolean;
+  onClickMonthDropDown?: () => void;
+  onClickMonthApply?: () => void;
+  onClickMonthCancel?: () => void;
+  onClickYearApply?: () => void;
+  onClickYearCancel?: () => void;
 }
 
 const YearMonthDropDown = ({
@@ -51,49 +50,86 @@ const YearMonthDropDown = ({
   showYearList,
   onClickYearValue,
   selectedYear,
+  showMonthList,
+  onClickMonthDropDown,
+  onClickMonthApply,
+  onClickMonthCancel,
+  onClickYearApply,
+  onClickYearCancel,
 }: Props) => {
   const styles = dynaimicStyles(selectedMonth);
-
   return (
     <View style={styles.main}>
       {showYear ? (
-        <DropDown
-          onClickValue={item => onClickYearValue(item)}
-          selectedValue={selectedYear}
-          title={'Please select Year'}
-          onClick={onClickDropDown}
-          placeHolder="Please select Year"
-          list={mYearList}
-          showDropdown={showYearList}
-        />
+        <>
+          <DropDown
+            onClickValue={item => onClickYearValue(item)}
+            selectedValue={selectedYear}
+            title={'Please select Year'}
+            onClick={onClickDropDown}
+            placeHolder="Please select Year"
+            list={mYearList}
+            showDropdown={showYearList}
+          />
+          {showYearList && (
+            <View style={styles.calebder_Btn_Con}>
+              <TouchableOpacity
+                style={styles.cancel_Btn_Con}
+                onPress={onClickYearCancel}>
+                <Label title="Cancel" style={styles.cancel_Label} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.calender_Apply_Button}
+                onPress={onClickYearApply}>
+                <Label title="Apply" style={styles.cancel_Label} />
+              </TouchableOpacity>
+            </View>
+          )}
+        </>
       ) : (
         <>
-          <Label title="Please select Month" style={styles.month_Title} />
-          <ScrollView contentContainerStyle={styles.month_List_Con}>
-            {monthArray?.map((item, index) => {
-              return (
-                <>
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.month_List_Back(item)}
-                    onPress={() => onClickMonthValue(item)}>
-                    <Label
-                      title={item?.value}
-                      style={styles.monthName_Label(item)}
-                    />
-                  </TouchableOpacity>
-                </>
-              );
-            })}
-          </ScrollView>
-          <View style={styles.calebder_Btn_Con}>
-            <TouchableOpacity style={styles.cancel_Btn_Con}>
-              <Label title="Cancel" style={styles.cancel_Label} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.calender_Apply_Button}>
-              <Label title="Apply" style={styles.cancel_Label} />
-            </TouchableOpacity>
-          </View>
+          <DropDown
+            onClickValue={item => onClickYearValue(item)}
+            selectedValue={selectedMonth}
+            title={'Please select Month'}
+            onClick={onClickMonthDropDown}
+            placeHolder="Please select Month"
+            list={mYearList}
+            showDropdown={false}
+          />
+          {showMonthList && (
+            <>
+              <ScrollView contentContainerStyle={styles.month_List_Con}>
+                {monthArray?.map((item, index) => {
+                  return (
+                    <>
+                      <TouchableOpacity
+                        key={index}
+                        style={styles.month_List_Back(item)}
+                        onPress={() => onClickMonthValue(item)}>
+                        <Label
+                          title={item?.value}
+                          style={styles.monthName_Label(item)}
+                        />
+                      </TouchableOpacity>
+                    </>
+                  );
+                })}
+              </ScrollView>
+              <View style={styles.calebder_Btn_Con}>
+                <TouchableOpacity
+                  style={styles.cancel_Btn_Con}
+                  onPress={onClickMonthCancel}>
+                  <Label title="Cancel" style={styles.cancel_Label} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.calender_Apply_Button}
+                  onPress={onClickMonthApply}>
+                  <Label title="Apply" style={styles.cancel_Label} />
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
         </>
       )}
     </View>
@@ -132,7 +168,7 @@ const dynaimicStyles = (selectedMonth: any) =>
     },
     month_List_Back: (item: any) => ({
       width: scale(78.5),
-      height: scale(100),
+      height: scale(86),
       justifyContent: 'center',
       alignItems: 'center',
       borderColor: COLOR.GREY,
