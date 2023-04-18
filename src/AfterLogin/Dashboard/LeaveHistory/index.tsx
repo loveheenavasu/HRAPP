@@ -36,6 +36,8 @@ const LeaveHistory = () => {
   const [selectedYear, setSelectedYear] = useState<string>('');
   const [showMonthList, setShowMonthList] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState<string>('');
+  const [currentYearMonth, setCurrentYearMonth] = useState<string>('');
+
   const [showLoader, setShowLoader] = useState<boolean>(false);
 
   const mFocus = useIsFocused();
@@ -53,12 +55,12 @@ const LeaveHistory = () => {
         msg: 'Please select year first',
       });
     } else {
-      setCurrentMonth('');
+      setCurrentYearMonth('');
       setShowLoader(true);
       let monthName = selectedYear + '-' + '01' + '-' + '01';
       setShowYearList(false);
       setTimeout(() => {
-        setCurrentMonth(monthName);
+        setCurrentYearMonth(monthName);
         setShowLoader(false);
       }, 1200);
     }
@@ -111,7 +113,7 @@ const LeaveHistory = () => {
               setMonthlyRadio(false);
               setShowshowYearDropDown(true);
               setShowMonthList(false);
-              if (selectedYear) {
+              if (currentYearMonth) {
                 clickApplyYear();
               }
             }}
@@ -120,7 +122,7 @@ const LeaveHistory = () => {
               setYearlyRadio(false);
               setShowshowYearDropDown(false);
               setShowYearList(false);
-              if (selectedMonth) {
+              if (currentMonth) {
                 clickApplyMonth();
               }
             }}
@@ -136,18 +138,25 @@ const LeaveHistory = () => {
             onClickMonthDropDown={() => setShowMonthList(!showMonthList)}
             showMonthList={showMonthList}
             onClickMonthApply={() => clickApplyMonth()}
-            onClickMonthCancel={() => setShowMonthList(false)}
+            onClickMonthCancel={() => {
+              let dateArray = currentMonth?.split('-');
+              let currentIndex = dateArray[1];
+              setSelectedMonth(monthArray[parseInt(currentIndex) - 1]);
+              setShowMonthList(false);
+            }}
             onClickYearApply={() => clickApplyYear()}
-            onClickYearCancel={() => setShowYearList(false)}
+            onClickYearCancel={() => {
+              let dateArray = currentYearMonth?.split('-');
+              let currentIndex = dateArray[0];
+              setSelectedYear(currentIndex);
+              setShowYearList(false);
+            }}
           />
           {currentMonth && selectedMonth && !showYearDropDown && (
             <CalendarListLayout currentMonth={currentMonth} />
           )}
-          {currentMonth && selectedYear && showYearDropDown && (
-            <CalenderYearlyLayout
-              currentMonth={currentMonth}
-              maxYear={selectedYear}
-            />
+          {currentYearMonth && selectedYear && showYearDropDown && (
+            <CalenderYearlyLayout currentMonth={currentYearMonth} />
           )}
         </View>
       </ScrollView>

@@ -6,11 +6,12 @@ import {Calendar} from 'react-native-calendars';
 
 interface Props {
   currentMonth: string;
-  maxYear?: string;
 }
 
-const CalenderYearlyLayout = ({currentMonth, maxYear}: Props) => {
+const CalenderYearlyLayout = ({currentMonth}: Props) => {
   const [selected, setSelected] = useState('');
+  let mCurrentDateArray = currentMonth?.split('-');
+  let maxYear = mCurrentDateArray[0];
   let maxDate = maxYear + '-12' + '-31';
   let minDate = maxYear + '-01' + '-1';
 
@@ -71,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CalenderYearlyLayout;
+export default React.memo(CalenderYearlyLayout);
