@@ -7,8 +7,18 @@ import LeaveDetailsLayout from './LeaveDetailsLayout';
 import Label from '../../../CommonComponent/Lable';
 import {LeaveDetailsArr} from '../../../Util/DummyData';
 import AddNotifySubmitCard from './AddNotifySubmitCard';
+import LeaveTypeLayout from './LeaveTypeLayout';
+import {useState} from 'react';
+import LeaveUnitLayout from './LeaveUnitLayout';
+import Test from './Test';
 
 const ApplyLeave = () => {
+  const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
+  const [showLeaveUnit, setShowLeaveUnit] = useState<boolean>(false);
+  const [selectedLeaveUnit, setSelectedLeaveUnit] = useState<string>('');
+  const [selectedLeavePeriod, setSelectedLeavePeriod] = useState<string>('');
+  const [showLeaveCalendar, setShowLeaveCalendar] = useState<boolean>(false);
+
   return (
     <>
       <KeyboardAvoidingView
@@ -24,10 +34,29 @@ const ApplyLeave = () => {
             paddingBottom: verticalScale(100),
             flexGrow: 1,
           }}>
-          <View style={{width: '94%', marginHorizontal: '3%'}}>
-            <Label title="Apply Leave" style={styles.title_Txt} />
-            <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} />
-            <AddNotifySubmitCard />
+          <View style={{width: '96%', marginHorizontal: '2%'}}>
+            <LeaveTypeLayout
+              showList={showLeaveType}
+              onClickDropDown={() => setShowLeaveType(!showLeaveType)}
+              onClickType={() => setShowLeaveType(false)}
+            />
+            <LeaveUnitLayout
+              onClickUnit={item => {
+                setSelectedLeaveUnit(item?.value);
+                setShowLeaveUnit(false);
+              }}
+              showLeaveUnit={showLeaveUnit}
+              onClickLeaveUnit={() => setShowLeaveUnit(!showLeaveUnit)}
+              selectedUnit={selectedLeaveUnit}
+              selectedLeaveRange={selectedLeavePeriod}
+              onClickLeavePeriod={() =>
+                setShowLeaveCalendar(!showLeaveCalendar)
+              }
+              showLeaveCalendar={showLeaveCalendar}
+            />
+            <Test />
+            {/* <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} /> */}
+            {/* <AddNotifySubmitCard /> */}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
