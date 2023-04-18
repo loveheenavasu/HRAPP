@@ -6,24 +6,63 @@ import {
   ScrollView,
 } from 'react-native';
 import COLOR from '../../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import Label from '../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
 import DropDownSelect from '../../../CommonComponent/DropDownSelect';
-import {LeaveDays, LeaveUnit} from '../../../Util/DummyData';
+import { LeaveDays, LeaveUnit } from '../../../Util/DummyData';
 import commonStyle from './commonStyle';
-import {Calendar, LocaleConfig} from 'react-native-calendars';
-import {useState} from 'react';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { useEffect, useState } from 'react';
 
 interface Props {
   leaveDetails: object[];
 }
 
 const LeaveDetailsLayout = (props: Props) => {
-  const {leaveDetails} = props;
+  const { leaveDetails } = props;
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selected, setSelected] = useState('');
-  console.log('selected date--->', selected);
+  const [selectedArr, setSelected] = useState([]);
+  console.log('selected date--->', selectedArr);
+  let markDatesObj = {};
+  const [dateMarkObj,setMarkObj] = useState(markDatesObj)
+
+
+  const DateArrFun = (markDate) => {
+    if (selectedArr.findIndex(i => i === markDate) > -1) {
+      let unSelectDate = selectedArr.filter(item => item !== markDate)
+      setSelected(unSelectDate)
+    }
+    else {
+      setSelected([...selectedArr, markDate])
+    }
+
+  }
+
+
+  useEffect(() => {
+    getMarkedDates()
+  }, [selectedArr?.length])
+
+  const getMarkedDates = () => {
+     selectedArr.map((item) => {
+      console.log('item====>>',item);
+      dateMarkObj[item] = {
+        selected: true,
+        marked: true,
+        selectedColor: "purple",
+      };
+     
+      setMarkObj(dateMarkObj)
+    });
+
+  }
+
+
+ 
+  console.log('markDatesObj-->>>',dateMarkObj);
+//  console.log('markDatesObj--->',markDatesObj);
+ 
 
   const getFormattedDate = (
     displayDate: boolean = false,
@@ -62,6 +101,9 @@ const LeaveDetailsLayout = (props: Props) => {
     return `${current_Date.getFullYear()}-${formatMonth}-${formatDate}`;
   };
 
+
+
+
   return (
     <View style={commonStyle.main}>
       <Label title="Leave Type" style={commonStyle.headingTxt} />
@@ -86,15 +128,15 @@ const LeaveDetailsLayout = (props: Props) => {
       <TouchableOpacity
         style={styles.calenderBtn}
         onPress={() => setShowCalendar(!showCalendar)}>
-        <View style={{width: '90%'}}>
-          <Label
+        <View style={{ width: '90%' }}>
+          {/* <Label
             title={
               selected
                 ? getFormattedDate(false, selected)
                 : getFormattedDate(true)
             }
             style={styles.peroidTxt}
-          />
+          /> */}
         </View>
         <View style={styles.calender_icon_box}>
           <Calender name="calendar" size={scale(17)} color={COLOR.LIGHT_GREY} />
@@ -113,17 +155,21 @@ const LeaveDetailsLayout = (props: Props) => {
             // Callback that gets called when the user selects a day
             onDayPress={day => {
               console.log('selected day', day);
+              DateArrFun(day?.dateString)
               //  let mm_dd_yyyy = getFormattedDate(day?.dateString)
-              setSelected(day.dateString);
+              // setSelected((day.dateString)=>DateArrFun(day.dateString));
+
               // setShowCalendar(false)
             }}
-            markedDates={{
-              [selected]: {
-                selected: true,
-                disableTouchEvent: true,
-                selectedDotColor: 'orange',
-              },
-            }}
+            markedDates={dateMarkObj}
+            //   {
+            //   [selected]: {
+            //     selected: true,
+            //     disableTouchEvent: true,
+            //     selectedDotColor: 'orange',
+            //   },
+            // }
+
             minDate={getFormattedDate()}
           />
         </>
