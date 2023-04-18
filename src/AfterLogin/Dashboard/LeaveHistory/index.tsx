@@ -37,8 +37,8 @@ const LeaveHistory = () => {
   const [showMonthList, setShowMonthList] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState<string>('');
   const [currentYearMonth, setCurrentYearMonth] = useState<string>('');
-
   const [showLoader, setShowLoader] = useState<boolean>(false);
+  const [leaveMonthJson, setLeaveMonthJson] = useState<Object>({});
 
   const mFocus = useIsFocused();
 
@@ -65,6 +65,7 @@ const LeaveHistory = () => {
       }, 1200);
     }
   };
+
   const clickApplyMonth = () => {
     if (!selectedMonth) {
       ToastMsg({
@@ -75,12 +76,39 @@ const LeaveHistory = () => {
       setShowLoader(true);
       setCurrentMonth('');
       const currentYear = new Date().getFullYear();
-      let monthName =
-        currentYear +
-        '-' +
-        parseInt(monthArray.indexOf(selectedMonth) + 1) +
-        '-' +
-        '01';
+      const getDateStr = (month: string, day: string) => {
+        const paddedMonth = (monthArray.indexOf(month) + 1)
+          .toString()
+          .padStart(2, '0');
+        return `${currentYear}-${paddedMonth}-${day}`;
+      };
+      const monthName = getDateStr(selectedMonth, '01');
+      const lastMonthName = getDateStr(selectedMonth, '10');
+      let mark: any = {};
+      for (let index = 1; index < 11; index++) {
+        const dayStr = index.toString().padStart(2, '0');
+        if (index === 1) {
+          mark[monthName] = {
+            startingDay: true,
+            color: COLOR.PRIMARY,
+            textColor: COLOR.WHITE,
+          };
+        } else if (index === 10) {
+          mark[lastMonthName] = {
+            endingDay: true,
+            textColor: COLOR.WHITE,
+            selected: true,
+            color: COLOR.PRIMARY,
+          };
+        } else {
+          const dateStr = getDateStr(selectedMonth, dayStr);
+          mark[dateStr] = {
+            color: COLOR.PRIMARY,
+            textColor: COLOR.WHITE,
+          };
+        }
+      }
+      setLeaveMonthJson(mark);
       setShowMonthList(false);
       setTimeout(() => {
         setCurrentMonth(monthName);
@@ -153,7 +181,10 @@ const LeaveHistory = () => {
             }}
           />
           {currentMonth && selectedMonth && !showYearDropDown && (
-            <CalendarListLayout currentMonth={currentMonth} />
+            <CalendarListLayout
+              currentMonth={currentMonth}
+              leaveDate={leaveMonthJson}
+            />
           )}
           {currentYearMonth && selectedYear && showYearDropDown && (
             <CalenderYearlyLayout currentMonth={currentYearMonth} />

@@ -6,28 +6,19 @@ import {Calendar} from 'react-native-calendars';
 
 interface Props {
   currentMonth: string;
+  leaveDate?: Object;
 }
 
-const CalenderList = ({currentMonth}: Props) => {
-  const [selected, setSelected] = useState('');
-
+const CalenderList = ({currentMonth, leaveDate}: Props) => {
   return (
     <View style={styles.main}>
       <Calendar
         theme={styles.theme}
         disableArrowLeft={true}
         disableArrowRight={true}
-        onDayPress={day => {
-          setSelected(day.dateString);
-        }}
         current={currentMonth}
-        markedDates={{
-          [selected]: {
-            selected: true,
-            disableTouchEvent: true,
-            selectedColor: COLOR.PRIMARY,
-          },
-        }}
+        markingType={'period'}
+        markedDates={leaveDate}
         enableSwipeMonths={false}
         renderArrow={() => {
           return null;
