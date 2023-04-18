@@ -7,6 +7,7 @@ import LeaveDetailsLayout from './LeaveDetailsLayout';
 import Label from '../../../CommonComponent/Lable';
 import {LeaveDetailsArr} from '../../../Util/DummyData';
 import AddNotifySubmitCard from './AddNotifySubmitCard';
+import LeaveBarChat from './LeaveBarChart';
 
 const ApplyLeave = () => {
   return (
@@ -28,6 +29,7 @@ const ApplyLeave = () => {
             <Label title="Apply Leave" style={styles.title_Txt} />
             <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} />
             <AddNotifySubmitCard />
+            <LeaveBarChat/>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
