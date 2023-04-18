@@ -24,7 +24,7 @@ const MultiDropDown = (props:Props) => {
                 selectText="Add Email Id's"
                 searchInputPlaceholderText="Search Email..."
                 //   onChangeInput={ (text)=> console.log(text)}
-                  altFontFamily="ProximaNova-Light"
+                //   altFontFamily="ProximaNova-Light"
                 tagRemoveIconColor="#CCC"
                 tagBorderColor="#CCC"
                 //   tagTextColor="#CCC"

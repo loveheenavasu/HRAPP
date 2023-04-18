@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Alert,
   StyleSheet,
@@ -13,6 +12,8 @@ import Calender from 'react-native-vector-icons/AntDesign';
 import DropDownSelect from '../../../CommonComponent/DropDownSelect';
 import {LeaveDays, LeaveUnit} from '../../../Util/DummyData';
 import commonStyle from './commonStyle';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
+import {useState} from 'react';
 
 interface Props {
   leaveDetails: object[];
@@ -20,6 +21,47 @@ interface Props {
 
 const LeaveDetailsLayout = (props: Props) => {
   const {leaveDetails} = props;
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [selected, setSelected] = useState('');
+  console.log('selected date--->', selected);
+
+  const getFormattedDate = (
+    displayDate: boolean = false,
+    dateToformat: string = '',
+  ) => {
+    let current_Date = new Date();
+    let formatMonth =
+      current_Date.getMonth() + 1 < 10
+        ? `0${current_Date.getMonth() + 1}`
+        : current_Date.getMonth() + 1;
+    let formatDate =
+      current_Date.getDate() < 10
+        ? `0${current_Date.getDate()}`
+        : current_Date.getDate();
+
+    if (dateToformat) {
+      return dateToformat
+        ?.split('-')
+        ?.reverse()
+        ?.join(',')
+        ?.replaceAll(',', '-');
+    }
+    if (displayDate) {
+      let ddmmyyyy =
+        `${current_Date.getFullYear()}-${formatMonth}-${formatDate}`
+          ?.split('-')
+          ?.reverse()
+          ?.join(',')
+          ?.replaceAll(',', '-');
+      return ddmmyyyy;
+    }
+    console.log(
+      'Formatted Date--->',
+      `${current_Date.getFullYear()}-${formatMonth}-${formatDate}`,
+    );
+    return `${current_Date.getFullYear()}-${formatMonth}-${formatDate}`;
+  };
+
   return (
     <View style={commonStyle.main}>
       <Label title="Leave Type" style={commonStyle.headingTxt} />
@@ -41,14 +83,51 @@ const LeaveDetailsLayout = (props: Props) => {
         }}
       />
       <Label title="Leave Period" style={commonStyle.headingTxt} />
-      <TouchableOpacity style={styles.calenderBtn}>
+      <TouchableOpacity
+        style={styles.calenderBtn}
+        onPress={() => setShowCalendar(!showCalendar)}>
         <View style={{width: '90%'}}>
-          <Label title="10/04/2023 - 10/04/2023" style={styles.peroidTxt} />
+          <Label
+            title={
+              selected
+                ? getFormattedDate(false, selected)
+                : getFormattedDate(true)
+            }
+            style={styles.peroidTxt}
+          />
         </View>
         <View style={styles.calender_icon_box}>
           <Calender name="calendar" size={scale(17)} color={COLOR.LIGHT_GREY} />
         </View>
       </TouchableOpacity>
+      {showCalendar ? (
+        <>
+          <Calendar
+            style={{
+              borderWidth: 1,
+              borderColor: 'gray',
+              height: 350,
+            }}
+            // Specify the current date
+            // current={'2023-04-01'}
+            // Callback that gets called when the user selects a day
+            onDayPress={day => {
+              console.log('selected day', day);
+              //  let mm_dd_yyyy = getFormattedDate(day?.dateString)
+              setSelected(day.dateString);
+              // setShowCalendar(false)
+            }}
+            markedDates={{
+              [selected]: {
+                selected: true,
+                disableTouchEvent: true,
+                selectedDotColor: 'orange',
+              },
+            }}
+            minDate={getFormattedDate()}
+          />
+        </>
+      ) : null}
       <Label title="Total leave days" style={commonStyle.headingTxt} />
       <Label title="2 days" style={styles.smallTxt} />
       <Label title="Leave Details" style={commonStyle.headingTxt} />
