@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, View, StyleSheet} from 'react-native';
+import {TouchableOpacity, View, StyleSheet, TextStyle} from 'react-native';
 import Label from '../Lable';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -13,6 +13,7 @@ interface Props {
   list?: object[];
   title: string;
   placeHolder: string;
+  titleStyle?: TextStyle;
 }
 
 const DropDown = (props: Props) => {
@@ -24,13 +25,14 @@ const DropDown = (props: Props) => {
     list,
     title,
     placeHolder,
+    titleStyle,
   } = props;
 
   const styles = dynamicStyles(selectedValue);
 
   return (
     <>
-      <Label title={title} />
+      <Label style={titleStyle} title={title} />
       <TouchableOpacity
         style={styles.dropDown_Main}
         onPress={onClick}
@@ -97,14 +99,14 @@ const dynamicStyles = (selectedValue: string) =>
       flexDirection: 'row',
     },
     value_Con: {
-      width: '90%',
+      width: '86%',
       height: '100%',
       paddingLeft: scale(10),
       paddingRight: scale(5),
       justifyContent: 'center',
     },
     icon_Con: {
-      width: '10%',
+      width: '14%',
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',

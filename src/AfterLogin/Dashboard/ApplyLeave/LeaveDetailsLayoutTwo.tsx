@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Alert,
   StyleSheet,
@@ -6,63 +7,60 @@ import {
   ScrollView,
 } from 'react-native';
 import COLOR from '../../../Util/Color';
-import { scale, verticalScale } from 'react-native-size-matters';
+import {scale, verticalScale} from 'react-native-size-matters';
 import Label from '../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
 import DropDownSelect from '../../../CommonComponent/DropDownSelect';
-import { LeaveDays, LeaveUnit } from '../../../Util/DummyData';
+import {LeaveDays, LeaveUnit} from '../../../Util/DummyData';
 import commonStyle from './commonStyle';
-import { Calendar, LocaleConfig } from 'react-native-calendars';
-import { useEffect, useState } from 'react';
+import {Calendar} from 'react-native-calendars';
+import {useEffect, useState} from 'react';
+import DropDown from '../../../CommonComponent/DropDown';
 
 interface Props {
   leaveDetails: object[];
+  showLeaveUnit?: boolean;
+  onClickLeaveUnit?: () => void;
 }
 
-const LeaveDetailsLayout = (props: Props) => {
-  const { leaveDetails } = props;
+const LeaveDetailsLayout = ({
+  showLeaveUnit,
+  leaveDetails,
+  onClickLeaveUnit,
+}: Props) => {
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedArr, setSelected] = useState([]);
-  console.log('selected date--->', selectedArr);
+  const [selectedArr, setSelected] = useState<any>([]);
+
   let markDatesObj = {};
-  const [dateMarkObj,setMarkObj] = useState(markDatesObj)
-
-
-  const DateArrFun = (markDate) => {
+  const [dateMarkObj, setMarkObj] = useState(markDatesObj);
+  const DateArrFun = (markDate: any) => {
     if (selectedArr.findIndex(i => i === markDate) > -1) {
-      let unSelectDate = selectedArr.filter(item => item !== markDate)
-      setSelected(unSelectDate)
+      let unSelectDate = selectedArr.filter(item => item !== markDate);
+      setSelected(unSelectDate);
+    } else {
+      setSelected([...selectedArr, markDate]);
     }
-    else {
-      setSelected([...selectedArr, markDate])
-    }
-
-  }
-
+  };
 
   useEffect(() => {
-    getMarkedDates()
-  }, [selectedArr?.length])
+    getMarkedDates();
+  }, [selectedArr?.length]);
 
   const getMarkedDates = () => {
-     selectedArr.map((item) => {
-      console.log('item====>>',item);
+    selectedArr.map(item => {
+      console.log('item====>>', item);
       dateMarkObj[item] = {
         selected: true,
         marked: true,
-        selectedColor: "purple",
+        selectedColor: 'purple',
       };
-     
-      setMarkObj(dateMarkObj)
+
+      setMarkObj(dateMarkObj);
     });
+  };
 
-  }
-
-
- 
-  console.log('markDatesObj-->>>',dateMarkObj);
-//  console.log('markDatesObj--->',markDatesObj);
- 
+  console.log('markDatesObj-->>>', dateMarkObj);
+  //  console.log('markDatesObj--->',markDatesObj);
 
   const getFormattedDate = (
     displayDate: boolean = false,
@@ -101,47 +99,18 @@ const LeaveDetailsLayout = (props: Props) => {
     return `${current_Date.getFullYear()}-${formatMonth}-${formatDate}`;
   };
 
-
-
-
   return (
-    <View style={commonStyle.main}>
-      <Label title="Leave Type" style={commonStyle.headingTxt} />
-      <View style={commonStyle.rowView}>
-        <View style={styles.leaveType_Box}>
-          <Label title="Annual" style={styles.leaveType_txt} />
-        </View>
-        <View>
-          <Label title="Annual Balance" style={styles.smallTxt} />
-          <Label title="5.5 days" style={styles.smallTxt} />
-        </View>
-      </View>
-      <Label title="Leave Unit" style={commonStyle.headingTxt} />
-      <DropDownSelect
-        Data={LeaveUnit}
-        displayTxt="Select leave unit"
-        onSelect={(selectedItem: any) => {
-          Alert.alert('selected-->', selectedItem);
-        }}
-      />
-      <Label title="Leave Period" style={commonStyle.headingTxt} />
+    <View style={styles.main}>
+      {/* <Label title="Leave Period" style={commonStyle.headingTxt} />
       <TouchableOpacity
         style={styles.calenderBtn}
         onPress={() => setShowCalendar(!showCalendar)}>
-        <View style={{ width: '90%' }}>
-          {/* <Label
-            title={
-              selected
-                ? getFormattedDate(false, selected)
-                : getFormattedDate(true)
-            }
-            style={styles.peroidTxt}
-          /> */}
+        <View style={{width: '90%'}}>
         </View>
         <View style={styles.calender_icon_box}>
           <Calender name="calendar" size={scale(17)} color={COLOR.LIGHT_GREY} />
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {showCalendar ? (
         <>
           <Calendar
@@ -155,7 +124,7 @@ const LeaveDetailsLayout = (props: Props) => {
             // Callback that gets called when the user selects a day
             onDayPress={day => {
               console.log('selected day', day);
-              DateArrFun(day?.dateString)
+              DateArrFun(day?.dateString);
               //  let mm_dd_yyyy = getFormattedDate(day?.dateString)
               // setSelected((day.dateString)=>DateArrFun(day.dateString));
 
@@ -206,6 +175,28 @@ const LeaveDetailsLayout = (props: Props) => {
 export default LeaveDetailsLayout;
 
 const styles = StyleSheet.create({
+  main: {
+    backgroundColor: COLOR.WHITE,
+    width: '100%',
+    maxHeight: verticalScale(500),
+    marginVertical: verticalScale(3),
+    borderRadius: scale(6),
+    paddingHorizontal: scale(10),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
+    paddingBottom: scale(10),
+    paddingTop: scale(2),
+  },
+  title_Label: {
+    marginVertical: scale(5),
+    marginLeft: scale(1),
+  },
   leaveType_Box: {
     borderWidth: 1,
     width: '45%',
