@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, View, StyleSheet, TextStyle} from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 import Label from '../Lable';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -14,6 +20,8 @@ interface Props {
   title: string;
   placeHolder: string;
   titleStyle?: TextStyle;
+  firstChildStyle?: ViewStyle;
+  secondChildStyle?: ViewStyle;
 }
 
 const DropDown = (props: Props) => {
@@ -26,24 +34,27 @@ const DropDown = (props: Props) => {
     title,
     placeHolder,
     titleStyle,
+    firstChildStyle,
+    secondChildStyle,
   } = props;
 
   const styles = dynamicStyles(selectedValue);
 
   return (
     <>
-      <Label style={titleStyle} title={title} />
+      {title && <Label style={titleStyle} title={title} />}
       <TouchableOpacity
         style={styles.dropDown_Main}
         onPress={onClick}
         activeOpacity={0.6}>
-        <View style={styles.value_Con}>
+        <View
+          style={[{...styles.value_Con}, firstChildStyle]}>
           <Label
             title={selectedValue ? selectedValue : placeHolder}
             style={styles.selected_Label}
           />
         </View>
-        <View style={styles.icon_Con}>
+        <View style={[{...styles.icon_Con}, secondChildStyle]}>
           <AntDesign
             name={showDropdown ? 'caretup' : 'caretdown'}
             color={COLOR.LIGHT_GREY}
@@ -137,6 +148,7 @@ const dynamicStyles = (selectedValue: string) =>
       marginTop: verticalScale(5),
       borderRadius: scale(5),
       paddingHorizontal: scale(3),
+      width: '100%',
     },
   });
 

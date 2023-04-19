@@ -21,9 +21,9 @@ const ApplyLeave = () => {
   const [showLeaveCalendar, setShowLeaveCalendar] = useState<boolean>(false);
   const [leaveJson, setLeaveJson] = useState<Object>({});
   const [leaveArray, setLeaveArray] = useState<any>([]);
-
-  let mLeaveArray: any = [];
-
+  const [selectedLeave, setSelectedLeave] = useState(
+    Array(leaveArray?.length).fill(''),
+  );
   const clickUnit = useCallback(item => {
     setSelectedLeaveUnit(item?.value);
     setShowLeaveUnit(false);
@@ -45,28 +45,63 @@ const ApplyLeave = () => {
     setShowLeaveType(!showLeaveType);
   }, [showLeaveType]);
 
-  const clickCalendar = useCallback((item: any) => {
-    if (mLeaveArray?.includes(item?.dateString)) {
-      let mNewArray = mLeaveArray.filter(function (ITEM: any) {
-        return ITEM != item?.dateString;
+  const clickCalendar = useCallback(
+    (item: any) => {
+      let mLeaveArray = leaveArray;
+      if (mLeaveArray?.includes(item?.dateString)) {
+        let mNewArray = mLeaveArray.filter(function (ITEM: any) {
+          return ITEM != item?.dateString;
+        });
+        mLeaveArray = [...mNewArray];
+      } else {
+        mLeaveArray.push(item?.dateString);
+      }
+      setLeaveArray(mLeaveArray);
+      let mark: any = {};
+      for (let index = 0; index < mLeaveArray.length; index++) {
+        mark[mLeaveArray[index]] = {
+          color: COLOR.PRIMARY,
+          textColor: COLOR.WHITE,
+          selected: true,
+          marked: false,
+          selectedColor: COLOR.PRIMARY,
+        };
+      }
+      setLeaveJson(mark);
+      setSelectedLeave(Array(leaveArray?.length).fill(''));
+    },
+    [leaveArray],
+  );
+
+  const clickLeaveOption = useCallback(
+    (item: any) => {
+      const newSelectedLeave = [...selectedLeave];
+      newSelectedLeave[item?.index] = item?.value;
+      setSelectedLeave(newSelectedLeave);
+    },
+    [selectedLeave],
+  );
+
+  const clickDeleteLeave = useCallback(
+    (index: number) => {
+      let newArary = leaveArray.filter(item => {
+        return item !== index;
       });
-      mLeaveArray = [...mNewArray];
-    } else {
-      mLeaveArray.push(item?.dateString);
-    }
-    setLeaveArray(mLeaveArray);
-    let mark: any = {};
-    for (let index = 0; index < mLeaveArray.length; index++) {
-      mark[mLeaveArray[index]] = {
-        color: COLOR.PRIMARY,
-        textColor: COLOR.WHITE,
-        selected: true,
-        marked: false,
-        selectedColor: COLOR.PRIMARY,
-      };
-    }
-    setLeaveJson(mark);
-  }, []);
+      setLeaveArray(newArary);
+      let mark: any = {};
+      for (let index = 0; index < newArary.length; index++) {
+        mark[newArary[index]] = {
+          color: COLOR.PRIMARY,
+          textColor: COLOR.WHITE,
+          selected: true,
+          marked: false,
+          selectedColor: COLOR.PRIMARY,
+        };
+      }
+      setLeaveJson(mark);
+    },
+    [leaveArray],
+  );
 
   return (
     <>
@@ -100,7 +135,14 @@ const ApplyLeave = () => {
               onClickCalendar={clickCalendar}
               leaveJson={leaveJson}
             />
-            {!showLeaveCalendar && <LeaveDetailsLayout list={leaveArray} />}
+            {!showLeaveCalendar && (
+              <LeaveDetailsLayout
+                list={leaveArray}
+                selectedLeaveType={selectedLeave}
+                clickLeaveFullHalf={clickLeaveOption}
+                deleteLeave={clickDeleteLeave}
+              />
+            )}
 
             {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
             {/* <AddNotifySubmitCard /> */}

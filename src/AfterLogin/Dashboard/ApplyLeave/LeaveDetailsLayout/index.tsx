@@ -1,78 +1,79 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import COLOR from '../../../../Util/Color';
+import React, {useState} from 'react';
+import {TouchableOpacity, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import Label from '../../../../CommonComponent/Lable';
+import DropDown from '../../../../CommonComponent/DropDown';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import styles from './styles';
+
+let leaveArray = [
+  {id: 0, value: 'Full Day'},
+  {id: 1, value: 'Half Day'},
+];
 
 interface Props {
   list?: string[];
+  deleteLeave?: (item: any) => void;
+  clickLeaveFullHalf?: (item: any) => void;
+  selectedLeaveType?: any[];
 }
 
-const LeaveDetailsLayout = ({list}: Props) => {
-  console.log('-LeaveDetailsLayout--list----->', list);
+const LeaveDetailsLayout = ({
+  list,
+  deleteLeave,
+  clickLeaveFullHalf,
+  selectedLeaveType,
+}: Props) => {
+  const [showDropdown, setShowDropdown] = useState(
+    Array(list?.length).fill(false),
+  );
+  const items = list?.map((value, index) => {
+    return (
+      <View style={styles.list_Main} key={index}>
+        <View style={styles.list_Date_Con}>
+          <Label style={styles.date_Label} title={value} />
+        </View>
+        <View style={styles.drop_Con}>
+          <DropDown
+            selectedValue={selectedLeaveType[index]}
+            title=""
+            onClickValue={item =>
+              clickLeaveFullHalf({id: item.id, value: item.value, index: index})
+            }
+            placeHolder="Select an option"
+            firstChildStyle={{width: '75%'}}
+            secondChildStyle={{width: '25%'}}
+            onClick={() => {
+              const newShowDropdown = [...showDropdown];
+              newShowDropdown[index] = !newShowDropdown[index];
+              setShowDropdown(newShowDropdown);
+            }}
+            list={leaveArray}
+            showDropdown={showDropdown[index]}
+          />
+        </View>
+        <View style={styles.full_Day_Con}>
+          <Label style={styles.date_Label} title={selectedLeaveType[index]} />
+        </View>
+        <TouchableOpacity
+          style={styles.delete_Con}
+          onPress={() => deleteLeave(value)}>
+          <MaterialIcons name="delete" size={scale(20)} />
+        </TouchableOpacity>
+      </View>
+    );
+  });
 
   return (
     <View style={styles.main}>
       <Label title="Leave Details" style={styles.title_Label} />
-
-      {list?.length > 0 && (
-        <>
-          {list?.map(item => {
-            return <Label title="mith" />;
-          })}
-        </>
-      )}
-
-      {/* {list?.map((item: any) => {
-        return <Label title="mith" />;
-      })} */}
-      {/* {list?.map((item, index) => (
-        <View
-          style={{
-            width: '100%',
-            height: verticalScale(45),
-            flexDirection: 'row',
-            borderBottomColor: COLOR.GREY,
-            borderBottomWidth: scale(0.6),
-          }}>
-          <View
-            style={{
-              width: '35%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Label title="mith" />
-          </View>
-        </View>
-      ))} */}
+      {items}
+      <Label
+        title="❗This excludes pubic holidays,non working days and taken leaves."
+        style={styles.warning_Txt}
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    backgroundColor: COLOR.WHITE,
-    width: '100%',
-    maxHeight: verticalScale(500),
-    marginVertical: verticalScale(3),
-    borderRadius: scale(6),
-    paddingHorizontal: scale(10),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.32,
-    shadowRadius: 5.46,
-    elevation: 9,
-    paddingBottom: scale(10),
-    paddingTop: scale(2),
-  },
-  title_Label: {
-    marginVertical: scale(5),
-    marginLeft: scale(1),
-  },
-});
 
 export default React.memo(LeaveDetailsLayout);
