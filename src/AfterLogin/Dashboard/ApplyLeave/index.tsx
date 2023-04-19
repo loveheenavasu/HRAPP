@@ -2,12 +2,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
 import Label from '../../../CommonComponent/Lable';
 import {LeaveDetailsArr} from '../../../Util/DummyData';
@@ -23,6 +18,9 @@ const ApplyLeave = () => {
   const [selectedLeaveUnit, setSelectedLeaveUnit] = useState<string>('');
   const [selectedLeavePeriod, setSelectedLeavePeriod] = useState<string>('');
   const [showLeaveCalendar, setShowLeaveCalendar] = useState<boolean>(false);
+  const [leaveJson, setLeaveJson] = useState<Object>({});
+
+  let mLeaveArray: any = [];
 
   const handleClick = useCallback(() => {
     console.log('Button clicked');
@@ -48,6 +46,28 @@ const ApplyLeave = () => {
   const clickLeaveDropDown = useCallback(() => {
     setShowLeaveType(!showLeaveType);
   }, [showLeaveType]);
+
+  const clickCalendar = useCallback((item: any) => {
+    if (mLeaveArray?.includes(item?.dateString)) {
+      let mNewArray = mLeaveArray.filter(function (ITEM: any) {
+        return ITEM != item?.dateString;
+      });
+      mLeaveArray = [...mNewArray];
+    } else {
+      mLeaveArray.push(item?.dateString);
+    }
+    let mark: any = {};
+    for (let index = 0; index < mLeaveArray.length; index++) {
+      mark[mLeaveArray[index]] = {
+        color: COLOR.PRIMARY,
+        textColor: COLOR.WHITE,
+        selected: true,
+        marked: false,
+        selectedColor: COLOR.PRIMARY,
+      };
+    }
+    setLeaveJson(mark);
+  }, []);
 
   return (
     <>
@@ -78,9 +98,10 @@ const ApplyLeave = () => {
               showLeaveUnit={showLeaveUnit}
               showLeaveCalendar={showLeaveCalendar}
               onClickLeavePeriod={showHideLeaveCalendar}
+              onClickCalendar={clickCalendar}
+              leaveJson={leaveJson}
             />
-            <Test onClick={handleClick} />
-            {/* <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} /> */}
+            <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} />
             {/* <AddNotifySubmitCard /> */}
           </View>
         </ScrollView>

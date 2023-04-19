@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import COLOR from '../../../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {scale} from 'react-native-size-matters';
 import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
@@ -16,6 +16,8 @@ interface Props {
   selectedLeaveRange?: string;
   showLeaveCalendar?: boolean;
   onClickLeavePeriod?: () => void;
+  onClickCalendar?: (item: any) => void;
+  leaveJson?: Object | {};
 }
 const LeaveUnitLayout = ({
   showLeaveUnit,
@@ -25,13 +27,14 @@ const LeaveUnitLayout = ({
   selectedLeaveRange,
   showLeaveCalendar,
   onClickLeavePeriod,
+  onClickCalendar,
+  leaveJson,
 }: Props) => {
   const styles = useMemo(
     () => dynamicStyles(selectedLeaveRange),
     [selectedLeaveRange],
   );
   const currentDate = new Date().toISOString().slice(0, 10);
-
   return (
     <View style={styles.main}>
       <DropDown
@@ -62,12 +65,14 @@ const LeaveUnitLayout = ({
           <Calender name="calendar" size={scale(17)} color={COLOR.LIGHT_GREY} />
         </View>
       </TouchableOpacity>
-
       {showLeaveCalendar && (
         <ViewCalendar
           style={styles.calendar_Main}
           current={currentDate}
           minDate={currentDate}
+          onDayPress={onClickCalendar}
+          markedDates={leaveJson}
+          theme={styles.theme}
         />
       )}
     </View>

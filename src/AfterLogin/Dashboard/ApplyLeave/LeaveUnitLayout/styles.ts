@@ -62,6 +62,18 @@ const dynamicStyles = (props: any) =>
       marginBottom: scale(20),
       borderRadius: verticalScale(5),
     },
+    theme: {
+      backgroundColor: '#ffffff',
+      calendarBackground: '#ffffff',
+      textSectionTitleColor: COLOR.PRIMARY,
+      selectedDayBackgroundColor: '#00adf5',
+      selectedDayTextColor: '#ffffff',
+      todayTextColor: '#00adf5',
+      dayTextColor: '#2d4150',
+      textDisabledColor: COLOR.GREY,
+      arrowColor: COLOR.PRIMARY,
+      monthTextColor: COLOR.PRIMARY,
+    },
   });
 
 export default dynamicStyles;
