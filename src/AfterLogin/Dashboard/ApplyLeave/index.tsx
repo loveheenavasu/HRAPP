@@ -3,14 +3,15 @@ import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
+import LeaveDetailsLayoutTwo from './LeaveDetailsLayoutTwo';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
+
 import Label from '../../../CommonComponent/Lable';
 import {LeaveDetailsArr} from '../../../Util/DummyData';
 import AddNotifySubmitCard from './AddNotifySubmitCard';
 import LeaveTypeLayout from './LeaveTypeLayout';
 import {useCallback, useState} from 'react';
 import LeaveUnitLayout from './LeaveUnitLayout';
-import Test from './Test';
 
 const ApplyLeave = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
@@ -19,12 +20,9 @@ const ApplyLeave = () => {
   const [selectedLeavePeriod, setSelectedLeavePeriod] = useState<string>('');
   const [showLeaveCalendar, setShowLeaveCalendar] = useState<boolean>(false);
   const [leaveJson, setLeaveJson] = useState<Object>({});
+  const [leaveArray, setLeaveArray] = useState<any>([]);
 
   let mLeaveArray: any = [];
-
-  const handleClick = useCallback(() => {
-    console.log('Button clicked');
-  }, []);
 
   const clickUnit = useCallback(item => {
     setSelectedLeaveUnit(item?.value);
@@ -56,6 +54,7 @@ const ApplyLeave = () => {
     } else {
       mLeaveArray.push(item?.dateString);
     }
+    setLeaveArray(mLeaveArray);
     let mark: any = {};
     for (let index = 0; index < mLeaveArray.length; index++) {
       mark[mLeaveArray[index]] = {
@@ -101,7 +100,9 @@ const ApplyLeave = () => {
               onClickCalendar={clickCalendar}
               leaveJson={leaveJson}
             />
-            <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} />
+            {!showLeaveCalendar && <LeaveDetailsLayout list={leaveArray} />}
+
+            {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
             {/* <AddNotifySubmitCard /> */}
           </View>
         </ScrollView>
