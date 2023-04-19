@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LeaveTypeLayout;
+export default React.memo(LeaveTypeLayout);

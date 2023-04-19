@@ -1,14 +1,18 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useCallback} from 'react';
+import {TouchableOpacity, View} from 'react-native';
 import Label from '../../../CommonComponent/Lable';
 
-const Test = () => {
+interface Props {
+  onClick?: () => void;
+}
+
+const Test = ({onClick}: Props) => {
   console.log('---Test----->', 123);
 
   return (
-    <View>
+    <TouchableOpacity onPress={onClick}>
       <Label title="mith" />
-    </View>
+    </TouchableOpacity>
   );
 };
 
