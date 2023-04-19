@@ -84,13 +84,9 @@ const ApplyLeave = () => {
             paddingBottom: verticalScale(100),
             flexGrow: 1,
           }}>
-          <View style={{width: '94%', marginHorizontal: '3%'}}>
-            <Label title="Apply Leave" style={styles.title_Txt} />
-            <LeaveDetailsLayout leaveDetails={LeaveDetailsArr} />
-            <AddNotifySubmitCard />
-            <LeaveBarChat/>
           <View style={{width: '96%', marginHorizontal: '2%'}}>
-            <LeaveTypeLayout
+          {/* <Label title="Apply Leave" style={styles.title_Txt} /> */}
+          <LeaveTypeLayout
               showList={showLeaveType}
               onClickDropDown={clickLeaveDropDown}
               onClickType={clickLeaveType}
@@ -107,11 +103,10 @@ const ApplyLeave = () => {
               leaveJson={leaveJson}
             />
             {!showLeaveCalendar && <LeaveDetailsLayout list={leaveArray} />}
-
-            {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
-            {/* <AddNotifySubmitCard /> */}
+            <AddNotifySubmitCard />
+            <LeaveBarChat/>
           </View>
-          </View>
+         
         </ScrollView>
       </KeyboardAvoidingView>
     </>
