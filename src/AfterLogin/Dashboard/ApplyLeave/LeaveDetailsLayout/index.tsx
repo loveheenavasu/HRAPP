@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {scale} from 'react-native-size-matters';
 import Label from '../../../../CommonComponent/Lable';
 import DropDown from '../../../../CommonComponent/DropDown';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -37,15 +37,22 @@ const LeaveDetailsLayout = ({
           <DropDown
             selectedValue={selectedLeaveType[index]}
             title=""
-            onClickValue={item =>
-              clickLeaveFullHalf({id: item.id, value: item.value, index: index})
-            }
+            onClickValue={item => {
+              clickLeaveFullHalf({
+                id: item.id,
+                value: item.value,
+                index: index,
+              });
+              let newShowDropdown = new Array(showDropdown.length).fill(false);
+              setShowDropdown(newShowDropdown);
+            }}
             placeHolder="Select an option"
             firstChildStyle={{width: '75%'}}
             secondChildStyle={{width: '25%'}}
             onClick={() => {
-              const newShowDropdown = [...showDropdown];
-              newShowDropdown[index] = !newShowDropdown[index];
+              let newShowDropdown = showDropdown.map((value, idx) =>
+                idx === index ? !value : false,
+              );
               setShowDropdown(newShowDropdown);
             }}
             list={leaveArray}

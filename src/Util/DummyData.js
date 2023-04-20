@@ -81,19 +81,18 @@ export const lastLeaveData = [
 export const NextpubHoli = [{id: 1, on: '22/4/2023', name: 'Eid al-Fitr'}];
 
 export const LeaveDetailsArr = [
-  {id:1,date:'10 Apr 2023',day:'1 days'},
-  {id:2,date:'23 May 2023',day:'0.5 days'},
-]
+  {id: 1, date: '10 Apr 2023', day: '1 days'},
+  {id: 2, date: '23 May 2023', day: '0.5 days'},
+];
 
-export const LeaveUnit = ["Egypt", "Canada", "Australia", "Ireland"]
+export const LeaveUnit = ['Egypt', 'Canada', 'Australia', 'Ireland'];
 
-export const LeaveDays = ['1 Day','0.5 Day']
+export const LeaveDays = ['1 Day', '0.5 Day'];
 
 export const HrMailngData = [
-  {id:1,email:'Shika_Mankotia@gmail.com'},
-  {id:2,email:'Ritika_sharma@gmail.com'},
-  {id:3,email:'Rohit_chugh@gmail.com'},
-  {id:4,email:'Harshit_vaid@gmail.com'},
-  {id:5,email:'Love_trivedi@gmail.com'}
-
+  {id: 1, email: 'Shika@gmail.com', selected: false},
+  {id: 2, email: 'Ritika@gmail.com', selected: false},
+  {id: 3, email: 'Rohit@gmail.com', selected: false},
+  {id: 4, email: 'Harshitvaid@gmail.com', selected: false},
+  {id: 5, email: 'Love@gmail.com', selected: false},
 ];

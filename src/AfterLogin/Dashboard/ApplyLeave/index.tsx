@@ -3,15 +3,13 @@ import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
-import LeaveDetailsLayoutTwo from './LeaveDetailsLayoutTwo';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
-
-import Label from '../../../CommonComponent/Lable';
-import {LeaveDetailsArr} from '../../../Util/DummyData';
-import AddNotifySubmitCard from './AddNotifySubmitCard';
+import {HrMailngData, LeaveDetailsArr} from '../../../Util/DummyData';
 import LeaveTypeLayout from './LeaveTypeLayout';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import LeaveUnitLayout from './LeaveUnitLayout';
+import NotifyPersonLayout from './NotifyPersonLayout';
+import {useIsFocused} from '@react-navigation/native';
 
 const ApplyLeave = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
@@ -24,6 +22,17 @@ const ApplyLeave = () => {
   const [selectedLeave, setSelectedLeave] = useState(
     Array(leaveArray?.length).fill(''),
   );
+  const [notifyPersonName, setNotifyPersoneName] = useState<string>('');
+  const [notifyList, setNotifyList] = useState<any>([]);
+  const [remark, setRemark] = useState<string>('');
+
+  const scrollRef = useRef(null);
+  const focus = useIsFocused();
+
+  useEffect(() => {
+    scrollRef?.current.scrollTo({x: 0, y: 0, animated: true});
+  }, [focus]);
+
   const clickUnit = useCallback(item => {
     setSelectedLeaveUnit(item?.value);
     setShowLeaveUnit(false);
@@ -102,63 +111,95 @@ const ApplyLeave = () => {
     },
     [leaveArray],
   );
+  const editNotifyPerson = useCallback((txt: string) => {
+    setNotifyPersoneName(txt);
+    if (txt) {
+      let newArray = HrMailngData.filter(item => {
+        const itemData = item.email.toUpperCase();
+        const textData = txt.toUpperCase();
+        return itemData.includes(textData);
+      });
+      setNotifyList(newArray);
+    } else {
+      setNotifyList([]);
+    }
+  }, []);
+
+  const editRemark = useCallback((txt: string) => {
+    setRemark(txt);
+  }, []);
+
+  const clickCheckBox = useCallback(
+    (ITEM: any) => {
+      let newArray = [];
+      for (let index = 0; index < notifyList.length; index++) {
+        if (notifyList[index]?.id === ITEM?.id) {
+          newArray.push({
+            id: notifyList[index].id,
+            email: notifyList[index].email,
+            selected: !notifyList[index].selected,
+          });
+        } else {
+          newArray.push(notifyList[index]);
+        }
+      }
+      setNotifyList(newArray);
+    },
+    [notifyList],
+  );
 
   return (
-    <>
-      <KeyboardAvoidingView
-        style={{flex: 1}}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={verticalScale(45)}>
-        <Header showBackButton={true} title="Apply Leave" />
-        <ScrollView
-          nestedScrollEnabled={true}
-          showsVerticalScrollIndicator={false}
-          style={{backgroundColor: COLOR.GREY, flex: 1}}
-          contentContainerStyle={{
-            paddingBottom: verticalScale(100),
-            flexGrow: 1,
-          }}>
-          <View style={{width: '96%', marginHorizontal: '2%'}}>
-            <LeaveTypeLayout
-              showList={showLeaveType}
-              onClickDropDown={clickLeaveDropDown}
-              onClickType={clickLeaveType}
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? verticalScale(45) : 0}>
+      <Header showBackButton={true} title="Apply Leave" />
+      <ScrollView
+        ref={scrollRef}
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        style={{backgroundColor: COLOR.GREY, flex: 1}}
+        contentContainerStyle={{
+          paddingBottom: verticalScale(100),
+        }}>
+        <View style={{width: '96%', height: '100%', marginHorizontal: '2%'}}>
+          <LeaveTypeLayout
+            showList={showLeaveType}
+            onClickDropDown={clickLeaveDropDown}
+            onClickType={clickLeaveType}
+          />
+          <LeaveUnitLayout
+            selectedUnit={selectedLeaveUnit}
+            onClickUnit={clickUnit}
+            selectedLeaveRange={selectedLeavePeriod}
+            onClickLeaveUnit={showHideLeaveUnit}
+            showLeaveUnit={showLeaveUnit}
+            showLeaveCalendar={showLeaveCalendar}
+            onClickLeavePeriod={showHideLeaveCalendar}
+            onClickCalendar={clickCalendar}
+            leaveJson={leaveJson}
+          />
+          {!showLeaveCalendar && (
+            <LeaveDetailsLayout
+              list={leaveArray}
+              selectedLeaveType={selectedLeave}
+              clickLeaveFullHalf={clickLeaveOption}
+              deleteLeave={clickDeleteLeave}
             />
-            <LeaveUnitLayout
-              selectedUnit={selectedLeaveUnit}
-              onClickUnit={clickUnit}
-              selectedLeaveRange={selectedLeavePeriod}
-              onClickLeaveUnit={showHideLeaveUnit}
-              showLeaveUnit={showLeaveUnit}
-              showLeaveCalendar={showLeaveCalendar}
-              onClickLeavePeriod={showHideLeaveCalendar}
-              onClickCalendar={clickCalendar}
-              leaveJson={leaveJson}
-            />
-            {!showLeaveCalendar && (
-              <LeaveDetailsLayout
-                list={leaveArray}
-                selectedLeaveType={selectedLeave}
-                clickLeaveFullHalf={clickLeaveOption}
-                deleteLeave={clickDeleteLeave}
-              />
-            )}
-
-            {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
-            {/* <AddNotifySubmitCard /> */}
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </>
+          )}
+          <NotifyPersonLayout
+            value={notifyPersonName}
+            onChangeText={editNotifyPerson}
+            list={notifyList}
+            onClickCheckBox={clickCheckBox}
+            remarkValue={remark}
+            onRemarkChange={editRemark}
+          />
+          {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
+          {/* <AddNotifySubmitCard /> */}
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
-
 export default ApplyLeave;
-
-const styles = StyleSheet.create({
-  title_Txt: {
-    fontSize: scale(15),
-    color: COLOR.DARK_GRAY,
-    fontWeight: '600',
-  },
-});

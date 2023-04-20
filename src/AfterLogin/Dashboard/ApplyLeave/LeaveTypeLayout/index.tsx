@@ -25,6 +25,8 @@ const LeaveTypeLayout = ({showList, onClickDropDown, onClickType}: Props) => {
             titleStyle={styles.title_Label}
             showDropdown={showList}
             onClick={onClickDropDown}
+            firstChildStyle={styles.first_Child_Con}
+            secondChildStyle={styles.second_Child_Con}
           />
         </View>
         <View style={styles.annual_Bal_Con}>
@@ -88,6 +90,12 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     color: COLOR.PRIMARY,
     opacity: 0.8,
+  },
+  first_Child_Con: {
+    width: '80%',
+  },
+  second_Child_Con: {
+    width: '20%',
   },
 });
 
