@@ -8,23 +8,21 @@ import User from 'react-native-vector-icons/EvilIcons';
 interface Props {
   list?: object[];
 }
-
 const CelebrationLayout = (props: Props) => {
   const {list} = props;
-
   return (
     <View style={styles.main}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      <Label style={styles.title_Label} title="Celebrations" />
+      <View style={styles.sub_Main}>
+        <Label style={styles.title_Label} title="Celebrations" />
         <TouchableOpacity>
           <Label style={styles.viewAll_Label} title="View ALL" />
         </TouchableOpacity>
-        </View>
-      
+      </View>
+
       <FlatList
         nestedScrollEnabled={false}
         showsVerticalScrollIndicator={false}
-        data={list?.slice(0,3)}
+        data={list?.slice(0, 3)}
         keyExtractor={item => item?.id}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}
         renderItem={({item}) => {
@@ -66,6 +64,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5.46,
     elevation: 9,
     paddingBottom: scale(10),
+  },
+  sub_Main: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title_Label: {
     color: COLOR.NAVY,

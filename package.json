@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
@@ -17,6 +18,8 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.3",
     "lottie-react-native": "^6.0.0-rc.3",
+    "patch-package": "^6.5.1",
+    "postinstall-postinstall": "^2.1.0",
     "react": "18.2.0",
     "react-native": "0.71.6",
     "react-native-calendars": "^1.1295.0",

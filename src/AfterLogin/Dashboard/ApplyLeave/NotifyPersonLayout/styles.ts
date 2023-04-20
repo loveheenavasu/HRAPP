@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(5),
     width: '100%',
   },
-  remark_Edit:{
+  remark_Edit: {
     width: '100%',
     height: verticalScale(80),
     textAlignVertical: 'top',

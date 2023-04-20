@@ -49,7 +49,7 @@ const LeaveBarChat = () => {
         />
       </View>
       <View style={commonStyle.rowView}>
-        {detailsData?.map((i, index) => {
+        {detailsData?.map(i => {
           return (
             <>
               <View style={[styles.rect, {backgroundColor: i?.color}]}></View>

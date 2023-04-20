@@ -29,7 +29,6 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setpassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  
   const passwordRef = useRef<TextInput | null>(null);
 
   const submit = () => {
@@ -57,8 +56,6 @@ const Login = () => {
       dispatch(
         getUserLogin({email: email, name: 'Test Kumar', password: password}),
       );
-      // Storage.storeData(UserId, '1');
-      // Storage.storeData(UserData, JSON.stringify({email: email}));
     }
   };
 

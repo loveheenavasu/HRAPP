@@ -7,23 +7,21 @@ import {
   TextStyle,
 } from 'react-native';
 import COLOR from '../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
-import Plus from 'react-native-vector-icons/AntDesign'
+import {scale} from 'react-native-size-matters';
+import Plus from 'react-native-vector-icons/AntDesign';
 interface Props {
   onPress?: (txt: any) => void;
   name: string;
   txtStyle?: TextStyle;
   btnStyle?: ViewStyle;
-  addLogo?:boolean
+  addLogo?: boolean;
 }
 
 const CustomButton = (props: Props) => {
-  const {name, onPress, btnStyle, txtStyle,addLogo} = props;
+  const {name, onPress, btnStyle, txtStyle, addLogo} = props;
   return (
     <TouchableOpacity onPress={onPress} style={[styles.btn, {...btnStyle}]}>
-      {addLogo && (
-        <Plus name='plus' size={scale(11)} color={COLOR.WHITE}/>
-      )}
+      {addLogo && <Plus name="plus" size={scale(11)} color={COLOR.WHITE} />}
       <Text style={[styles.txt, {...txtStyle}]}>{name}</Text>
     </TouchableOpacity>
   );
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: COLOR.PRIMARY,
     alignItems: 'center',
-    justifyContent:"center",
+    justifyContent: 'center',
     borderRadius: 7,
   },
   txt: {

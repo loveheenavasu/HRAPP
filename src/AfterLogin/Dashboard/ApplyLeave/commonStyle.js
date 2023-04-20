@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../Util/Color';
 
-export default CommonStyles = StyleSheet.create({
+const CommonStyles = StyleSheet.create({
   main: {
     backgroundColor: COLOR.WHITE,
     width: '100%',
@@ -36,3 +36,5 @@ export default CommonStyles = StyleSheet.create({
     color: COLOR.DARK_GRAY,
   },
 });
+
+export default CommonStyles;

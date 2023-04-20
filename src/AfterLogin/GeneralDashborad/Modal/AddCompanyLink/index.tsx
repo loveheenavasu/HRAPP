@@ -16,23 +16,19 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import EditText from '../../../../CommonComponent/EditText';
 import CustomButton from '../../../../CommonComponent/CustomButton';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
 interface Props {
   showModal: boolean;
   onClickCancel?: () => void;
   onClickSubmit?: () => void;
 }
-
 const AddCompanyLinkModal = ({
   showModal,
   onClickCancel,
   onClickSubmit,
 }: Props) => {
-  console.log('------AddCompanyLinkModal--->', 123);
-
   return (
     <Modal visible={showModal} transparent={true} animationType="slide">
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={styles.second_main}>
         <KeyboardAvoidingView
           style={styles.main}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -81,6 +77,9 @@ const styles = StyleSheet.create({
     padding: scale(10),
     backgroundColor: COLOR.WHITE,
     marginTop: verticalScale(200),
+  },
+  second_main: {
+    flex: 1,
   },
   title_Label: {
     marginVertical: 0,

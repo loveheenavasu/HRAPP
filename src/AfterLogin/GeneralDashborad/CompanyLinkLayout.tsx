@@ -5,18 +5,14 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Attach from 'react-native-vector-icons/Ionicons';
 import CustomButton from '../../CommonComponent/CustomButton';
-
-
 interface Props {
-  onClickAdd?:()=> void;
+  onClickAdd?: () => void;
 }
-
-
-const UpComingLink = ({onClickAdd} : Props) => {
+const UpComingLink = ({onClickAdd}: Props) => {
   return (
     <View style={styles.main}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      <Label style={styles.title_Label} title="Company Links" />
+      <View style={{}}>
+        <Label style={styles.title_Label} title="Company Links" />
         <TouchableOpacity>
           <Label style={styles.viewAll_Label} title="View ALL" />
         </TouchableOpacity>
@@ -66,6 +62,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
     elevation: 9,
+  },
+  sub_Main: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title_Label: {
     color: COLOR.NAVY,

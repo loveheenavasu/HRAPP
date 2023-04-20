@@ -14,8 +14,8 @@ const NewHiresLayout = (props: Props) => {
 
   return (
     <View style={styles.main}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      <Label style={styles.title_Label} title="New Hires" />
+      <View style={styles.sub_Main}>
+        <Label style={styles.title_Label} title="New Hires" />
         <TouchableOpacity>
           <Label style={styles.viewAll_Label} title="View ALL" />
         </TouchableOpacity>
@@ -23,7 +23,7 @@ const NewHiresLayout = (props: Props) => {
       <FlatList
         nestedScrollEnabled={false}
         showsVerticalScrollIndicator={false}
-        data={list?.splice(0,3)}
+        data={list?.splice(0, 3)}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}
         renderItem={({item}) => {
           return (
@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
     elevation: 9,
+  },
+  sub_Main: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title_Label: {
     color: COLOR.NAVY,

@@ -11,10 +11,9 @@ interface Props {
 
 const UpcomingLeave = (props: Props) => {
   const {list} = props;
-
   return (
     <View style={styles.main}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={styles.sub_Main}>
         <Label style={styles.title_Label} title="Upcoming Leave" />
         <TouchableOpacity>
           <Label style={styles.viewAll_Label} title="View ALL" />
@@ -23,7 +22,7 @@ const UpcomingLeave = (props: Props) => {
       <FlatList
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
-        data={list?.slice(0,3)}
+        data={list?.slice(0, 3)}
         renderItem={({item, index}) => {
           return (
             <View style={styles.list_Main}>
@@ -70,6 +69,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
     elevation: 9,
+  },
+  sub_Main: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title_Label: {
     color: COLOR.NAVY,

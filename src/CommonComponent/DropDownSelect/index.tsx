@@ -1,8 +1,8 @@
+import React from 'react';
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {scale, verticalScale} from 'react-native-size-matters';
 import DownIcon from 'react-native-vector-icons/Ionicons';
-
 interface Props {
   Data: string[];
   onSelect: (item: any) => void;
@@ -10,7 +10,6 @@ interface Props {
   dropTxtStyle?: TextStyle;
   displayTxt: string;
 }
-
 const DropDownSelect = (props: Props) => {
   const {Data, onSelect, dropDownStyle, dropTxtStyle, displayTxt} = props;
 

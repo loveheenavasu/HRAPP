@@ -10,7 +10,6 @@ import Label from '../Lable';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
-
 interface Props {
   showDropdown?: boolean;
   onClick?: () => void;
@@ -23,7 +22,6 @@ interface Props {
   firstChildStyle?: ViewStyle;
   secondChildStyle?: ViewStyle;
 }
-
 const DropDown = (props: Props) => {
   const {
     showDropdown,
@@ -47,8 +45,7 @@ const DropDown = (props: Props) => {
         style={styles.dropDown_Main}
         onPress={onClick}
         activeOpacity={0.6}>
-        <View
-          style={[{...styles.value_Con}, firstChildStyle]}>
+        <View style={[{...styles.value_Con}, firstChildStyle]}>
           <Label
             title={selectedValue ? selectedValue : placeHolder}
             style={styles.selected_Label}

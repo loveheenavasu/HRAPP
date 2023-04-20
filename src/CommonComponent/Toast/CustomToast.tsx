@@ -1,11 +1,5 @@
 import {verticalScale} from 'react-native-size-matters';
 import Toast from 'react-native-toast-message';
-
-interface type {
-  error: 'error';
-  success: 'success';
-}
-
 interface Props {
   status: 'error' | 'success';
   msg: string;

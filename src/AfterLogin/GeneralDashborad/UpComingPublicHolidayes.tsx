@@ -4,29 +4,26 @@ import Label from '../../CommonComponent/Lable';
 import COLOR from '../../Util/Color';
 import {verticalScale, scale} from 'react-native-size-matters';
 import Calender from 'react-native-vector-icons/AntDesign';
-
 interface Props {
   public_Holiday_List?: object[];
 }
-
 const UpcomingPublicHolidays = (props: Props) => {
   const {public_Holiday_List} = props;
-
   return (
     <View style={styles.main}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={styles.title_Con}>
         <Label style={styles.title_Label} title="Upcoming Public Holiday" />
         <TouchableOpacity>
           <Label style={styles.viewAll_Label} title="View ALL" />
         </TouchableOpacity>
       </View>
       <FlatList
-        style={{width: '100%'}}
-        data={public_Holiday_List?.slice(0,3)}
+        style={styles.list_Con}
+        data={public_Holiday_List?.slice(0, 3)}
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: verticalScale(10)}}
-        renderItem={({item, index}) => {
+        renderItem={({item}) => {
           return (
             <View style={styles.list_Main}>
               <View style={styles.f_Child}>
@@ -43,7 +40,7 @@ const UpcomingPublicHolidays = (props: Props) => {
             </View>
           );
         }}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={index => index.toString()}
         ListEmptyComponent={() => {
           return (
             <View style={styles.empty_Con}>
@@ -76,11 +73,18 @@ const styles = StyleSheet.create({
     shadowRadius: 5.46,
     elevation: 9,
   },
+  title_Con: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   title_Label: {
     color: COLOR.NAVY,
     fontWeight: 'bold',
     fontSize: scale(15),
     opacity: 0.8,
+  },
+  list_Con: {
+    width: '100%',
   },
   viewAll_Label: {
     color: COLOR.NAVY,

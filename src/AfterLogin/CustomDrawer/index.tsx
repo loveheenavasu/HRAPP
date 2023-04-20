@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import COLOR from '../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -11,7 +11,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 function CustomDrawerContent({navigation}) {
   const dispatch = useDispatch();
-  const [appVersion, setAppVersion] = useState<string>('1.0');
+  const [appVersion, setAppVersion] = useState<string>('');
+
+  useEffect(() => {
+    setAppVersion('1.0');
+  }, []);
 
   const logOutAlert = () => {
     Alert.alert('', 'Are you sure? You want to logout.', [

@@ -22,7 +22,6 @@ import ViewPublicHolidayLayout from './AfterLogin/Dashboard/ViewPublicHoliday';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
-const leaveSatck = createNativeStackNavigator();
 
 const BeforeStack = () => {
   return (

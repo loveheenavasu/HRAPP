@@ -1,21 +1,21 @@
+import React from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {verticalScale} from 'react-native-size-matters';
 import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
   View,
   TextInput,
+  StyleSheet,
 } from 'react-native';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
-import Label from '../../../CommonComponent/Lable';
-import {LeaveDetailsArr, HrMailngData} from '../../../Util/DummyData';
-import AddNotifySubmitCard from './AddNotifySubmitCard';
+import {HrMailngData} from '../../../Util/DummyData';
 import LeaveBarChat from './LeaveBarChart';
 import LeaveTypeLayout from './LeaveTypeLayout';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import LeaveUnitLayout from './LeaveUnitLayout';
 import NotifyPersonLayout from './NotifyPersonLayout';
 import {useIsFocused} from '@react-navigation/native';
@@ -25,7 +25,6 @@ const ApplyLeave = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
   const [showLeaveUnit, setShowLeaveUnit] = useState<boolean>(false);
   const [selectedLeaveUnit, setSelectedLeaveUnit] = useState<string>('');
-  const [selectedLeavePeriod, setSelectedLeavePeriod] = useState<string>('');
   const [showLeaveCalendar, setShowLeaveCalendar] = useState<boolean>(false);
   const [leaveJson, setLeaveJson] = useState<Object>({});
   const [leaveArray, setLeaveArray] = useState<any>([]);
@@ -90,7 +89,7 @@ const ApplyLeave = () => {
       let mLeaveArray = leaveArray;
       if (mLeaveArray?.includes(item?.dateString)) {
         let mNewArray = mLeaveArray.filter(function (ITEM: any) {
-          return ITEM != item?.dateString;
+          return ITEM !== item?.dateString;
         });
         mLeaveArray = [...mNewArray];
       } else {
@@ -195,7 +194,7 @@ const ApplyLeave = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={styles.main}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? verticalScale(45) : 0}>
       <Header showBackButton={true} title="Apply Leave" />
@@ -203,11 +202,9 @@ const ApplyLeave = () => {
         ref={scrollRef}
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
-        style={{backgroundColor: COLOR.GREY, flex: 1}}
-        contentContainerStyle={{
-          paddingBottom: verticalScale(100),
-        }}>
-        <View style={{width: '96%', height: '100%', marginHorizontal: '2%'}}>
+        style={styles.sub_Main}
+        contentContainerStyle={styles.content_Con}>
+        <View style={styles.main_Child}>
           <LeaveTypeLayout
             showList={showLeaveType}
             onClickDropDown={clickLeaveDropDown}
@@ -216,7 +213,6 @@ const ApplyLeave = () => {
           <LeaveUnitLayout
             selectedUnit={selectedLeaveUnit}
             onClickUnit={clickUnit}
-            selectedLeaveRange={selectedLeavePeriod}
             onClickLeaveUnit={showHideLeaveUnit}
             showLeaveUnit={showLeaveUnit}
             showLeaveCalendar={showLeaveCalendar}
@@ -244,12 +240,28 @@ const ApplyLeave = () => {
             refNotify={notifyRemark}
             clickSubmitButton={clickSubmit}
           />
-          {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
-          {/* <AddNotifySubmitCard /> */}
           <LeaveBarChat />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
+  sub_Main: {
+    backgroundColor: COLOR.GREY,
+    flex: 1,
+  },
+  content_Con: {
+    paddingBottom: verticalScale(100),
+  },
+  main_Child: {
+    width: '96%',
+    height: '100%',
+    marginHorizontal: '2%',
+  },
+});
 export default ApplyLeave;

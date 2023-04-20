@@ -61,6 +61,12 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(3),
     marginBottom: 0,
   },
+  first_Child_Con: {
+    width: '75%',
+  },
+  second_Child_Con: {
+    width: '25%',
+  },
 });
 
 export default styles;

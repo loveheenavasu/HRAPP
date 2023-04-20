@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet} from 'react-native';
 import COLOR from '../../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';

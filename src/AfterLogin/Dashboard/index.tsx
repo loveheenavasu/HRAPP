@@ -2,12 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {ScrollView} from 'react-native';
 import styles from './styles';
 import Header from '../../CommonComponent/Header';
-import {
-  NextpubHoli,
-  lastLeaveData,
-  pubHoliArr,
-  upcomingLeave,
-} from '../../Util/DummyData';
+import {NextpubHoli, lastLeaveData, upcomingLeave} from '../../Util/DummyData';
 import DashboardLayout from './DashboardLayout';
 import {scale, verticalScale} from 'react-native-size-matters';
 import UpComingLeaveLayout from './UpComingLeaveLayout';

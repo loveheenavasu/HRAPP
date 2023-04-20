@@ -9,14 +9,13 @@ import {useRoute} from '@react-navigation/native';
 
 const ViewAllLayout = () => {
   const mRoute = useRoute();
-
   return (
     <>
       <Header showBackButton={true} title="Upcoming Leave" />
       <View style={styles.sub_main}>
         <FlatList
           data={mRoute?.params?.list}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={index => index.toString()}
           renderItem={({item}) => {
             return (
               <TouchableOpacity style={styles.rowView} onPress={() => null}>
@@ -25,7 +24,7 @@ const ViewAllLayout = () => {
                   size={scale(30)}
                   color={COLOR.LIGHT_GREY}
                 />
-                <View style={{marginLeft: scale(10), justifyContent: 'center'}}>
+                <View style={styles.list_Sub_Child}>
                   <Label title={item?.date} style={styles.date_Label} />
                   <Label title={item?.day} style={styles.day_Label} />
                 </View>
@@ -95,6 +94,10 @@ const styles = StyleSheet.create({
   not_Found_Label: {
     color: COLOR.BLACK,
     opacity: 0.5,
+  },
+  list_Sub_Child: {
+    marginLeft: scale(10),
+    justifyContent: 'center',
   },
 });
 

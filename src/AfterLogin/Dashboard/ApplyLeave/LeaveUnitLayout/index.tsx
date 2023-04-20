@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import COLOR from '../../../../Util/Color';
 import {scale} from 'react-native-size-matters';
@@ -13,7 +13,6 @@ interface Props {
   onClickLeaveUnit?: () => void;
   onClickUnit?: (item: any) => void;
   selectedUnit: string;
-  selectedLeaveRange?: string;
   showLeaveCalendar?: boolean;
   onClickLeavePeriod?: () => void;
   onClickCalendar?: (item: any) => void;

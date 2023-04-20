@@ -6,13 +6,11 @@ import Label from '../Lable';
 import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
 interface Props {
   title?: string;
   navigation?: any;
   showBackButton?: boolean;
 }
-
 const Header = (props: Props) => {
   const {title, showBackButton} = props;
   const navigation = useNavigation();
@@ -31,7 +29,7 @@ const Header = (props: Props) => {
         )}
       </TouchableOpacity>
       <View style={styles.second_Child}>
-        <Label style={{fontWeight: '700', opacity: 0.7}} title={title} />
+        <Label style={styles.title_Label} title={title} />
       </View>
     </View>
   );
@@ -58,6 +56,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: '15%',
+  },
+  title_Label: {
+    fontWeight: '700',
+    opacity: 0.7,
   },
 });
 

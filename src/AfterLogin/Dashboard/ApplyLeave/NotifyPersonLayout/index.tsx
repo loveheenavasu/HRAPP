@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Label from '../../../../CommonComponent/Lable';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {scale} from 'react-native-size-matters';
 import EditText from '../../../../CommonComponent/EditText';
 import COLOR from '../../../../Util/Color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -68,7 +68,7 @@ const NotifyPersonLayout = ({
             </View>
           );
         }}
-        keyExtractor={(item, index) => item?.id.toString()}
+        keyExtractor={item => item?.id.toString()}
       />
       <ScrollView contentContainerStyle={styles.selected_Person_Main}>
         {list?.map((item, index) => {

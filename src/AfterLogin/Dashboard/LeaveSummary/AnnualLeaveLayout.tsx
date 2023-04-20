@@ -27,7 +27,7 @@ const AnnualLeaveLayout = () => {
           data={pieData}
           fontStyle={'normal'}
           radius={scale(80)}
-          labelsPosition='mid'
+          labelsPosition="mid"
         />
       </View>
       <View style={styles.total_Leave_Con}>

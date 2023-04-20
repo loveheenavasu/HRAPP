@@ -12,10 +12,9 @@ let mArray = ['Apply Leave', 'Leave Summary', 'Leave Adjustment'];
 
 const LeaveLayout = () => {
   const navigation = useNavigation<any>();
-
   return (
     <View style={styles.main}>
-      <View style={[styles.rowView, {justifyContent: 'space-around'}]}>
+      <View style={styles.rowView}>
         {mArray.map((item, index) => {
           return (
             <TouchableOpacity
@@ -34,16 +33,16 @@ const LeaveLayout = () => {
                 <Calender
                   name="calendar"
                   size={scale(21)}
-                  style={{opacity: 0.6}}
+                  style={styles.icon}
                 />
               ) : index === 1 ? (
                 <Summary
                   name="document-text-outline"
                   size={scale(23)}
-                  style={{opacity: 0.6}}
+                  style={styles.icon}
                 />
               ) : (
-                <Adjust name="edit" size={scale(20)} style={{opacity: 0.6}} />
+                <Adjust name="edit" size={scale(20)} style={styles.icon} />
               )}
               <Label title={item} style={styles.leaveTxt} />
             </TouchableOpacity>
@@ -74,10 +73,10 @@ const styles = StyleSheet.create({
   },
   rowView: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: scale(5),
     marginVertical: verticalScale(5),
+    justifyContent: 'space-around',
   },
   Leave_Menu_wrap: {
     alignItems: 'center',
@@ -86,10 +85,13 @@ const styles = StyleSheet.create({
   },
   leaveTxt: {
     marginTop: verticalScale(3),
-    marginBottom:0,
+    marginBottom: 0,
     color: COLOR.BLACK,
     opacity: 0.9,
     fontSize: scale(12),
+  },
+  icon: {
+    opacity: 0.6,
   },
 });
 

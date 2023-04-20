@@ -3,7 +3,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
-import {StyleSheet, View, FlatList, Alert} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import CustomButton from '../../CommonComponent/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 

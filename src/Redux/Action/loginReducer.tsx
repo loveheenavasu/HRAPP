@@ -60,7 +60,7 @@ export const loginReducer = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(getUserLogin.pending, (state, action) => {
+    builder.addCase(getUserLogin.pending, state => {
       return {...state, hideLoader: true};
     });
     builder.addCase(getUserLogin.fulfilled, (state, action) => {
@@ -77,7 +77,7 @@ export const loginReducer = createSlice({
         userId: '1',
       };
     });
-    builder.addCase(getUserLogin.rejected, (state, action) => {
+    builder.addCase(getUserLogin.rejected, state => {
       return {...state, hideLoader: false};
     });
   },

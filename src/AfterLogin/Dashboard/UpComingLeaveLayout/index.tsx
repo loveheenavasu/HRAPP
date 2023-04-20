@@ -34,7 +34,7 @@ const UpComingLeaveLayout = (props: Props) => {
                 size={scale(30)}
                 color={COLOR.LIGHT_GREY}
               />
-              <View style={{marginLeft: scale(10), justifyContent: 'center'}}>
+              <View style={styles.list_Sub_Child}>
                 <Label title={item?.date} style={styles.date_Label} />
                 <Label title={item?.day} style={styles.day_Label} />
               </View>
@@ -108,6 +108,10 @@ const styles = StyleSheet.create({
     fontSize: scale(11),
     color: COLOR.BLACK,
     opacity: 0.4,
+  },
+  list_Sub_Child: {
+    marginLeft: scale(10),
+    justifyContent: 'center',
   },
 });
 

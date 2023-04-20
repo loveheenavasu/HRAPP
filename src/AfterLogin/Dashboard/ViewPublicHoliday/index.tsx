@@ -9,8 +9,6 @@ import {useRoute} from '@react-navigation/native';
 
 const ViewPublicHolidayLayout = () => {
   const mRoute = useRoute();
-
-
   return (
     <>
       <Header showBackButton={true} title="Next Public Holiday" />
@@ -26,7 +24,7 @@ const ViewPublicHolidayLayout = () => {
                   size={scale(30)}
                   color={COLOR.LIGHT_GREY}
                 />
-                <View style={{marginLeft: scale(10), justifyContent: 'center'}}>
+                <View style={styles.list_Sub_Child}>
                   <Label title={item?.name} style={styles.date_Label} />
                   <Label title={item?.on} style={styles.day_Label} />
                 </View>
@@ -96,6 +94,9 @@ const styles = StyleSheet.create({
     color: COLOR.BLACK,
     opacity: 0.5,
   },
+  list_Sub_Child: {
+    marginLeft: scale(10),
+    justifyContent: 'center',
+  },
 });
-
 export default ViewPublicHolidayLayout;

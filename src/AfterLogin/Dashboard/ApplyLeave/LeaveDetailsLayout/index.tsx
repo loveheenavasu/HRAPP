@@ -47,8 +47,8 @@ const LeaveDetailsLayout = ({
               setShowDropdown(newShowDropdown);
             }}
             placeHolder="Select an option"
-            firstChildStyle={{width: '75%'}}
-            secondChildStyle={{width: '25%'}}
+            firstChildStyle={styles.first_Child_Con}
+            secondChildStyle={styles.second_Child_Con}
             onClick={() => {
               let newShowDropdown = showDropdown.map((value, idx) =>
                 idx === index ? !value : false,

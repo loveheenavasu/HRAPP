@@ -1,9 +1,10 @@
+import React from 'react';
 import {
-  Dimensions,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StyleSheet,
   View,
 } from 'react-native';
 import {
@@ -14,7 +15,7 @@ import {
 } from '../../Util/DummyData';
 import Header from '../../CommonComponent/Header';
 import COLOR from '../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {verticalScale} from 'react-native-size-matters';
 import UpcomingLeave from './UpComingLeave';
 import UpcomingPublicHolidays from './UpComingPublicHolidayes';
 import CelebrationLayout from './CelebrartionLayout';
@@ -36,7 +37,7 @@ const GeneralDashboard = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={styles.main}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={verticalScale(45)}>
       <Header title="General Dashboard" />
@@ -44,12 +45,9 @@ const GeneralDashboard = () => {
         ref={scrollRef}
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
-        style={{backgroundColor: COLOR.GREY, flex: 1}}
-        contentContainerStyle={{
-          paddingBottom: verticalScale(100),
-          flexGrow: 1,
-        }}>
-        <View style={{width: '94%', marginHorizontal: '3%'}}>
+        style={styles.scroll_Con}
+        contentContainerStyle={styles.content_Con}>
+        <View style={styles.sub_Main}>
           <UpcomingLeave list={Arr} />
           <UpcomingPublicHolidays public_Holiday_List={pubHoliArr} />
           <CelebrationLayout list={celebrationArr} />
@@ -73,5 +71,23 @@ const GeneralDashboard = () => {
     </KeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
+  content_Con: {
+    paddingBottom: verticalScale(100),
+    flexGrow: 1,
+  },
+  sub_Main: {
+    width: '94%',
+    marginHorizontal: '3%',
+  },
+  scroll_Con: {
+    backgroundColor: COLOR.GREY,
+    flex: 1,
+  },
+});
 
 export default GeneralDashboard;
