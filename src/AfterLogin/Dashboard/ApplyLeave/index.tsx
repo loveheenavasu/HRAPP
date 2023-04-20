@@ -10,7 +10,10 @@ import {
   TextInput,
 } from 'react-native';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
-import {HrMailngData, LeaveDetailsArr} from '../../../Util/DummyData';
+import Label from '../../../CommonComponent/Lable';
+import {LeaveDetailsArr, HrMailngData} from '../../../Util/DummyData';
+import AddNotifySubmitCard from './AddNotifySubmitCard';
+import LeaveBarChat from './LeaveBarChart';
 import LeaveTypeLayout from './LeaveTypeLayout';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import LeaveUnitLayout from './LeaveUnitLayout';
@@ -243,6 +246,7 @@ const ApplyLeave = () => {
           />
           {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
           {/* <AddNotifySubmitCard /> */}
+          <LeaveBarChat />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
