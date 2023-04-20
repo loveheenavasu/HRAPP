@@ -16,6 +16,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import LeaveUnitLayout from './LeaveUnitLayout';
 import NotifyPersonLayout from './NotifyPersonLayout';
 import {useIsFocused} from '@react-navigation/native';
+import ToastMsg from '../../../CommonComponent/Toast/CustomToast';
 
 const ApplyLeave = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
@@ -60,6 +61,7 @@ const ApplyLeave = () => {
   }, []);
 
   const clickUnit = useCallback(item => {
+    console.log('--item?.value----->', item?.value);
     setSelectedLeaveUnit(item?.value);
     setShowLeaveUnit(false);
   }, []);
@@ -174,6 +176,20 @@ const ApplyLeave = () => {
     [notifyList],
   );
 
+  const clickSubmit = useCallback(() => {
+    if (!selectedLeaveUnit) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please select leave unit first',
+      });
+    } else if (leaveArray?.length === 0) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please select leave period',
+      });
+    }
+  }, [selectedLeaveUnit, leaveArray]);
+
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -223,6 +239,7 @@ const ApplyLeave = () => {
             onRemarkChange={editRemark}
             refRemark={remarkRef}
             refNotify={notifyRemark}
+            clickSubmitButton={clickSubmit}
           />
           {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
           {/* <AddNotifySubmitCard /> */}

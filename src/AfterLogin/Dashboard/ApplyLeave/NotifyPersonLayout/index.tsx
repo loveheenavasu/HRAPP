@@ -24,6 +24,7 @@ interface Props {
   onRemarkChange?: (txt: any) => void;
   refRemark?: any;
   refNotify?: any;
+  clickSubmitButton?: () => void;
 }
 const NotifyPersonLayout = ({
   value,
@@ -34,6 +35,7 @@ const NotifyPersonLayout = ({
   onRemarkChange,
   refRemark,
   refNotify,
+  clickSubmitButton,
 }: Props) => {
   return (
     <View style={styles.main}>
@@ -99,7 +101,11 @@ const NotifyPersonLayout = ({
         OnChangeText={onRemarkChange}
         inputRef={refRemark}
       />
-      <CustomButton btnStyle={styles.btn} name="Submit" />
+      <CustomButton
+        onPress={clickSubmitButton}
+        btnStyle={styles.btn}
+        name="Submit"
+      />
     </View>
   );
 };
