@@ -22,6 +22,8 @@ interface Props {
   onClickCheckBox?: (item: any) => void;
   remarkValue: string;
   onRemarkChange?: (txt: any) => void;
+  refRemark?: any;
+  refNotify?: any;
 }
 const NotifyPersonLayout = ({
   value,
@@ -30,11 +32,14 @@ const NotifyPersonLayout = ({
   onClickCheckBox,
   remarkValue,
   onRemarkChange,
+  refRemark,
+  refNotify,
 }: Props) => {
   return (
     <View style={styles.main}>
       <Label title="Notify Person" style={styles.title_Label} />
       <EditText
+        inputRef={refNotify}
         Value={value}
         outerBoxStyle={styles.outer_Con}
         Placholder={'Please enter email id '}
@@ -92,6 +97,7 @@ const NotifyPersonLayout = ({
         multiline={true}
         Style={styles.remark_Edit}
         OnChangeText={onRemarkChange}
+        inputRef={refRemark}
       />
       <CustomButton btnStyle={styles.btn} name="Submit" />
     </View>

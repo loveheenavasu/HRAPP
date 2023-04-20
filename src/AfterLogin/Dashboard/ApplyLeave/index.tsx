@@ -2,7 +2,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  View,
+  TextInput,
+} from 'react-native';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
 import {HrMailngData, LeaveDetailsArr} from '../../../Util/DummyData';
 import LeaveTypeLayout from './LeaveTypeLayout';
@@ -26,12 +32,32 @@ const ApplyLeave = () => {
   const [notifyList, setNotifyList] = useState<any>([]);
   const [remark, setRemark] = useState<string>('');
 
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<ScrollView>(null);
+  const remarkRef = useRef<TextInput>(null);
+  const notifyRemark = useRef<TextInput>(null);
   const focus = useIsFocused();
 
   useEffect(() => {
-    scrollRef?.current.scrollTo({x: 0, y: 0, animated: true});
+    scrollRef?.current?.scrollTo({x: 0, y: 0, animated: true});
+    setLeaveArray([]);
+    setLeaveJson({});
+    setSelectedLeaveUnit('');
   }, [focus]);
+
+  useEffect(() => {
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        if (Platform.OS === 'android') {
+          remarkRef?.current?.blur();
+          notifyRemark?.current?.blur();
+        }
+      },
+    );
+    return () => {
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const clickUnit = useCallback(item => {
     setSelectedLeaveUnit(item?.value);
@@ -178,6 +204,7 @@ const ApplyLeave = () => {
             onClickLeavePeriod={showHideLeaveCalendar}
             onClickCalendar={clickCalendar}
             leaveJson={leaveJson}
+            leavePeriodArray={leaveArray}
           />
           {!showLeaveCalendar && (
             <LeaveDetailsLayout
@@ -194,6 +221,8 @@ const ApplyLeave = () => {
             onClickCheckBox={clickCheckBox}
             remarkValue={remark}
             onRemarkChange={editRemark}
+            refRemark={remarkRef}
+            refNotify={notifyRemark}
           />
           {/* <LeaveDetailsLayoutTwo leaveDetails={LeaveDetailsArr} /> */}
           {/* <AddNotifySubmitCard /> */}

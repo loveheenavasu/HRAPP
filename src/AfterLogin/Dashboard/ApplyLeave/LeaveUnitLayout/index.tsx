@@ -6,7 +6,7 @@ import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
 import {Calendar as ViewCalendar} from 'react-native-calendars';
-import dynamicStyles from './styles';
+import styles from './styles';
 
 interface Props {
   showLeaveUnit?: boolean;
@@ -18,22 +18,19 @@ interface Props {
   onClickLeavePeriod?: () => void;
   onClickCalendar?: (item: any) => void;
   leaveJson?: Object | {};
+  leavePeriodArray?: Object[];
 }
 const LeaveUnitLayout = ({
   showLeaveUnit,
   onClickLeaveUnit,
   onClickUnit,
   selectedUnit,
-  selectedLeaveRange,
   showLeaveCalendar,
   onClickLeavePeriod,
   onClickCalendar,
   leaveJson,
+  leavePeriodArray,
 }: Props) => {
-  const styles = useMemo(
-    () => dynamicStyles(selectedLeaveRange),
-    [selectedLeaveRange],
-  );
   const currentDate = new Date().toISOString().slice(0, 10);
   return (
     <View style={styles.main}>
@@ -57,8 +54,18 @@ const LeaveUnitLayout = ({
         activeOpacity={0.7}>
         <View style={styles.leave_Period_Val_Con}>
           <Label
-            style={styles.leavePeriod_Label}
-            title="Please select leave Period "
+            style={
+              leavePeriodArray?.length > 0
+                ? styles.leavePeriod_Selected_Label
+                : styles.leavePeriod_Label
+            }
+            title={
+              leavePeriodArray?.length > 0
+                ? 'Leave Period is ' +
+                  leavePeriodArray?.length.toString() +
+                  (leavePeriodArray?.length > 1 ? ' Days' : ' Day')
+                : 'Please select leave Period '
+            }
           />
         </View>
         <View style={styles.calendar_Con}>
