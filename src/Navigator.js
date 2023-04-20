@@ -107,7 +107,7 @@ const Navigator = () => {
         setShowLoader(false);
       }
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (mUserData?.userId) {
