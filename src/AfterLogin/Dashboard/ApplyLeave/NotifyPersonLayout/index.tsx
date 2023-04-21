@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Label from '../../../../CommonComponent/Lable';
-import {scale} from 'react-native-size-matters';
+import {scale, verticalScale} from 'react-native-size-matters';
 import EditText from '../../../../CommonComponent/EditText';
 import COLOR from '../../../../Util/Color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -25,6 +25,9 @@ interface Props {
   refRemark?: any;
   refNotify?: any;
   clickSubmitButton?: () => void;
+  clickNotifyDropDown?: () => void;
+  showList?: boolean;
+  selectedList?: any[];
 }
 const NotifyPersonLayout = ({
   value,
@@ -36,40 +39,88 @@ const NotifyPersonLayout = ({
   refRemark,
   refNotify,
   clickSubmitButton,
+  clickNotifyDropDown,
+  showList,
+  selectedList,
 }: Props) => {
+  console.log('----selectedList--->', selectedList);
+
   return (
     <View style={styles.main}>
       <Label title="Notify Person" style={styles.title_Label} />
-      <EditText
-        inputRef={refNotify}
-        Value={value}
-        outerBoxStyle={styles.outer_Con}
-        Placholder={'Please enter email id '}
-        ReturnKeyType="done"
-        OnSubmit={() => Keyboard.dismiss()}
-        OnChangeText={onChangeText}
-      />
-      <FlatList
-        style={styles.flat_Con}
-        data={list}
-        renderItem={({item}) => {
-          return (
-            <View style={styles.flat_MainChild}>
-              <Label title={item?.email} />
-              <TouchableOpacity
-                style={styles.flat_F_Child}
-                onPress={() => onClickCheckBox(item)}>
-                <AntDesign
-                  name={item?.selected ? 'checksquare' : 'checksquareo'}
-                  color={item?.selected ? COLOR.PRIMARY : COLOR.LIGHT_GREY}
-                  size={scale(18)}
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          borderWidth: scale(0.6),
+          borderRadius: 7,
+          borderColor: COLOR.BLACK,
+        }}>
+        <EditText
+          inputRef={refNotify}
+          Value={value}
+          outerBoxStyle={styles.outer_Con}
+          Placholder={'Please enter email id '}
+          ReturnKeyType="done"
+          OnSubmit={() => Keyboard.dismiss()}
+          OnChangeText={onChangeText}
+          showEye={false}
+        />
+        <TouchableOpacity
+          style={{
+            width: '10%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={clickNotifyDropDown}>
+          <AntDesign
+            name={showList ? 'caretup' : 'caretdown'}
+            color={COLOR.LIGHT_GREY}
+            size={scale(20)}
+          />
+        </TouchableOpacity>
+      </View>
+      {showList && (
+        <FlatList
+          style={styles.flat_Con}
+          data={list}
+          renderItem={({item}) => {
+            return (
+              <View style={styles.flat_MainChild}>
+                <Label title={item?.email} />
+                <TouchableOpacity
+                  style={styles.flat_F_Child}
+                  onPress={() => onClickCheckBox(item)}>
+                  <AntDesign
+                    name={item?.selected ? 'checksquare' : 'checksquareo'}
+                    color={item?.selected ? COLOR.PRIMARY : COLOR.LIGHT_GREY}
+                    size={scale(18)}
+                  />
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+          ListEmptyComponent={() => {
+            return (
+              <View
+                style={{
+                  width: '100%',
+                  height: verticalScale(45),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderBottomColor: COLOR.GREY,
+                  borderBottomWidth: scale(1),
+                }}>
+                <Label
+                  style={{color: COLOR.BLACK, opacity: 0.5}}
+                  title="Not Found, Please try another "
                 />
-              </TouchableOpacity>
-            </View>
-          );
-        }}
-        keyExtractor={item => item?.id.toString()}
-      />
+              </View>
+            );
+          }}
+          keyExtractor={item => item?.id.toString()}
+        />
+      )}
       <ScrollView contentContainerStyle={styles.selected_Person_Main}>
         {list?.map((item, index) => {
           return (

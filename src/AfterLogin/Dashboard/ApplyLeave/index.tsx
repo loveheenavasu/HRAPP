@@ -32,8 +32,10 @@ const ApplyLeave = () => {
     Array(leaveArray?.length).fill(''),
   );
   const [notifyPersonName, setNotifyPersoneName] = useState<string>('');
-  const [notifyList, setNotifyList] = useState<any>([]);
+  const [notifyList, setNotifyList] = useState<any>(HrMailngData);
   const [remark, setRemark] = useState<string>('');
+  const [showNotifyList, setShowNotifyList] = useState<boolean>(false);
+  const [selectedNotifyList, setSelectedNotifyList] = useState<any>([]);
 
   const scrollRef = useRef<ScrollView>(null);
   const remarkRef = useRef<TextInput>(null);
@@ -141,19 +143,31 @@ const ApplyLeave = () => {
     },
     [leaveArray],
   );
-  const editNotifyPerson = useCallback((txt: string) => {
-    setNotifyPersoneName(txt);
-    if (txt) {
-      let newArray = HrMailngData.filter(item => {
-        const itemData = item.email.toUpperCase();
-        const textData = txt.toUpperCase();
-        return itemData.includes(textData);
-      });
-      setNotifyList(newArray);
-    } else {
-      setNotifyList([]);
-    }
-  }, []);
+  const editNotifyPerson = useCallback(
+    (txt: string) => {
+      setNotifyPersoneName(txt);
+      setShowNotifyList(true);
+      if (txt) {
+        let newArray = HrMailngData.filter(item => {
+          const itemData = item.email.toUpperCase();
+          const textData = txt.toUpperCase();
+          return itemData.includes(textData);
+        });
+        const updatedNotifyList = newArray.map(item => ({
+          ...item,
+          selected: selectedNotifyList.includes(item.id),
+        }));
+        setNotifyList(updatedNotifyList);
+      } else {
+        const updatedNotifyList = HrMailngData.map(item => ({
+          ...item,
+          selected: selectedNotifyList.includes(item.id),
+        }));
+        setNotifyList(updatedNotifyList);
+      }
+    },
+    [showNotifyList, selectedNotifyList],
+  );
 
   const editRemark = useCallback((txt: string) => {
     setRemark(txt);
@@ -162,6 +176,7 @@ const ApplyLeave = () => {
   const clickCheckBox = useCallback(
     (ITEM: any) => {
       let newArray = [];
+      let selectedId = [...selectedNotifyList];
       for (let index = 0; index < notifyList.length; index++) {
         if (notifyList[index]?.id === ITEM?.id) {
           newArray.push({
@@ -169,13 +184,22 @@ const ApplyLeave = () => {
             email: notifyList[index].email,
             selected: !notifyList[index].selected,
           });
+          if (!notifyList[index].selected) {
+            selectedId.push(ITEM?.id);
+            setSelectedNotifyList(selectedId);
+          } else {
+            const updatedArray = selectedNotifyList.filter(
+              item => item !== notifyList[index].id,
+            );
+            setSelectedNotifyList(updatedArray);
+          }
         } else {
           newArray.push(notifyList[index]);
         }
       }
       setNotifyList(newArray);
     },
-    [notifyList],
+    [notifyList, selectedNotifyList],
   );
 
   const clickSubmit = useCallback(() => {
@@ -191,6 +215,11 @@ const ApplyLeave = () => {
       });
     }
   }, [selectedLeaveUnit, leaveArray]);
+
+  const openCloseNotifyDropDown = useCallback(() => {
+    Keyboard.dismiss();
+    setShowNotifyList(!showNotifyList);
+  }, [showNotifyList]);
 
   return (
     <KeyboardAvoidingView
@@ -239,6 +268,9 @@ const ApplyLeave = () => {
             refRemark={remarkRef}
             refNotify={notifyRemark}
             clickSubmitButton={clickSubmit}
+            clickNotifyDropDown={openCloseNotifyDropDown}
+            showList={showNotifyList}
+            selectedList={selectedNotifyList}
           />
           <LeaveBarChat />
         </View>

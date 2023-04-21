@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: COLOR.WHITE,
     width: '100%',
-    maxHeight: verticalScale(500),
+    maxHeight: verticalScale(1000),
     marginVertical: verticalScale(3),
     marginBottom: verticalScale(3),
     borderRadius: scale(6),
@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     marginLeft: scale(1),
   },
   outer_Con: {
-    marginTop: verticalScale(2),
-    marginBottom: verticalScale(5),
-    width: '100%',
+    marginTop:0,
+    marginBottom:0,
+    width: '90%',
+    borderWidth:0
   },
   remark_outer_Con: {
     marginTop: verticalScale(3),
