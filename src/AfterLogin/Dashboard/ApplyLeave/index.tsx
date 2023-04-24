@@ -208,8 +208,8 @@ const ApplyLeave = () => {
   );
 
   const clickSubmit = useCallback(() => {
+    Keyboard.dismiss();
     const isEmpty = selectedLeave.every(item => item.trim() === '');
-
     if (!selectedLeaveUnit) {
       ToastMsg({
         status: 'error',
@@ -225,8 +225,13 @@ const ApplyLeave = () => {
         status: 'error',
         msg: 'Please select leave details',
       });
+    } else if (selectedNotifyList?.length === 0) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please select atleast one notify person',
+      });
     }
-  }, [selectedLeaveUnit, leaveArray, selectedLeave]);
+  }, [selectedLeaveUnit, leaveArray, selectedLeave, selectedNotifyList]);
 
   const openCloseNotifyDropDown = useCallback(() => {
     Keyboard.dismiss();
