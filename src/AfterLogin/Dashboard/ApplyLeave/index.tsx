@@ -125,6 +125,11 @@ const ApplyLeave = () => {
 
   const clickDeleteLeave = useCallback(
     (index: number) => {
+      const index1 = leaveArray.indexOf(index);
+      let newSelectedLeave = selectedLeave.filter((INDEX, item) => {
+        return item !== index1;
+      });
+      setSelectedLeave(newSelectedLeave);
       let newArary = leaveArray.filter(item => {
         return item !== index;
       });
@@ -141,7 +146,7 @@ const ApplyLeave = () => {
       }
       setLeaveJson(mark);
     },
-    [leaveArray],
+    [leaveArray, selectedLeave],
   );
   const editNotifyPerson = useCallback(
     (txt: string) => {
@@ -203,6 +208,8 @@ const ApplyLeave = () => {
   );
 
   const clickSubmit = useCallback(() => {
+    const isEmpty = selectedLeave.every(item => item.trim() === '');
+
     if (!selectedLeaveUnit) {
       ToastMsg({
         status: 'error',
@@ -213,8 +220,13 @@ const ApplyLeave = () => {
         status: 'error',
         msg: 'Please select leave period',
       });
+    } else if (isEmpty) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please select leave details',
+      });
     }
-  }, [selectedLeaveUnit, leaveArray]);
+  }, [selectedLeaveUnit, leaveArray, selectedLeave]);
 
   const openCloseNotifyDropDown = useCallback(() => {
     Keyboard.dismiss();

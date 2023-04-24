@@ -43,7 +43,6 @@ const NotifyPersonLayout = ({
   showList,
   selectedList,
 }: Props) => {
-  console.log('----selectedList--->', selectedList);
 
   return (
     <View style={styles.main}>
