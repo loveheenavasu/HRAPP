@@ -14,7 +14,6 @@ import styles from './styles';
 import CustomButton from '../../CommonComponent/CustomButton';
 import FastImage from 'react-native-fast-image';
 import Images from '../../Util/Images';
-import ToastMsg from '../../CommonComponent/Toast/CustomToast';
 import {isEmailValid} from '../../Util/Validator';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../../Redux/Action/loginReducer';
@@ -22,6 +21,7 @@ import {RootState} from '../../Redux/store';
 import Loader from '../../CommonComponent/Loader';
 import {verticalScale} from 'react-native-size-matters';
 import {TextInput} from 'react-native-gesture-handler';
+import Toast from '../../Util/Helper/ToastType';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -33,25 +33,13 @@ const Login = () => {
 
   const submit = () => {
     if (!email?.trim() && !password?.trim()) {
-      ToastMsg({
-        status: 'error',
-        msg: 'All fields are required',
-      });
+      Toast.error('All fields are required');
     } else if (!email.trim()) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter Email',
-      });
+      Toast.error('Please enter Email');
     } else if (!isEmailValid(email.trim())) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter valid Email',
-      });
+      Toast.error('Please enter valid Email');
     } else if (!password.trim()) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter password',
-      });
+      Toast.error('Please enter password');
     } else {
       dispatch(
         getUserLogin({email: email, name: 'Test Kumar', password: password}),

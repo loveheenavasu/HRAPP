@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import SplashScreen from './src/BeforeLogin/Splash';
 import Navigator from './src/Navigator';
-import Toast from 'react-native-toast-message';
 import {store} from './src/Redux/store';
 import {Provider} from 'react-redux';
+import Toast from './src/CommonComponent/CustomToast';
 
 const App = () => {
   const [showSplash, setShowSplash] = useState<boolean>(true);

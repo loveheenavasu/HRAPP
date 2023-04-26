@@ -19,7 +19,7 @@ import LeaveTypeLayout from './LeaveTypeLayout';
 import LeaveUnitLayout from './LeaveUnitLayout';
 import NotifyPersonLayout from './NotifyPersonLayout';
 import {useIsFocused} from '@react-navigation/native';
-import ToastMsg from '../../../CommonComponent/Toast/CustomToast';
+import Toast from '../../../Util/Helper/ToastType';
 
 const ApplyLeave = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
@@ -65,7 +65,6 @@ const ApplyLeave = () => {
   }, []);
 
   const clickUnit = useCallback(item => {
-    console.log('--item?.value----->', item?.value);
     setSelectedLeaveUnit(item?.value);
     setShowLeaveUnit(false);
   }, []);
@@ -211,25 +210,15 @@ const ApplyLeave = () => {
     Keyboard.dismiss();
     const isEmpty = selectedLeave.every(item => item.trim() === '');
     if (!selectedLeaveUnit) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please select leave unit first',
-      });
+      Toast.error('Please select leave unit first');
     } else if (leaveArray?.length === 0) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please select leave period',
-      });
+      Toast.error('Please select leave period');
     } else if (isEmpty) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please select leave details',
-      });
+      Toast.error('Please select leave details');
     } else if (selectedNotifyList?.length === 0) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please select atleast one notify person',
-      });
+      Toast.error('Please select atleast one notify person');
+    } else {
+      Toast.success('Data submit successfully');
     }
   }, [selectedLeaveUnit, leaveArray, selectedLeave, selectedNotifyList]);
 
