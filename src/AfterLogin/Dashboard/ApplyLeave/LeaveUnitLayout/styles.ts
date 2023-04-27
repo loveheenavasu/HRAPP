@@ -6,7 +6,7 @@ const dynamicStyles = StyleSheet.create({
   main: {
     backgroundColor: COLOR.WHITE,
     width: '100%',
-    maxHeight: verticalScale(500),
+    maxHeight: verticalScale(1000),
     marginVertical: verticalScale(3),
     borderRadius: scale(6),
     paddingHorizontal: scale(10),
@@ -60,7 +60,6 @@ const dynamicStyles = StyleSheet.create({
     borderWidth: scale(0.5),
     borderColor: COLOR.LIGHT_GREY,
     marginTop: scale(6),
-    marginBottom: scale(20),
     borderRadius: verticalScale(5),
   },
   theme: {

@@ -4,29 +4,23 @@ import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
+import CustomDropDown from '../../../../CommonComponent/CustomDropDown';
 
 interface Props {
-  showList?: boolean;
-  onClickDropDown?: () => void;
-  onClickType?: (item: any) => void;
+  onClickType: (item: {id: number; value: string}) => void;
 }
 
-const LeaveTypeLayout = ({showList, onClickDropDown, onClickType}: Props) => {
+const LeaveTypeLayout = ({onClickType}: Props) => {
   return (
     <View style={styles.main}>
       <View style={styles.rowView}>
         <View style={styles.annual_Levae_Con}>
-          <DropDown
-            list={[{id: 0, value: 'Annual', selected: false}]}
-            selectedValue="Annual"
-            title="Leave Type"
-            placeHolder="Please select leave type"
-            onClickValue={item => onClickType(item)}
+          <CustomDropDown
             titleStyle={styles.title_Label}
-            showDropdown={showList}
-            onClick={onClickDropDown}
-            firstChildStyle={styles.first_Child_Con}
-            secondChildStyle={styles.second_Child_Con}
+            title="Leave Type"
+            data={[{id: 0, value: 'Annual'}]}
+            onClick={item => onClickType(item)}
+            placeHolder={'Select leave type'}
           />
         </View>
         <View style={styles.annual_Bal_Con}>
@@ -90,12 +84,6 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     color: COLOR.PRIMARY,
     opacity: 0.8,
-  },
-  first_Child_Con: {
-    width: '80%',
-  },
-  second_Child_Con: {
-    width: '20%',
   },
 });
 

@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
     marginLeft: scale(1),
   },
   outer_Con: {
-    marginTop:0,
-    marginBottom:0,
+    marginTop: 0,
+    marginBottom: 0,
     width: '90%',
-    borderWidth:0
+    borderWidth: 0,
   },
   remark_outer_Con: {
     marginTop: verticalScale(3),
@@ -88,6 +88,37 @@ const styles = StyleSheet.create({
     marginTop: scale(10),
     marginBottom: scale(5),
   },
+  checkbox_Con: {
+    alignSelf: 'flex-end',
+    marginRight: scale(8),
+  },
+  notFound: {
+    width: '100%',
+    height: verticalScale(45),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomColor: COLOR.GREY,
+    borderBottomWidth: scale(1),
+  },
+  not_Found_Label: {
+    color: COLOR.BLACK,
+    opacity: 0.5,
+  },
+  cross_Con: {
+    marginRight: scale(4),
+  },
+  edit_Con: {
+    width: '100%',
+    flexDirection: 'row',
+    borderWidth: scale(0.6),
+    borderRadius: 7,
+    borderColor: COLOR.BLACK,
+  },
+  upIcon_Con:{
+    width: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 export default styles;

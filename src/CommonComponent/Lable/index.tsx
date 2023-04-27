@@ -6,10 +6,15 @@ import COLOR from '../../Util/Color';
 interface Props {
   title?: string;
   style?: TextStyle;
+  maxLines?: number | 1;
 }
 const Label = (props: Props) => {
-  const {title, style} = props;
-  return <Text style={[styles.main, {...style}]}>{title}</Text>;
+  const {title, style, maxLines} = props;
+  return (
+    <Text numberOfLines={maxLines} style={[styles.main, {...style}]}>
+      {title}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Label from '../../../../CommonComponent/Lable';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {scale} from 'react-native-size-matters';
 import EditText from '../../../../CommonComponent/EditText';
 import COLOR from '../../../../Util/Color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -43,18 +43,10 @@ const NotifyPersonLayout = ({
   showList,
   selectedList,
 }: Props) => {
-
   return (
     <View style={styles.main}>
       <Label title="Notify Person" style={styles.title_Label} />
-      <View
-        style={{
-          width: '100%',
-          flexDirection: 'row',
-          borderWidth: scale(0.6),
-          borderRadius: 7,
-          borderColor: COLOR.BLACK,
-        }}>
+      <View style={styles.edit_Con}>
         <EditText
           inputRef={refNotify}
           Value={value}
@@ -66,11 +58,7 @@ const NotifyPersonLayout = ({
           showEye={false}
         />
         <TouchableOpacity
-          style={{
-            width: '10%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          style={styles.upIcon_Con}
           onPress={clickNotifyDropDown}>
           <AntDesign
             name={showList ? 'caretup' : 'caretdown'}
@@ -94,6 +82,7 @@ const NotifyPersonLayout = ({
                     name={item?.selected ? 'checksquare' : 'checksquareo'}
                     color={item?.selected ? COLOR.PRIMARY : COLOR.LIGHT_GREY}
                     size={scale(18)}
+                    style={styles.checkbox_Con}
                   />
                 </TouchableOpacity>
               </View>
@@ -101,17 +90,9 @@ const NotifyPersonLayout = ({
           }}
           ListEmptyComponent={() => {
             return (
-              <View
-                style={{
-                  width: '100%',
-                  height: verticalScale(45),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderBottomColor: COLOR.GREY,
-                  borderBottomWidth: scale(1),
-                }}>
+              <View style={styles.notFound}>
                 <Label
-                  style={{color: COLOR.BLACK, opacity: 0.5}}
+                  style={styles.not_Found_Label}
                   title="Not Found, Please try another "
                 />
               </View>
@@ -132,7 +113,7 @@ const NotifyPersonLayout = ({
                       name="circle-with-cross"
                       size={scale(20)}
                       color={COLOR.PRIMARY}
-                      style={{marginRight: scale(4)}}
+                      style={styles.cross_Con}
                     />
                   </TouchableOpacity>
                 </View>

@@ -77,13 +77,9 @@ const ApplyLeave = () => {
     setShowLeaveCalendar(!showLeaveCalendar);
   }, [showLeaveCalendar]);
 
-  const clickLeaveType = useCallback(() => {
+  const clickLeaveType = useCallback((item: any) => {
     setShowLeaveType(false);
   }, []);
-
-  const clickLeaveDropDown = useCallback(() => {
-    setShowLeaveType(!showLeaveType);
-  }, [showLeaveType]);
 
   const clickCalendar = useCallback(
     (item: any) => {
@@ -240,11 +236,7 @@ const ApplyLeave = () => {
         style={styles.sub_Main}
         contentContainerStyle={styles.content_Con}>
         <View style={styles.main_Child}>
-          <LeaveTypeLayout
-            showList={showLeaveType}
-            onClickDropDown={clickLeaveDropDown}
-            onClickType={clickLeaveType}
-          />
+          <LeaveTypeLayout onClickType={clickLeaveType} />
           <LeaveUnitLayout
             selectedUnit={selectedLeaveUnit}
             onClickUnit={clickUnit}

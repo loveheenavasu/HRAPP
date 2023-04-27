@@ -2,16 +2,16 @@ import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import COLOR from '../../../../Util/Color';
 import {scale} from 'react-native-size-matters';
-import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
 import {Calendar as ViewCalendar} from 'react-native-calendars';
 import styles from './styles';
+import CustomDropdown from '../../../../CommonComponent/CustomDropDown';
 
 interface Props {
   showLeaveUnit?: boolean;
   onClickLeaveUnit?: () => void;
-  onClickUnit?: (item: any) => void;
+  onClickUnit: (item: any) => void;
   selectedUnit: string;
   showLeaveCalendar?: boolean;
   onClickLeavePeriod?: () => void;
@@ -20,10 +20,7 @@ interface Props {
   leavePeriodArray?: Object[];
 }
 const LeaveUnitLayout = ({
-  showLeaveUnit,
-  onClickLeaveUnit,
   onClickUnit,
-  selectedUnit,
   showLeaveCalendar,
   onClickLeavePeriod,
   onClickCalendar,
@@ -33,18 +30,14 @@ const LeaveUnitLayout = ({
   const currentDate = new Date().toISOString().slice(0, 10);
   return (
     <View style={styles.main}>
-      <DropDown
+      <CustomDropdown
         title="Leave Unit"
-        onClickValue={item => onClickUnit(item)}
+        onClick={item => onClickUnit(item)}
         placeHolder="Please select Leave Unit"
-        onClick={onClickLeaveUnit}
-        selectedValue={selectedUnit}
-        titleStyle={styles.title_Label}
-        list={[
-          {id: 0, value: 'Days', selected: false},
-          {id: 1, value: 'Weeks', selected: false},
+        data={[
+          {id: 0, value: 'Days'},
+          {id: 1, value: 'Weeks'},
         ]}
-        showDropdown={showLeaveUnit}
       />
       <Label title="Leave Period" style={styles.leave_Title} />
       <TouchableOpacity
