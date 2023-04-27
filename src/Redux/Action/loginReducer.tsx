@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import * as Storage from '../../Service/Storage';
 import {UserData} from '../../Util/StorageKey';
-import ToastMsg from '../../CommonComponent/Toast/CustomToast';
+import Toast from '../../Util/Helper/ToastType';
 
 type Detail = {
   email: string;
@@ -47,10 +47,7 @@ export const loginReducer = createSlice({
       return {...state, hideLoader: false, userId: action?.payload?.userId};
     },
     logOut: state => {
-      ToastMsg({
-        status: 'success',
-        msg: 'Logout successfully',
-      });
+      Toast.success('Logout successfully');
       return {
         ...state,
         hideLoader: false,
@@ -66,10 +63,7 @@ export const loginReducer = createSlice({
     builder.addCase(getUserLogin.fulfilled, (state, action) => {
       let details: Detail = action?.payload; //ok
       Storage.storeData(UserData, JSON.stringify(action?.payload));
-      ToastMsg({
-        status: 'success',
-        msg: 'Login successfully',
-      });
+      Toast.success('Login successfully');
       return {
         ...state,
         hideLoader: false,

@@ -4,7 +4,7 @@ import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
 import StaffDropDownLayout from './StaffDropDown';
 import YearMonthDropDown from './YearMonthDropDown';
-import ToastMsg from '../../../CommonComponent/Toast/CustomToast';
+import Toast from '../../../Util/Helper/ToastType';
 import CalendarListLayout from './CalendarListLayout';
 import Loader from '../../../CommonComponent/Loader';
 import CalenderYearlyLayout from './CalenderYearlyLayout';
@@ -50,10 +50,7 @@ const LeaveHistory = () => {
 
   const clickApplyYear = () => {
     if (!selectedYear) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please select year first',
-      });
+      Toast.error('Please select year first');
     } else {
       setCurrentYearMonth('');
       setShowLoader(true);
@@ -68,10 +65,7 @@ const LeaveHistory = () => {
 
   const clickApplyMonth = () => {
     if (!selectedMonth) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please select month first',
-      });
+      Toast.error('Please select month first');
     } else {
       setShowLoader(true);
       setCurrentMonth('');

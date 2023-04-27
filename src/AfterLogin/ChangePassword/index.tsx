@@ -9,8 +9,8 @@ import Header from '../../CommonComponent/Header';
 import Label from '../../CommonComponent/Lable';
 import EditText from '../../CommonComponent/EditText';
 import CustomButton from '../../CommonComponent/CustomButton';
-import ToastMsg from '../../CommonComponent/Toast/CustomToast';
 import styles from './styles';
+import Toast from '../../Util/Helper/ToastType';
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState<string>('');
@@ -22,35 +22,19 @@ const ChangePassword = () => {
 
   const submit = () => {
     if (!oldPassword && !newPassword && !confirmPassword) {
-      ToastMsg({
-        status: 'error',
-        msg: 'All fields are required',
-      });
+      Toast.error('All fields are required');
     } else if (!oldPassword) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter old password',
-      });
+      Toast.error('Please enter old password');
     } else if (!newPassword) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter new password',
-      });
+      Toast.error('Please enter new password');
     } else if (newPassword.trim().length < 4) {
-      ToastMsg({
-        status: 'error',
-        msg: 'New Password should be minimum 4 character',
-      });
+      Toast.error('New Password should be minimum 4 character');
     } else if (!confirmPassword) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter confirm password',
-      });
+      Toast.error('Please enter confirm password');
     } else if (newPassword !== confirmPassword) {
-      ToastMsg({
-        status: 'error',
-        msg: 'New Password and confirm password did not match!',
-      });
+      Toast.error('New Password and confirm password did not match!');
+    } else {
+      Toast.success('Data submit successfully');
     }
   };
 

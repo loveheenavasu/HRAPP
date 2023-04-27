@@ -13,8 +13,10 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import Label from '../Lable';
 import COLOR from '../../Util/Color';
 
+let timeOut: any = null;
+
 const Toast = () => {
-  const windowHeight = Dimensions.get('screen').height;
+  const {height: windowHeight} = Dimensions.get('screen');
   const popAnim = useRef(new Animated.Value(windowHeight * -1)).current;
   const successHeader = 'Success!';
   const failHeader = 'Failed!';
@@ -25,9 +27,11 @@ const Toast = () => {
     DeviceEventEmitter.addListener('SHOW_TOAST', onNewToast);
     return () => {
       DeviceEventEmitter.removeAllListeners();
+      clearTimeout(timeOut);
     };
   }, []);
   const onNewToast = (data: any) => {
+    clearTimeout(timeOut);
     setStatus(data?.type);
     setMessage(data?.options);
     popIn();
@@ -42,7 +46,7 @@ const Toast = () => {
   };
 
   const popOut = () => {
-    setTimeout(() => {
+    timeOut = setTimeout(() => {
       Animated.timing(popAnim, {
         toValue: windowHeight * -1,
         duration: 2000,
@@ -54,7 +58,7 @@ const Toast = () => {
   const instantPopOut = () => {
     Animated.timing(popAnim, {
       toValue: windowHeight * -1,
-      duration: 1500,
+      duration: 1000,
       useNativeDriver: true,
     }).start();
   };
