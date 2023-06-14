@@ -16,7 +16,7 @@ interface Props {
   titleStyle?: TextStyle;
 }
 
-const DropDown = (props: Props) => {
+const DropDown= (props: Props) => {
   const {
     showDropdown,
     onClick,

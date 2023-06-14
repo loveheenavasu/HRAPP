@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View} from 'react-native';
 import commonStyle from './commonStyle';
 import Label from '../../../CommonComponent/Lable';
@@ -11,7 +11,7 @@ import User from 'react-native-vector-icons/EvilIcons';
 import COLOR from '../../../Util/Color';
 import CustomButton from '../../../CommonComponent/CustomButton';
 
-const AddNotifySubmitCard = () => {
+const AddNotifySubmitCard:FC = () => {
   const [remark, setRemark] = useState();
   const [selectedItems, setSelectedItems] = useState([]);
   return (

@@ -1,11 +1,11 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, FC,RefObject} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 
-const SplashScreen = () => {
-  const lottieRef = useRef();
+const SplashScreen :FC= () => {
+  const lottieRef: RefObject<Lottie> = useRef(null);
 
   const _finish = () => {
     lottieRef.current?.pause();

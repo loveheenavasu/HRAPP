@@ -11,10 +11,10 @@ import {LeaveDetailsArr} from '../../../Util/DummyData';
 import AddNotifySubmitCard from './AddNotifySubmitCard';
 import LeaveBarChat from './LeaveBarChart';
 import LeaveTypeLayout from './LeaveTypeLayout';
-import {useCallback, useState} from 'react';
+import {FC, useCallback, useState} from 'react';
 import LeaveUnitLayout from './LeaveUnitLayout';
 
-const ApplyLeave = () => {
+const ApplyLeave:FC = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
   const [showLeaveUnit, setShowLeaveUnit] = useState<boolean>(false);
   const [selectedLeaveUnit, setSelectedLeaveUnit] = useState<string>('');

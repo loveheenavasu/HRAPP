@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -12,7 +12,7 @@ import CustomButton from '../../CommonComponent/CustomButton';
 import ToastMsg from '../../CommonComponent/Toast/CustomToast';
 import styles from './styles';
 
-const ChangePassword = () => {
+const ChangePassword :FC= () => {
   const [oldPassword, setOldPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
