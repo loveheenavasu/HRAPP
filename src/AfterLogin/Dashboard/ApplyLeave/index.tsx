@@ -1,5 +1,5 @@
 import React from 'react';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState, FC} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
@@ -21,7 +21,7 @@ import NotifyPersonLayout from './NotifyPersonLayout';
 import {useIsFocused} from '@react-navigation/native';
 import Toast from '../../../Util/Helper/ToastType';
 
-const ApplyLeave = () => {
+const ApplyLeave: FC = () => {
   const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
   const [showLeaveUnit, setShowLeaveUnit] = useState<boolean>(false);
   const [selectedLeaveUnit, setSelectedLeaveUnit] = useState<string>('');

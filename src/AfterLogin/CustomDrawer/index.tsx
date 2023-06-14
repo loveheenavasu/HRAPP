@@ -9,7 +9,7 @@ import {useDispatch} from 'react-redux';
 import {logOut} from '../../Redux/Action/loginReducer';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-function CustomDrawerContent({navigation}) {
+const  CustomDrawerContent = ({navigation})=> {
   const dispatch = useDispatch();
   const [appVersion, setAppVersion] = useState<string>('');
 

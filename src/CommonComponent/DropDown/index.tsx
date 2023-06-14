@@ -22,7 +22,7 @@ interface Props {
   firstChildStyle?: ViewStyle;
   secondChildStyle?: ViewStyle;
 }
-const DropDown = (props: Props) => {
+const DropDown= (props: Props) => {
   const {
     showDropdown,
     onClick,

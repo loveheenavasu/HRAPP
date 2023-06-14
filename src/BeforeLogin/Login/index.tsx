@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   Platform,
   Keyboard,
+  TextInput,
 } from 'react-native';
 import EditText from '../../CommonComponent/EditText';
 import Label from '../../CommonComponent/Lable';
@@ -20,29 +21,53 @@ import {getUserLogin} from '../../Redux/Action/loginReducer';
 import {RootState} from '../../Redux/store';
 import Loader from '../../CommonComponent/Loader';
 import {verticalScale} from 'react-native-size-matters';
-import {TextInput} from 'react-native-gesture-handler';
 import Toast from '../../Util/Helper/ToastType';
 
-const Login = () => {
+import ToastMsg from '../../CommonComponent/Toast/CustomToast';
+
+interface loginObj {
+  email: string;
+  password: string;
+}
+
+const Login: FC = () => {
   const dispatch = useDispatch();
   const mUserData = useSelector((state: RootState) => state.loginReducer);
-  const [email, setEmail] = useState<string>('');
-  const [password, setpassword] = useState<string>('');
+  const [loginData, setLoginData] = useState<loginObj>({
+    email: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const passwordRef = useRef<TextInput | null>(null);
 
   const submit = () => {
-    if (!email?.trim() && !password?.trim()) {
-      Toast.error('All fields are required');
-    } else if (!email.trim()) {
-      Toast.error('Please enter Email');
-    } else if (!isEmailValid(email.trim())) {
-      Toast.error('Please enter valid Email');
-    } else if (!password.trim()) {
-      Toast.error('Please enter password');
+    if (!loginData?.email?.trim() && !loginData?.password?.trim()) {
+      ToastMsg({
+        status: 'error',
+        msg: 'All fields are required',
+      });
+    } else if (!loginData?.email?.trim()) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please enter Email',
+      });
+    } else if (!isEmailValid(loginData?.email.trim())) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please enter valid Email',
+      });
+    } else if (!loginData?.password.trim()) {
+      ToastMsg({
+        status: 'error',
+        msg: 'Please enter password',
+      });
     } else {
       dispatch(
-        getUserLogin({email: email, name: 'Test Kumar', password: password}),
+        getUserLogin({
+          email: loginData?.email,
+          name: 'Test Kumar',
+          password: loginData?.password,
+        }),
       );
     }
   };
@@ -62,8 +87,8 @@ const Login = () => {
           />
           <EditText
             Placholder="Email id"
-            Value={email}
-            OnChangeText={e => setEmail(e.trim())}
+            Value={loginData?.email}
+            OnChangeText={e => setLoginData({...loginData, email: e.trim()})}
             showImg
             OnSubmit={() => passwordRef?.current.focus()}
             ReturnKeyType="next"
@@ -71,8 +96,8 @@ const Login = () => {
           <EditText
             inputRef={passwordRef}
             Placholder="Password"
-            Value={password}
-            OnChangeText={e => setpassword(e)}
+            Value={loginData?.password}
+            OnChangeText={e => setLoginData({...loginData, password: e.trim()})}
             showImg
             showEye={true}
             onClickSecure={() => setShowPassword(!showPassword)}
