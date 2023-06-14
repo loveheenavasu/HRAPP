@@ -114,11 +114,11 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderColor: COLOR.BLACK,
   },
-  upIcon_Con:{
+  upIcon_Con: {
     width: '10%',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });
 
 export default styles;

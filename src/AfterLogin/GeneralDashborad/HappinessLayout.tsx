@@ -101,5 +101,4 @@ const styles = StyleSheet.create({
     marginLeft: scale(7),
   },
 });
-
 export default HappinesLayout;

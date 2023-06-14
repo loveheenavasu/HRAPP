@@ -67,6 +67,7 @@ const Custom: FC<Props> = ({
                   </TouchableOpacity>
                 );
               }}
+              keyExtractor={(item, index) => index.toString()}
             />
           </View>
         </TouchableOpacity>
@@ -159,6 +160,7 @@ const styles = (
       top: dropdownTop,
       left: dropdownLeft,
       elevation: 7,
+      borderRadius: scale(5),
     },
     list_Con: {
       width: '100%',

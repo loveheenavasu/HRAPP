@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';

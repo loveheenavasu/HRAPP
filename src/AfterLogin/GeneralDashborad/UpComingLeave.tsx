@@ -23,7 +23,7 @@ const UpcomingLeave = (props: Props) => {
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
         data={list?.slice(0, 3)}
-        renderItem={({item, index}) => {
+        renderItem={({item}) => {
           return (
             <View style={styles.list_Main}>
               <View style={styles.f_Child}>

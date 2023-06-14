@@ -27,7 +27,6 @@ interface Props {
   clickSubmitButton?: () => void;
   clickNotifyDropDown?: () => void;
   showList?: boolean;
-  selectedList?: any[];
 }
 const NotifyPersonLayout = ({
   value,
@@ -41,7 +40,6 @@ const NotifyPersonLayout = ({
   clickSubmitButton,
   clickNotifyDropDown,
   showList,
-  selectedList,
 }: Props) => {
   return (
     <View style={styles.main}>
