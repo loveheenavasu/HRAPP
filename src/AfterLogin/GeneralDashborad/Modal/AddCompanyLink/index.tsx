@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import COLOR from '../../../../Util/Color';
 import Label from '../../../../CommonComponent/Lable';
-import {scale, verticalScale} from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import EditText from '../../../../CommonComponent/EditText';
 import CustomButton from '../../../../CommonComponent/CustomButton';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -23,16 +23,16 @@ interface Props {
   onClickSubmit?: () => void;
 }
 
-const AddCompanyLinkModal = ({
+const AddCompanyLinkModal: FC<Props> = ({
   showModal,
   onClickCancel,
   onClickSubmit,
-}: Props) => {
+}) => {
   console.log('------AddCompanyLinkModal--->', 123);
 
   return (
     <Modal visible={showModal} transparent={true} animationType="slide">
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           style={styles.main}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -43,7 +43,7 @@ const AddCompanyLinkModal = ({
                 title="Please paste/write your link here"
               />
               <EditText
-                outerBoxStyle={{marginTop: scale(10)}}
+                outerBoxStyle={{ marginTop: scale(10) }}
                 Value=""
                 Placholder="Please enter link here.."
                 ReturnKeyType="done"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
@@ -42,7 +42,7 @@ interface Props {
   onClickYearCancel?: () => void;
 }
 
-const YearMonthDropDown = ({
+const YearMonthDropDown:FC<Props> = ({
   onClickMonthValue,
   selectedMonth,
   showYear,
@@ -56,7 +56,7 @@ const YearMonthDropDown = ({
   onClickMonthCancel,
   onClickYearApply,
   onClickYearCancel,
-}: Props) => {
+}) => {
   const styles = dynaimicStyles(selectedMonth);
   return (
     <View style={styles.main}>

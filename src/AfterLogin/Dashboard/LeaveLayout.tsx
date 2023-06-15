@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import Summary from 'react-native-vector-icons/Ionicons';
 import Calender from 'react-native-vector-icons/AntDesign';
@@ -10,7 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 
 let mArray = ['Apply Leave', 'Leave Summary', 'Leave Adjustment'];
 
-const LeaveLayout = () => {
+const LeaveLayout:FC = () => {
   const navigation = useNavigation<any>();
 
   return (

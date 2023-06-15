@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
@@ -7,7 +7,7 @@ import Calender from 'react-native-vector-icons/AntDesign';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {useRoute} from '@react-navigation/native';
 
-const ViewAllLayout = () => {
+const ViewAllLayout:FC = () => {
   const mRoute = useRoute();
 
   return (

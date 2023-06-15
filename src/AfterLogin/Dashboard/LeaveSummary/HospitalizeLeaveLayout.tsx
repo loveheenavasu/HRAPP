@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../Util/Color';
@@ -9,7 +9,7 @@ const pieData = [
   {value: 20, color: COLOR.PRIMARY, text: '54%'},
   {value: 12, color: COLOR.NAVY, text: '12%'},
 ];
-const HospitalizeLeaveLayout = () => {
+const HospitalizeLeaveLayout:FC = () => {
   return (
     <View style={styles.main}>
       <Label title="Hospitalisation Leave" style={styles.title_Label} />

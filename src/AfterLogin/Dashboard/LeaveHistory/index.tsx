@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
@@ -25,7 +25,7 @@ const monthArray: any = [
   'Dec',
 ];
 
-const LeaveHistory = () => {
+const LeaveHistory:FC = () => {
   const [personalRadio, setPersonalRadio] = useState<boolean>(true);
   const [staffRadio, setStaffRadio] = useState<boolean>(false);
   const [yearlyRadio, setYearlyRadio] = useState<boolean>(true);

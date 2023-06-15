@@ -3,11 +3,7 @@ import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
-import LeaveDetailsLayoutTwo from './LeaveDetailsLayoutTwo';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
-
-import Label from '../../../CommonComponent/Lable';
-import {LeaveDetailsArr} from '../../../Util/DummyData';
 import AddNotifySubmitCard from './AddNotifySubmitCard';
 import LeaveBarChat from './LeaveBarChart';
 import LeaveTypeLayout from './LeaveTypeLayout';
@@ -85,7 +81,6 @@ const ApplyLeave:FC = () => {
             flexGrow: 1,
           }}>
           <View style={{width: '96%', marginHorizontal: '2%'}}>
-          {/* <Label title="Apply Leave" style={styles.title_Txt} /> */}
           <LeaveTypeLayout
               showList={showLeaveType}
               onClickDropDown={clickLeaveDropDown}

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import COLOR from '../../Util/Color';
 
-const Loader = () => {
+const Loader:FC = () => {
   return (
     <View
       style={{

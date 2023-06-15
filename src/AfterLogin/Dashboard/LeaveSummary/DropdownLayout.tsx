@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../Util/Color';
@@ -21,8 +21,7 @@ for (let index = 0; index < 5; index++) {
   });
 }
 
-const DropdownLayout = (props: Props) => {
-  const {showDropdown, onClick, selectedValue, onClickYear} = props;
+const DropdownLayout:FC<Props> = ({showDropdown, onClick, selectedValue, onClickYear}) => {
 
   return (
     <View style={styles.main}>

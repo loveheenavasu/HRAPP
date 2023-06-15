@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, TouchableOpacity, Keyboard} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -12,8 +12,7 @@ interface Props {
   onChangeText?: () => void;
 }
 
-const HappinesLayout = (props: Props) => {
-  const {value, onChangeText} = props;
+const HappinesLayout:FC<Props> = ({value, onChangeText}) => {
   return (
     <View style={styles.main}>
       <Label style={styles.title_Label} title="Happiness" />

@@ -1,10 +1,10 @@
-import React from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
-import {scale, verticalScale} from 'react-native-size-matters';
+import React, { FC } from 'react';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { scale, verticalScale } from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../Lable';
 import Feather from 'react-native-vector-icons/Feather';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 interface Props {
@@ -13,8 +13,8 @@ interface Props {
   showBackButton?: boolean;
 }
 
-const Header = (props: Props) => {
-  const {title, showBackButton} = props;
+const Header: FC<Props> = (title, showBackButton) => {
+
   const navigation = useNavigation();
 
   return (
@@ -31,7 +31,7 @@ const Header = (props: Props) => {
         )}
       </TouchableOpacity>
       <View style={styles.second_Child}>
-        <Label style={{fontWeight: '700', opacity: 0.7}} title={title} />
+        <Label style={{ fontWeight: '700', opacity: 0.7 }} title={title} />
       </View>
     </View>
   );

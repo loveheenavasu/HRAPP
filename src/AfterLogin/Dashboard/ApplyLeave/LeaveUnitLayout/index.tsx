@@ -1,11 +1,11 @@
-import React, {useMemo} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import React, { FC, useMemo } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import COLOR from '../../../../Util/Color';
-import {scale} from 'react-native-size-matters';
+import { scale } from 'react-native-size-matters';
 import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
-import {Calendar as ViewCalendar} from 'react-native-calendars';
+import { Calendar as ViewCalendar } from 'react-native-calendars';
 import dynamicStyles from './styles';
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
   onClickCalendar?: (item: any) => void;
   leaveJson?: Object | {};
 }
-const LeaveUnitLayout = ({
+const LeaveUnitLayout: FC<Props> = ({
   showLeaveUnit,
   onClickLeaveUnit,
   onClickUnit,
@@ -29,7 +29,7 @@ const LeaveUnitLayout = ({
   onClickLeavePeriod,
   onClickCalendar,
   leaveJson,
-}: Props) => {
+}) => {
   const styles = useMemo(
     () => dynamicStyles(selectedLeaveRange),
     [selectedLeaveRange],
@@ -45,8 +45,8 @@ const LeaveUnitLayout = ({
         selectedValue={selectedUnit}
         titleStyle={styles.title_Label}
         list={[
-          {id: 0, value: 'Days', selected: false},
-          {id: 1, value: 'Weeks', selected: false},
+          { id: 0, value: 'Days', selected: false },
+          { id: 1, value: 'Weeks', selected: false },
         ]}
         showDropdown={showLeaveUnit}
       />

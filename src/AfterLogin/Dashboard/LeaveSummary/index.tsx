@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../../../CommonComponent/Header';
 import COLOR from '../../../Util/Color';
@@ -10,7 +10,7 @@ import SickLeaveLayout from './SickLeaveLayout';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../../../CommonComponent/Loader';
 
-const LeaveSummary = () => {
+const LeaveSummary:FC = () => {
   const mFocus = useIsFocused();
   const [showYearDropDown, setShowYearDropDown] = useState<boolean>(false);
   const [selectedYear, setSelectedYear] = useState<string>('');

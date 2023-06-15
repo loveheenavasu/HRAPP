@@ -1,8 +1,7 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, { FC } from 'react';
 import Header from '../../../CommonComponent/Header';
 
-const LeaveAdjustment = () => {
+const LeaveAdjustment:FC = () => {
   return (
     <>
       <Header showBackButton={true} title="Leave Adjustment" />

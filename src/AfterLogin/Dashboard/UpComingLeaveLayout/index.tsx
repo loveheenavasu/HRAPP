@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import Calender from 'react-native-vector-icons/AntDesign';
@@ -10,9 +10,8 @@ interface Props {
   list?: object[];
 }
 
-const UpComingLeaveLayout = (props: Props) => {
-  const {list} = props;
-  const navigation = useNavigation<any>();
+const UpComingLeaveLayout:FC<Props> = ({list}) => {
+ const navigation = useNavigation<any>();
 
   return (
     <View style={styles.main}>

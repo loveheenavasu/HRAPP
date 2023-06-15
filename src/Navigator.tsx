@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -24,7 +24,7 @@ const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
 const leaveSatck = createNativeStackNavigator();
 
-const BeforeStack = () => {
+const BeforeStack:FC = () => {
   return (
     <NavigationContainer>
       <beforeLoginStack.Navigator
@@ -41,7 +41,8 @@ const BeforeStack = () => {
   );
 };
 
-const AfterLoginStack = () => {
+const AfterLoginStack:FC = () => {
+  console.log('Inside the Afterlogin*********')
   return (
     <NavigationContainer>
       <afterDrawerLoginStack.Navigator
@@ -91,7 +92,7 @@ const AfterLoginStack = () => {
   );
 };
 
-const Navigator = () => {
+const Navigator:FC = () => {
   const dispatch = useDispatch();
   const mUserData = useSelector(state => state.loginReducer);
   const [userId, setUserId] = useState('');

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import commonStyle from './commonStyle'
 import Label from '../../../CommonComponent/Lable'
@@ -44,7 +44,7 @@ const _showLeaveData = ({ item }: any) => {
 }
 
 
-const LeaveBarChat = () => {
+const LeaveBarChat:FC = () => {
     return (
         <View style={commonStyle.main}>
             <Label title="Annual" style={commonStyle.headingTxt} />

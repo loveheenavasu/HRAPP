@@ -1,8 +1,8 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
 import DropDown from '../../../../CommonComponent/DropDown';
 import Label from '../../../../CommonComponent/Lable';
-import {scale, verticalScale} from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
 
 interface Props {
@@ -11,13 +11,13 @@ interface Props {
   onClickType?: (item: any) => void;
 }
 
-const LeaveTypeLayout = ({showList, onClickDropDown, onClickType}: Props) => {
+const LeaveTypeLayout: FC<Props> = ({ showList, onClickDropDown, onClickType }) => {
   return (
     <View style={styles.main}>
       <View style={styles.rowView}>
         <View style={styles.annual_Levae_Con}>
           <DropDown
-            list={[{id: 0, value: 'Annual', selected: false}]}
+            list={[{ id: 0, value: 'Annual', selected: false }]}
             selectedValue="Annual"
             title="Leave Type"
             placeHolder="Please select leave type"

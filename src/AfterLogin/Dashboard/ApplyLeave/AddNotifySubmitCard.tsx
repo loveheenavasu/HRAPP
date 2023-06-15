@@ -12,8 +12,8 @@ import COLOR from '../../../Util/Color';
 import CustomButton from '../../../CommonComponent/CustomButton';
 
 const AddNotifySubmitCard:FC = () => {
-  const [remark, setRemark] = useState();
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [remark, setRemark] = useState<string>();
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   return (
     <View style={commonStyle.main}>
       <Label title="Notify Person" style={commonStyle.headingTxt} />

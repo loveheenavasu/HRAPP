@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-const UpComingLink = ({onClickAdd} : Props) => {
+const UpComingLink:FC<Props> = ({onClickAdd}) => {
   return (
     <View style={styles.main}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>

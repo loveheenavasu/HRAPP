@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../Util/Color';
@@ -9,7 +9,7 @@ const pieData = [
   {value: 16, color: COLOR.PRIMARY, text: '54%'},
   {value: 3.5, color: COLOR.NAVY, text: '30%'},
 ];
-const AnnualLeaveLayout = () => {
+const AnnualLeaveLayout:FC = () => {
   return (
     <View style={styles.main}>
       <Label title="Annual Leave" style={styles.title_Label} />

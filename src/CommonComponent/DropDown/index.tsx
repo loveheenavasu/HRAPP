@@ -1,8 +1,8 @@
-import React from 'react';
-import {TouchableOpacity, View, StyleSheet, TextStyle} from 'react-native';
+import React, { FC } from 'react';
+import { TouchableOpacity, View, StyleSheet, TextStyle } from 'react-native';
 import Label from '../Lable';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {scale, verticalScale} from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 
 interface Props {
@@ -16,17 +16,15 @@ interface Props {
   titleStyle?: TextStyle;
 }
 
-const DropDown= (props: Props) => {
-  const {
-    showDropdown,
-    onClick,
-    selectedValue,
-    onClickValue,
-    list,
-    title,
-    placeHolder,
-    titleStyle,
-  } = props;
+const DropDown: FC<Props> = ({ showDropdown,
+  onClick,
+  selectedValue,
+  onClickValue,
+  list,
+  title,
+  placeHolder,
+  titleStyle, }) => {
+
 
   const styles = dynamicStyles(selectedValue);
 

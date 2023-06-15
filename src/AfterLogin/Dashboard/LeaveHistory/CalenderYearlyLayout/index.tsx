@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
@@ -8,7 +8,7 @@ interface Props {
   currentMonth: string;
 }
 
-const CalenderYearlyLayout = ({currentMonth}: Props) => {
+const CalenderYearlyLayout:FC<Props> = ({currentMonth}) => {
   const [selected, setSelected] = useState('');
   let mCurrentDateArray = currentMonth?.split('-');
   let maxYear = mCurrentDateArray[0];

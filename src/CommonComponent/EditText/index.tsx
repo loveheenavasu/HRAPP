@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   TextInput,
   StyleSheet,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import COLOR from '../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import User from 'react-native-vector-icons/FontAwesome';
 import Password from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -30,27 +30,25 @@ interface Props {
   multiline?: boolean;
 }
 
-function EditText(props: Props): JSX.Element {
-  const {
-    Placholder,
-    Value,
-    OnChangeText,
-    Style,
-    inputRef,
-    ReturnKeyType,
-    OnSubmit,
-    KeyboradType,
-    showImg,
-    showEye,
-    onClickSecure,
-    SecureText,
-    outerBoxStyle,
-    multiline,
-  } = props;
+const EditText: FC<Props> = ({ Placholder,
+  Value,
+  OnChangeText,
+  Style,
+  inputRef,
+  ReturnKeyType,
+  OnSubmit,
+  KeyboradType,
+  showImg,
+  showEye,
+  onClickSecure,
+  SecureText,
+  outerBoxStyle,
+  multiline, }) => {
+
 
   return (
     <>
-      <View style={[styles.inputBox, {...outerBoxStyle}]}>
+      <View style={[styles.inputBox, { ...outerBoxStyle }]}>
         {showImg && (
           <View style={styles.imgBox}>
             {Placholder == 'Email id' ? (
@@ -69,7 +67,7 @@ function EditText(props: Props): JSX.Element {
           placeholder={Placholder}
           value={Value}
           onChangeText={OnChangeText}
-          style={[styles.main, {...Style}]}
+          style={[styles.main, { ...Style }]}
           returnKeyType={ReturnKeyType}
           onSubmitEditing={OnSubmit}
           blurOnSubmit={false}

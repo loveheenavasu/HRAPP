@@ -1,6 +1,7 @@
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import { FC } from 'react';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import {scale, verticalScale} from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 import DownIcon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
@@ -11,8 +12,7 @@ interface Props {
   displayTxt: string;
 }
 
-const DropDownSelect = (props: Props) => {
-  const {Data, onSelect, dropDownStyle, dropTxtStyle, displayTxt} = props;
+const DropDownSelect: FC<Props> = ({ Data, onSelect, dropDownStyle, dropTxtStyle, displayTxt }) => {
 
   const _dropDownIcon = () => {
     return <DownIcon name="chevron-down" size={17} />;
@@ -24,8 +24,8 @@ const DropDownSelect = (props: Props) => {
         data={Data}
         onSelect={onSelect}
         defaultButtonText={displayTxt}
-        buttonStyle={[styles.dropBtn, {...dropDownStyle}]}
-        buttonTextStyle={[styles.dropBtnTxt, {...dropTxtStyle}]}
+        buttonStyle={[styles.dropBtn, { ...dropDownStyle }]}
+        buttonTextStyle={[styles.dropBtnTxt, { ...dropTxtStyle }]}
         renderDropdownIcon={_dropDownIcon}
       />
     </>
