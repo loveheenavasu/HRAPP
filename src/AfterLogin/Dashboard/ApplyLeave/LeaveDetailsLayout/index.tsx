@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import {scale} from 'react-native-size-matters';
+import React, { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
+import COLOR from '../../../../Util/Color';
+import { scale, verticalScale } from 'react-native-size-matters';
 import Label from '../../../../CommonComponent/Lable';
 import DropDown from '../../../../CommonComponent/DropDown';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -18,67 +19,18 @@ interface Props {
   selectedLeaveType?: any[];
 }
 
-const LeaveDetailsLayout = ({
-  list,
-  deleteLeave,
-  clickLeaveFullHalf,
-  selectedLeaveType,
-}: Props) => {
-  const [showDropdown, setShowDropdown] = useState(
-    Array(list?.length).fill(false),
-  );
-  const items = list?.map((value, index) => {
-    return (
-      <View style={styles.list_Main} key={index}>
-        <View style={styles.list_Date_Con}>
-          <Label style={styles.date_Label} title={value} />
-        </View>
-        <View style={styles.drop_Con}>
-          <DropDown
-            selectedValue={selectedLeaveType[index]}
-            title=""
-            onClickValue={item => {
-              clickLeaveFullHalf({
-                id: item.id,
-                value: item.value,
-                index: index,
-              });
-              let newShowDropdown = new Array(showDropdown.length).fill(false);
-              setShowDropdown(newShowDropdown);
-            }}
-            placeHolder="Select an option"
-            firstChildStyle={styles.first_Child_Con}
-            secondChildStyle={styles.second_Child_Con}
-            onClick={() => {
-              let newShowDropdown = showDropdown.map((value, idx) =>
-                idx === index ? !value : false,
-              );
-              setShowDropdown(newShowDropdown);
-            }}
-            list={leaveArray}
-            showDropdown={showDropdown[index]}
-          />
-        </View>
-        <View style={styles.full_Day_Con}>
-          <Label style={styles.date_Label} title={selectedLeaveType[index]} />
-        </View>
-        <TouchableOpacity
-          style={styles.delete_Con}
-          onPress={() => deleteLeave(value)}>
-          <MaterialIcons name="delete" size={scale(20)} />
-        </TouchableOpacity>
-      </View>
-    );
-  });
+const LeaveDetailsLayout: FC<Props> = ({ list }) => {
 
   return (
     <View style={styles.main}>
       <Label title="Leave Details" style={styles.title_Label} />
-      {items}
-      <Label
-        title="❗This excludes pubic holidays,non working days and taken leaves."
-        style={styles.warning_Txt}
-      />
+      {list?.length > 0 && (
+        <>
+          {list?.map(item => {
+            return <Label title="mith" />;
+          })}
+        </>
+      )}
     </View>
   );
 };

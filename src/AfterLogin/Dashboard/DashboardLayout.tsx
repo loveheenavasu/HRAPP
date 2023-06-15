@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {View, StyleSheet} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../../CommonComponent/Lable';
 
-const DashboardLayout = () => {
+const DashboardLayout:FC = () => {
   return (
     <View style={styles.main}>
       <Label title="Dashboard" style={styles.s_Title} />

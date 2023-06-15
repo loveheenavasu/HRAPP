@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import Gift from 'react-native-vector-icons/AntDesign';
@@ -11,8 +11,7 @@ interface Props {
   list?: object[];
 }
 
-const PublicHolidayLayout = (props: Props) => {
-  const {list} = props;
+const PublicHolidayLayout:FC<Props> = ({list}) => {
   const navigation = useNavigation<any>();
 
   return (

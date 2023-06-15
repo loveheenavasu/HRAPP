@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import COLOR from '../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -9,7 +9,7 @@ import {useDispatch} from 'react-redux';
 import {logOut} from '../../Redux/Action/loginReducer';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const  CustomDrawerContent = ({navigation})=> {
+const  CustomDrawerContent:FC = ({navigation}:any)=> {
   const dispatch = useDispatch();
   const [appVersion, setAppVersion] = useState<string>('');
 

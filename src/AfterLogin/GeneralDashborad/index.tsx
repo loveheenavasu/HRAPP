@@ -22,10 +22,10 @@ import CelebrationLayout from './CelebrartionLayout';
 import CompanyLinkLayout from './CompanyLinkLayout';
 import NewHiresLayout from './NewHiresLayout';
 import HappinesLayout from './HappinessLayout';
-import {useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import AddCompanyLinkModal from './Modal/AddCompanyLink';
-const GeneralDashboard = () => {
+const GeneralDashboard:FC = () => {
   const isFocused = useIsFocused();
   const scrollRef = useRef('');
 

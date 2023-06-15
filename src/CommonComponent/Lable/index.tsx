@@ -1,6 +1,6 @@
-import React from 'react';
-import {Text, TextStyle, StyleSheet} from 'react-native';
-import {scale, verticalScale} from 'react-native-size-matters';
+import React, { FC } from 'react';
+import { Text, TextStyle, StyleSheet } from 'react-native';
+import { scale, verticalScale } from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 
 interface Props {
@@ -8,13 +8,8 @@ interface Props {
   style?: TextStyle;
   maxLines?: number | 1;
 }
-const Label = (props: Props) => {
-  const {title, style, maxLines} = props;
-  return (
-    <Text numberOfLines={maxLines} style={[styles.main, {...style}]}>
-      {title}
-    </Text>
-  );
+const Label: FC<Props> = ({ title, style }) => {
+  return <Text style={[styles.main, { ...style }]}>{title}</Text>;
 };
 
 const styles = StyleSheet.create({

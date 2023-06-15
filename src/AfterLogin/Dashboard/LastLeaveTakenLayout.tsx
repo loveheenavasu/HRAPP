@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../../CommonComponent/Lable';
@@ -11,8 +11,7 @@ interface Props {
   list?: object[];
 }
 
-const LastLeaveTakenLayout = (props: Props) => {
-  const {list} = props;
+const LastLeaveTakenLayout:FC<Props> = ({list}) => {
   const navigation = useNavigation();
 
   return (

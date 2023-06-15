@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -8,9 +8,9 @@ import User from 'react-native-vector-icons/EvilIcons';
 interface Props {
   list?: object[];
 }
-const CelebrationLayout = (props: Props) => {
-  const {list} = props;
-  return (
+
+const CelebrationLayout:FC<Props> = ({list}) => {
+return (
     <View style={styles.main}>
       <View style={styles.sub_Main}>
         <Label style={styles.title_Label} title="Celebrations" />

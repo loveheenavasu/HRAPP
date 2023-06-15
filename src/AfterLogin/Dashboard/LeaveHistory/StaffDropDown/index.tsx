@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
@@ -16,7 +16,7 @@ interface Props {
   onClickMonthly?: () => void;
 }
 
-const StaffDropDownLayout = ({
+const StaffDropDownLayout:FC<Props> = ({
   personal,
   staff,
   yearly,
@@ -25,7 +25,7 @@ const StaffDropDownLayout = ({
   onClickStaff,
   onClickYearly,
   onClickMonthly,
-}: Props) => {
+}) => {
   return (
     <View style={styles.main}>
       <View style={styles.f_Child}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
@@ -9,7 +9,7 @@ interface Props {
   leaveDate?: Object;
 }
 
-const CalenderList = ({currentMonth, leaveDate}: Props) => {
+const CalenderList:FC<Props> = ({currentMonth, leaveDate}) => {
   return (
     <View style={styles.main}>
       <Calendar

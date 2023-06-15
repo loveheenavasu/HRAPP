@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {FC} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
 import commonStyle from './commonStyle';
 import Label from '../../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -31,11 +31,21 @@ const leaveData = [
   {id: 9, title: 'Leave balance as 31/12/2023', txt: '24 days'},
 ];
 
-const LeaveBarChat = () => {
+const _showLeaveData = ({item}: any) => {
+  const {title, txt} = item;
   return (
-    <View style={[commonStyle.main, styles.mainsub]}>
-      <Label title="Annual" style={styles.title_Label} />
-      <View style={styles.pie_Chart_Con}>
+    <View style={[commonStyle.rowView, {paddingBottom: scale(4)}]}>
+      <Label title={title} style={styles.total_Leave_Label} />
+      <Label title={txt} style={styles.total_Leave_Label} />
+    </View>
+  );
+};
+
+const LeaveBarChat: FC = () => {
+  return (
+    <View style={commonStyle.main}>
+      <Label title="Annual" style={commonStyle.headingTxt} />
+      <View style={styles.chart_Con}>
         <PieChart
           strokeWidth={scale(0.5)}
           showText
@@ -59,50 +69,62 @@ const LeaveBarChat = () => {
         })}
       </View>
 
-      {leaveData?.map((item, index) => (
-        <View key={index} style={styles.list_Main}>
-          <Label title={item?.title} style={styles.total_Leave_Label} />
-          <Label title={item?.txt} style={styles.total_Leave_Label} />
-        </View>
-      ))}
+      <FlatList
+        data={leaveData}
+        keyExtractor={item => item?.id.toString()}
+        renderItem={_showLeaveData}
+        style={styles.list}
+      />
     </View>
   );
 };
-
-export default LeaveBarChat;
-
 const styles = StyleSheet.create({
-  mainsub: {
-    marginTop: verticalScale(3),
-    maxHeight: '100%',
+  chart_Con: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: verticalScale(20),
+  },
+  total_Leave_Con: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   total_Leave_Label: {
-    opacity: 0.5,
-    color: COLOR.BLACK,
-    fontSize: scale(12),
+    marginVertical: 2,
+    // color: COLOR.BLACK,
+    opacity: 0.7,
+    // marginLeft: scale(2)
+    marginHorizontal: scale(3),
+  },
+  cir_Con: {
+    width: scale(16),
+    height: scale(16),
+    backgroundColor: COLOR.PRIMARY,
+    borderRadius: scale(8),
+    marginLeft: scale(10),
+  },
+  bal_Con: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: verticalScale(10),
+  },
+  bal_Cir_Con: {
+    width: scale(16),
+    height: scale(16),
+    backgroundColor: COLOR.NAVY,
+    borderRadius: scale(8),
+    // marginLeft: scale(10),
   },
   rect: {
     borderWidth: 1,
     height: 10,
     width: 10,
   },
-  title_Label: {
-    marginVertical: scale(5),
-    marginLeft: scale(1),
-  },
-  pie_Chart_Con: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  list_Main: {
-    width: '100%',
-    height: verticalScale(42),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomColor: COLOR.GREY,
-    borderBottomWidth: scale(0.5),
-    paddingHorizontal: scale(10),
+  list: {
+    // backgroundColor:'red',
+    // marginTop:verticalScale(3)
   },
 });
+export default LeaveBarChat;
