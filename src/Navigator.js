@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -19,11 +19,12 @@ import LeaveAdjustment from './AfterLogin/Dashboard/LeaveAdjustment';
 import LeaveHistory from './AfterLogin/Dashboard/LeaveHistory';
 import UpComingViewAll from './AfterLogin/Dashboard/UpComingLeaveLayout/UpComingViewAll';
 import ViewPublicHolidayLayout from './AfterLogin/Dashboard/ViewPublicHoliday';
+import {Text} from 'react-native';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
 
-const BeforeStack:FC = () => {
+const BeforeStack = () => {
   return (
     <NavigationContainer>
       <beforeLoginStack.Navigator
@@ -40,8 +41,8 @@ const BeforeStack:FC = () => {
   );
 };
 
-const AfterLoginStack:FC = () => {
-  console.log('Inside the Afterlogin*********')
+const AfterLoginStack = () => {
+  console.log('Inside the Afterlogin*********');
   return (
     <NavigationContainer>
       <afterDrawerLoginStack.Navigator
@@ -54,7 +55,7 @@ const AfterLoginStack:FC = () => {
           headerShown: false,
         }}>
         <afterDrawerLoginStack.Screen component={Dashboard} name="Dashboard" />
-        <afterDrawerLoginStack.Screen
+        {/* <afterDrawerLoginStack.Screen
           component={GeneralDashboard}
           name="GeneralDashboard"
         />
@@ -85,13 +86,13 @@ const AfterLoginStack:FC = () => {
         <afterDrawerLoginStack.Screen
           component={ViewPublicHolidayLayout}
           name="ViewPublicHolidayLayout"
-        />
+        /> */}
       </afterDrawerLoginStack.Navigator>
     </NavigationContainer>
   );
 };
 
-const Navigator:FC = () => {
+const Navigator = () => {
   const dispatch = useDispatch();
   const mUserData = useSelector(state => state.loginReducer);
   const [userId, setUserId] = useState('');
@@ -121,6 +122,8 @@ const Navigator:FC = () => {
   return (
     <>
       {showLoader ? <Loader /> : userId ? <AfterLoginStack /> : <BeforeStack />}
+      {/* <AfterLoginStack /> */}
+      {/* <BeforeStack /> */}
     </>
   );
 };

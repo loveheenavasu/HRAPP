@@ -8,7 +8,8 @@ module.exports = {
         root: ['.'],
         alias: {
           '@Util': './src/Util',
-          "@src":"./src",
+          '@src': './src',
+          "@CommonComponent":"./src/CommonComponent",
         },
       },
     ],
