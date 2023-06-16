@@ -1,3 +1,12 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@Util": ["src/Util"],
+      "@CommonComponent": ["src/CommonComponent"],
+      "@src/*": ["src/*"],
+      "@Validator": ["src/Util/Validator"]
+    }
+  }
 }

@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import SplashScreen from './src/BeforeLogin/Splash';
-import Navigator from './src/Navigator';
-import {store} from './src/Redux/store';
 import {Provider} from 'react-redux';
-import Toast from './src/CommonComponent/CustomToast';
-
-//Old Code
+import SplashScreen from '@src/BeforeLogin/Splash';
+import Navigator from '@src/Navigator';
+import {store} from '@src/Redux/store';
+import Toast from '@src/CommonComponent/CustomToast';
+import strings from '@src/Language/strings';
 
 const App = () => {
   const [showSplash, setShowSplash] = useState<boolean>(true);
+
   useEffect(() => {
+    strings.setContent('en');
     setTimeout(() => {
       setShowSplash(false);
     }, 1500);

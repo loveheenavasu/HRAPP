@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import * as Storage from './Service/Storage';
+import {StorageKey} from '@Util';
+
 import Login from './BeforeLogin/Login';
 import Dashboard from './AfterLogin/Dashboard';
-import * as Storage from './Service/Storage';
-import {UserData} from './Util/StorageKey';
 import CustomDrawerContent from './AfterLogin/CustomDrawer';
 import {scale} from 'react-native-size-matters';
 import Loader from './CommonComponent/Loader';
@@ -97,7 +98,7 @@ const Navigator = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    Storage.getData(UserData).then(res => {
+    Storage.getData(StorageKey.UserData).then(res => {
       let mdata = JSON.parse(res);
       if (res) {
         dispatch(setUserCredential({...mdata, userId: '1'}));
