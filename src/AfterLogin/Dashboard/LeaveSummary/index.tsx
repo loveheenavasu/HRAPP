@@ -9,6 +9,7 @@ import {verticalScale} from 'react-native-size-matters';
 import SickLeaveLayout from './SickLeaveLayout';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../../../CommonComponent/Loader';
+import english from '../../../Language/English';
 
 const LeaveSummary = () => {
   const mFocus = useIsFocused();
@@ -31,7 +32,7 @@ const LeaveSummary = () => {
 
   return (
     <>
-      <Header showBackButton={true} title="Leave Summary" />
+      <Header showBackButton={true} title={english.LeaveSummary} />
       <ScrollView
         contentContainerStyle={{paddingBottom: verticalScale(100)}}
         style={styles.main}>

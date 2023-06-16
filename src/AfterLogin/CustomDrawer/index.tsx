@@ -8,6 +8,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../Redux/Action/loginReducer';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import english from '../../Language/English';
 
 function CustomDrawerContent({navigation}) {
   const dispatch = useDispatch();
@@ -37,16 +38,16 @@ function CustomDrawerContent({navigation}) {
   return (
     <View style={styles.main}>
       <View style={styles.profile_Icon_Con}>
-        <Label style={styles.short_Name_Label} title="TK" />
+      <Label style={styles.short_Name_Label} title={english.TK} />
       </View>
-      <Label style={styles.name_Label} title="Profile Name" />
+      <Label style={styles.name_Label} title={english.ProfileName} />
       <TouchableOpacity
         style={styles.first_Child}
         onPress={() => navigation.navigate('Dashboard')}>
         <View style={styles.circle_Con}>
           <Entypo name="home" color={COLOR.WHITE} size={scale(18)} />
         </View>
-        <Label style={styles.home_Label} title="Home" />
+        <Label style={styles.home_Label} title={english.Home} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.second_Child}
@@ -54,7 +55,7 @@ function CustomDrawerContent({navigation}) {
         <View style={styles.leave_circle_Con}>
           <Entypo name="calendar" color={COLOR.WHITE} size={scale(18)} />
         </View>
-        <Label style={styles.home_Label} title="Leave" />
+        <Label style={styles.home_Label} title={english.Leave} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.second_Child}
@@ -66,11 +67,11 @@ function CustomDrawerContent({navigation}) {
             size={scale(22)}
           />
         </View>
-        <Label style={styles.home_Label} title="Change Password" />
+        <Label style={styles.home_Label} title={english.ChangePassword} />
       </TouchableOpacity>
       <View style={styles.logout_Con}>
         <TouchableOpacity onPress={() => logOutAlert()}>
-          <Label style={styles.logout_Label} title="Logout" />
+        <Label style={styles.logout_Label} title={english.Logout} />
         </TouchableOpacity>
         <Label title={'Version : ' + `${appVersion}`} />
       </View>

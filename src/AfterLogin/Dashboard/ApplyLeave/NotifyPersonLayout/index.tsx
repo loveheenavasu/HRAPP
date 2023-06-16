@@ -14,6 +14,7 @@ import COLOR from '../../../../Util/Color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomButton from '../../../../CommonComponent/CustomButton';
+import english from '../../../../Language/English';
 
 interface Props {
   value: string;
@@ -45,13 +46,13 @@ const NotifyPersonLayout = ({
 }: Props) => {
   return (
     <View style={styles.main}>
-      <Label title="Notify Person" style={styles.title_Label} />
+      <Label title={english.NotifyPerson} style={styles.title_Label} />
       <View style={styles.edit_Con}>
         <EditText
           inputRef={refNotify}
           Value={value}
           outerBoxStyle={styles.outer_Con}
-          Placholder={'Please enter email id '}
+          Placholder={english.EnterEmail}
           ReturnKeyType="done"
           OnSubmit={() => Keyboard.dismiss()}
           OnChangeText={onChangeText}
@@ -93,7 +94,7 @@ const NotifyPersonLayout = ({
               <View style={styles.notFound}>
                 <Label
                   style={styles.not_Found_Label}
-                  title="Not Found, Please try another "
+                  title={english.NotFound}
                 />
               </View>
             );
@@ -122,11 +123,11 @@ const NotifyPersonLayout = ({
           );
         })}
       </ScrollView>
-      <Label title="Remark" style={styles.title_Label} />
+      <Label title={english.Remark} style={styles.title_Label} />
       <EditText
         outerBoxStyle={styles.remark_outer_Con}
         Value={remarkValue}
-        Placholder="Please enter somethings"
+        Placholder={english.EnterSomething}
         multiline={true}
         Style={styles.remark_Edit}
         OnChangeText={onRemarkChange}
@@ -135,7 +136,7 @@ const NotifyPersonLayout = ({
       <CustomButton
         onPress={clickSubmitButton}
         btnStyle={styles.btn}
-        name="Submit"
+        name={english.Submit}
       />
     </View>
   );

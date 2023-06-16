@@ -6,6 +6,7 @@ import Calender from 'react-native-vector-icons/AntDesign';
 import {StyleSheet, View, FlatList} from 'react-native';
 import CustomButton from '../../CommonComponent/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import english from '../../Language/English';
 
 interface Props {
   list?: object[];
@@ -18,7 +19,7 @@ const LastLeaveTakenLayout = (props: Props) => {
   return (
     <View style={styles.main}>
       <View style={styles.header_Con}>
-        <Label title="LAST LEAVE TAKEN" style={styles.s_Title} />
+      <Label title={english.LastLeaveTaken} style={styles.s_Title} />
         <Calender name="calendar" size={scale(23)} color={COLOR.LIGHT_GREY} />
       </View>
 
@@ -32,7 +33,7 @@ const LastLeaveTakenLayout = (props: Props) => {
               <Label title={item?.type} style={styles.normalTxt} />
               <Label title={item?.fromTo} style={styles.normalTxt} />
               <CustomButton
-                name="View History"
+                name={english.ViewHistory}
                 btnStyle={styles.btn}
                 onPress={() => navigation.navigate('LeaveHistory')}
               />

@@ -3,13 +3,14 @@ import {View, StyleSheet} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Label from '../../CommonComponent/Lable';
+import english from '../../Language/English';
 
 const DashboardLayout = () => {
   return (
     <View style={styles.main}>
-      <Label title="Dashboard" style={styles.s_Title} />
+      <Label title={english.Dashboard} style={styles.s_Title} />
       <Label
-        title="Check your upcoming leaves,Leave balance or apply for one"
+        title={english.CheckUpcomig}
         style={styles.des}
       />
     </View>

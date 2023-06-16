@@ -10,6 +10,7 @@ import LastLeaveTakenLayout from './LastLeaveTakenLayout';
 import PublicHolidayLayout from './PublicHolidayLayout';
 import LeaveLayout from './LeaveLayout';
 import {useIsFocused} from '@react-navigation/native';
+import english from '../../Language/English';
 
 const Dashboard = () => {
   const isFocused = useIsFocused();
@@ -20,7 +21,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header title="Dashboard" />
+      <Header title={english.Dashboard} />
       <ScrollView
         ref={scrollRef}
         style={styles.main}

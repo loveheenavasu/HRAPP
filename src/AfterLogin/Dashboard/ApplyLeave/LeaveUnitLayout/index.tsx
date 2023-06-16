@@ -7,6 +7,7 @@ import Calender from 'react-native-vector-icons/AntDesign';
 import {Calendar as ViewCalendar} from 'react-native-calendars';
 import styles from './styles';
 import CustomDropdown from '../../../../CommonComponent/CustomDropDown';
+import english from '../../../../Language/English';
 
 interface Props {
   showLeaveUnit?: boolean;
@@ -31,15 +32,15 @@ const LeaveUnitLayout = ({
   return (
     <View style={styles.main}>
       <CustomDropdown
-        title="Leave Unit"
+        title={english.LeaveUnit}
         onClick={item => onClickUnit(item)}
-        placeHolder="Please select Leave Unit"
+        placeHolder={english.SelectLeaveUnit}
         data={[
           {id: 0, value: 'Days'},
           {id: 1, value: 'Weeks'},
         ]}
       />
-      <Label title="Leave Period" style={styles.leave_Title} />
+      <Label title={english.LeavePeriod} style={styles.leave_Title} />
       <TouchableOpacity
         style={styles.leave_Period_Con}
         onPress={onClickLeavePeriod}
@@ -53,10 +54,10 @@ const LeaveUnitLayout = ({
             }
             title={
               leavePeriodArray?.length > 0
-                ? 'Leave Period is ' +
+                ? `${english.LeavePeriodis}` +
                   leavePeriodArray?.length.toString() +
                   (leavePeriodArray?.length > 1 ? ' Days' : ' Day')
-                : 'Please select leave Period '
+                : `${english.SelectLeavePeriod}`
             }
           />
         </View>

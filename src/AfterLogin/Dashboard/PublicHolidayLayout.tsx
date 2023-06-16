@@ -6,6 +6,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import CustomButton from '../../CommonComponent/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import english from '../../Language/English';
 
 interface Props {
   list?: object[];
@@ -18,7 +19,7 @@ const PublicHolidayLayout = (props: Props) => {
   return (
     <View style={styles.main}>
       <View style={styles.header_Con}>
-        <Label title="NEXT PUBLIC HOLIDAY" style={styles.s_Title} />
+      <Label title={english.NextPublicHoliday} style={styles.s_Title} />
         <Gift name="gift" size={scale(23)} color={COLOR.LIGHT_GREY} />
       </View>
       <FlatList
@@ -33,7 +34,7 @@ const PublicHolidayLayout = (props: Props) => {
                 onPress={() =>
                   navigation.navigate('ViewPublicHolidayLayout', {list})
                 }
-                name="View Public Holiday"
+                name={english.ViewPublicHoliday}
                 btnStyle={styles.btn}
               />
             </>

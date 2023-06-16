@@ -5,6 +5,7 @@ import Label from '../../../../CommonComponent/Lable';
 import DropDown from '../../../../CommonComponent/DropDown';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
+import english from '../../../../Language/English';
 
 let leaveArray = [
   {id: 0, value: 'Full Day'},
@@ -46,7 +47,7 @@ const LeaveDetailsLayout = ({
               let newShowDropdown = new Array(showDropdown.length).fill(false);
               setShowDropdown(newShowDropdown);
             }}
-            placeHolder="Select an option"
+            placeHolder={english.SelectOption}
             firstChildStyle={styles.first_Child_Con}
             secondChildStyle={styles.second_Child_Con}
             onClick={() => {
@@ -73,10 +74,10 @@ const LeaveDetailsLayout = ({
 
   return (
     <View style={styles.main}>
-      <Label title="Leave Details" style={styles.title_Label} />
+      <Label title={english.LeaveDetails} style={styles.title_Label} />
       {items}
       <Label
-        title="❗This excludes pubic holidays,non working days and taken leaves."
+        title={english.ThisExclude}
         style={styles.warning_Txt}
       />
     </View>

@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../Util/Color';
 import DropDown from '../../../CommonComponent/DropDown';
+import english from '../../../Language/English';
 
 interface Props {
   showDropdown?: boolean;
@@ -27,13 +28,13 @@ const DropdownLayout = (props: Props) => {
   return (
     <View style={styles.main}>
       <DropDown
-        title="Year"
+        title={english.Year}
         selectedValue={selectedValue}
         showDropdown={showDropdown}
         onClick={onClick}
         list={mTempArray}
         onClickValue={item => onClickYear(item)}
-        placeHolder="Please select year"
+        placeHolder={english.SelectYear}
       />
     </View>
   );

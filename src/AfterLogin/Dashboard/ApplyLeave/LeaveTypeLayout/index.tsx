@@ -5,6 +5,7 @@ import Label from '../../../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../../../Util/Color';
 import CustomDropDown from '../../../../CommonComponent/CustomDropDown';
+import english from '../../../../Language/English';
 
 interface Props {
   onClickType: (item: {id: number; value: string}) => void;
@@ -17,14 +18,14 @@ const LeaveTypeLayout = ({onClickType}: Props) => {
         <View style={styles.annual_Levae_Con}>
           <CustomDropDown
             titleStyle={styles.title_Label}
-            title="Leave Type"
+            title={english.LeaveType}
             data={[{id: 0, value: 'Annual'}]}
             onClick={item => onClickType(item)}
-            placeHolder={'Select leave type'}
+            placeHolder={english.SelectLeaveType}
           />
         </View>
         <View style={styles.annual_Bal_Con}>
-          <Label title="Annual Balance" style={styles.annual_Bal_Label} />
+          <Label title={english.AnnualBalance} style={styles.annual_Bal_Label} />
           <Label title="5.5 days" style={styles.annual_Bal_Value} />
         </View>
       </View>
