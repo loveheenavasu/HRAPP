@@ -9,9 +9,10 @@ import {
   Loader,
   ToastMsg,
 } from '@CommonComponent';
+import {isEmailValid} from '@Validator';
+
 import {Images} from '@Util';
 import styles from './styles';
-import {isEmailValid} from '../../Util/Validator';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../../Redux/Action/loginReducer';
 import {AppDispatch, RootState} from '../../Redux/store';
@@ -56,15 +57,13 @@ const Login: FC = () => {
         msg: 'Please enter password',
       });
     } else {
-      // dispatch(
-      //   getUserLogin({
-      //     email: loginData?.email,
-      //     name: 'Test Kumar',
-      //     password: loginData?.password,
-      //   }),
-      // );
-
-      dispatch(getUserLogin())
+      dispatch(
+        getUserLogin({
+          email: loginData?.email,
+          name: 'Test Kumar',
+          password: loginData?.password,
+        }),
+      );
     }
   };
 

@@ -55,7 +55,7 @@ const AfterLoginStack = () => {
           headerShown: false,
         }}>
         <afterDrawerLoginStack.Screen component={Dashboard} name="Dashboard" />
-        {/* <afterDrawerLoginStack.Screen
+        <afterDrawerLoginStack.Screen
           component={GeneralDashboard}
           name="GeneralDashboard"
         />
@@ -86,7 +86,7 @@ const AfterLoginStack = () => {
         <afterDrawerLoginStack.Screen
           component={ViewPublicHolidayLayout}
           name="ViewPublicHolidayLayout"
-        /> */}
+        />
       </afterDrawerLoginStack.Navigator>
     </NavigationContainer>
   );

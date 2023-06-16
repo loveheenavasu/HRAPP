@@ -25,10 +25,13 @@ const initialState: CounterState = {
   userData: {name: '', email: ''},
 };
 
-export const getUserLogin = createAsyncThunk('HIT_USER_LOGIN', async pars => {
-  console.log('-----getUserLogin---pars--->', pars);
-  return pars;
-});
+export const getUserLogin = createAsyncThunk(
+  'HIT_USER_LOGIN',
+  async (pars: {email: string; name: string; password: string}) => {
+    console.log('-----getUserLogin---pars--->', pars);
+    return pars;
+  },
+);
 
 export const loginReducer = createSlice({
   name: 'counter',
