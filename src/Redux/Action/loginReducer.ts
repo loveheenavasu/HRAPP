@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import * as Storage from '../../Service/Storage';
-import {UserData} from '../../Util/StorageKey';
+import {StorageKey, Storage} from '@Util';
 import Toast from '../../Util/Helper/ToastType';
 
 type Detail = {
@@ -25,9 +24,15 @@ const initialState: CounterState = {
   userData: {name: '', email: ''},
 };
 
+interface inputProps {
+  email: string;
+  name: string;
+  password: string;
+}
+
 export const getUserLogin = createAsyncThunk(
   'HIT_USER_LOGIN',
-  async (pars: {email: string; name: string; password: string}) => {
+  async (pars: inputProps) => {
     return pars;
   },
 );
@@ -36,15 +41,6 @@ export const loginReducer = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    increment: state => {
-      state.value += 1;
-    },
-    decrement: state => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
     setUserCredential: (state, action) => {
       return {...state, hideLoader: false, userId: action?.payload?.userId};
     },
@@ -64,7 +60,7 @@ export const loginReducer = createSlice({
     });
     builder.addCase(getUserLogin.fulfilled, (state, action) => {
       let details: Detail = action?.payload; //ok
-      Storage.storeData(UserData, JSON.stringify(action?.payload));
+      Storage.storeData(StorageKey.UserData, JSON.stringify(action?.payload));
       Toast.success('Login successfully');
       return {
         ...state,

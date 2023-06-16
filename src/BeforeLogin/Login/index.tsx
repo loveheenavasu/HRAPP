@@ -31,7 +31,7 @@ const Login: FC = () => {
     showPassword: true,
   });
 
-  const passwordRef = useRef<TextInput>();
+  const passwordRef = useRef<TextInput>(null);
 
   const submit = () => {
     const {email, password} = loginData;
@@ -47,7 +47,7 @@ const Login: FC = () => {
       dispatch(
         getUserLogin({
           email: loginData?.email,
-          name: '',
+          name: 'Guest',
           password: loginData?.password,
         }),
       );
@@ -68,7 +68,7 @@ const Login: FC = () => {
           Value={loginData?.email}
           OnChangeText={e => setLoginData({...loginData, email: e.trim()})}
           showImg
-          OnSubmit={() => passwordRef?.current.focus()}
+          OnSubmit={() => passwordRef?.current?.focus()}
           ReturnKeyType="next"
         />
         <EditText

@@ -3,7 +3,7 @@ import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import COLOR from '../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
 import Label from '../../CommonComponent/Lable';
-import * as Storage from '../../Service/Storage';
+import * as Storage from '../../Util/Service/Storage';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../Redux/Action/loginReducer';
