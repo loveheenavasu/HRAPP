@@ -1,12 +1,20 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {View, ActivityIndicator, StyleSheet} from 'react-native';
-import COLOR from '../../Util/Color';
+import {COLOR} from '@Util';
 
-const Loader:FC = () => {
+interface Props {
+  Visible: boolean;
+}
+
+const Loader: FC<Props> = ({Visible}) => {
   return (
-    <View style={styles.main}>
-      <ActivityIndicator size={'large'} color={COLOR.PRIMARY} />
-    </View>
+    <>
+      {Visible && (
+        <View style={styles.main}>
+          <ActivityIndicator size={'large'} color={COLOR.PRIMARY} />
+        </View>
+      )}
+    </>
   );
 };
 

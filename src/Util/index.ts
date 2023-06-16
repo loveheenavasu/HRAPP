@@ -1,11 +1,11 @@
 import Images from './Images';
 import COLOR from './Color';
-
-export {Images, COLOR};
+import Toast from "./Helper/ToastType";
+export {Images, COLOR, Toast};
 
 const Util = {
   Images,
   COLOR,
+  Toast
 };
-
 export default Util;

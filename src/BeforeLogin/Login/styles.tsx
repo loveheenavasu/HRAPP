@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(2),
     backgroundColor: COLOR.WHITE,
     width: '90%',
+    height: '100%',
     marginHorizontal: '5%',
   },
   forgotTxtBox: {
@@ -40,9 +41,9 @@ const styles = StyleSheet.create({
     fontSize: scale(12),
     textDecorationLine: 'underline',
   },
-  button_Con:{
+  button_Con: {
     height: verticalScale(38),
-  }
+  },
 });
 
 export default styles;

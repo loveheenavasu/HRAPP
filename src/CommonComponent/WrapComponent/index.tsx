@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import COLOR from '@Util/Color';
+import {COLOR} from '@Util';
 import {verticalScale} from 'react-native-size-matters';
 
 interface Props {
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
   },
   scroll: {
-    paddingBottom: verticalScale(100),
+    flexGrow: 1,
+    paddingBottom: verticalScale(80),
   },
 });
 export default WrapComponent;

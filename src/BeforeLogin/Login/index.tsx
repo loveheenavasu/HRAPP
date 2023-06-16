@@ -1,5 +1,5 @@
 import React, {FC, useRef, useState} from 'react';
-import {Text, TouchableOpacity, View, Keyboard, TextInput} from 'react-native';
+import {TouchableOpacity, View, Keyboard, TextInput} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {
   CustomButton,
@@ -7,15 +7,15 @@ import {
   EditText,
   WrapComponent,
   Loader,
-  ToastMsg,
 } from '@CommonComponent';
 import {isEmailValid} from '@Validator';
-
-import {Images} from '@Util';
+import {Images, Toast} from '@Util';
 import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserLogin} from '../../Redux/Action/loginReducer';
-import {AppDispatch, RootState} from '../../Redux/store';
+import {getUserLogin} from '@src/Redux/Action/loginReducer';
+import {AppDispatch, RootState} from '@src/Redux/store';
+
+import strings from '@src/Language/string';
 
 interface userData {
   email: string;
@@ -37,25 +37,13 @@ const Login: FC = () => {
   const submit = () => {
     const {email, password} = loginData;
     if (!email?.trim() && !password?.trim()) {
-      ToastMsg({
-        status: 'error',
-        msg: 'All fields are required',
-      });
+      Toast.error(strings.AllFieldsRequired);
     } else if (!email?.trim()) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter Email',
-      });
+      Toast.error(strings.PleaseEmail);
     } else if (!isEmailValid(email.trim())) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter valid Email',
-      });
+      Toast.error(strings.ValidEmail);
     } else if (!password.trim()) {
-      ToastMsg({
-        status: 'error',
-        msg: 'Please enter password',
-      });
+      Toast.error(strings.PleasePassword);
     } else {
       dispatch(
         getUserLogin({
@@ -70,14 +58,14 @@ const Login: FC = () => {
   return (
     <WrapComponent>
       <View style={styles.main}>
-        <Label title="Login to your Account" style={styles.title} />
+        <Label title={strings.LoginAccount} style={styles.title} />
         <FastImage
           style={styles.logo_Con}
           source={Images.LoginDemoIcon}
           resizeMode={FastImage.resizeMode.contain}
         />
         <EditText
-          Placholder="Email id"
+          Placholder={strings.Email}
           Value={loginData?.email}
           OnChangeText={e => setLoginData({...loginData, email: e.trim()})}
           showImg
@@ -86,7 +74,7 @@ const Login: FC = () => {
         />
         <EditText
           inputRef={passwordRef}
-          Placholder="Password"
+          Placholder={strings.Password}
           Value={loginData?.password}
           OnChangeText={e => setLoginData({...loginData, password: e.trim()})}
           showImg
@@ -102,15 +90,14 @@ const Login: FC = () => {
           ReturnKeyType="done"
         />
         <TouchableOpacity style={styles.forgotTxtBox}>
-          <Text style={styles.forgotTxt}>Forgot My Password</Text>
+          <Label title={strings.ForgotPassword} style={styles.forgotTxt} />
         </TouchableOpacity>
         <CustomButton
-          name="Login"
+          name={strings.Login}
           onPress={() => submit()}
           btnStyle={styles.button_Con}
         />
-        {mUserData?.hideLoader && <Loader />}
-        {/* <Loader Show={mUserData?.hideLoader} /> */}
+        <Loader Visible={mUserData.hideLoader} />
       </View>
     </WrapComponent>
   );

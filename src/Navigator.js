@@ -121,9 +121,13 @@ const Navigator = () => {
 
   return (
     <>
-      {showLoader ? <Loader /> : userId ? <AfterLoginStack /> : <BeforeStack />}
-      {/* <AfterLoginStack /> */}
-      {/* <BeforeStack /> */}
+      {showLoader ? (
+        <Loader Visible={showLoader} />
+      ) : userId ? (
+        <AfterLoginStack />
+      ) : (
+        <BeforeStack />
+      )}
     </>
   );
 };
