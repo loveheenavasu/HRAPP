@@ -124,12 +124,11 @@ const Navigator: FC = () => {
 
   useEffect(() => {
     if (mUserData?.userId) {
-      setData({...data, userId: mUserData?.userId});
+      setData({...data, userId: mUserData?.userId, showLoader: false});
     } else {
       setData({...data, userId: ''});
     }
   }, [mUserData?.userId]);
-
   return (
     <>
       {data?.showLoader ? (
