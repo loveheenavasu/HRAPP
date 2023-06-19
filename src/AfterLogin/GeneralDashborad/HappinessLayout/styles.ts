@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
   },
-  rowView: (props: string) => ({
+  rowView2: {
     flexDirection: 'row',
-    justifyContent: props,
+    justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: scale(5),
     marginVertical: verticalScale(5),
-  }),
+  },
   rowViewHand: {
     flexDirection: 'row',
     justifyContent: 'space-between',

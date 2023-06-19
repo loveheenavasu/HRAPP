@@ -26,8 +26,8 @@ const HappinesLayout: FC<Props> = ({value, onChangeText}) => {
           <ThumbUp name="thumbs-down" size={30} color={COLOR.RED} />
         </TouchableOpacity>
       </View>
-      <View style={styles.hLine}></View>
-      <View style={styles.rowView('flex-start')}>
+      <View style={styles.hLine} />
+      <View style={styles.rowView2}>
         <Chat name="chatbubbles-sharp" size={30} color={COLOR.NAVY} />
         <Label title={strings.WhatYouThink} style={styles.chatTxt} />
       </View>

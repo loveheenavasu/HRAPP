@@ -91,14 +91,14 @@ const ApplyLeave: FC = () => {
 
   const showHideLeaveUnit = useCallback(() => {
     setData(predata => ({...predata, showLeaveUnit: !data.showLeaveUnit}));
-  }, [data?.showLeaveUnit]);
+  }, [data.showLeaveUnit]);
 
   const showHideLeaveCalendar = useCallback(() => {
     setData(predata => ({
       ...predata,
       showLeaveCalendar: !data?.showLeaveCalendar,
     }));
-  }, [data?.showLeaveCalendar]);
+  }, [data.showLeaveCalendar]);
 
   const clickLeaveType = useCallback(() => {
     setData(predata => ({...predata, showLeaveType: false}));
@@ -129,7 +129,7 @@ const ApplyLeave: FC = () => {
       setData(predata => ({...predata, leaveJson: mark}));
       setSelectedLeave(Array(data?.leaveArray?.length).fill(''));
     },
-    [data?.leaveArray],
+    [data.leaveArray],
   );
 
   const clickLeaveOption = useCallback(
@@ -193,7 +193,7 @@ const ApplyLeave: FC = () => {
         setNotifyList(updatedNotifyList);
       }
     },
-    [data?.showNotifyList, data?.selectedNotifyList],
+    [data.showNotifyList, data.selectedNotifyList],
   );
 
   const editRemark = useCallback((txt: string) => {
@@ -230,7 +230,7 @@ const ApplyLeave: FC = () => {
       }
       setNotifyList(newArray);
     },
-    [notifyList, data?.selectedNotifyList],
+    [notifyList, data.selectedNotifyList],
   );
 
   const clickSubmit = useCallback(() => {
@@ -249,10 +249,10 @@ const ApplyLeave: FC = () => {
       Toast.success(strings?.DataSubmit_Successfully);
     }
   }, [
-    data?.selectedLeaveUnit,
-    data?.leaveArray,
+    data.selectedLeaveUnit,
+    data.leaveArray,
     selectedLeave,
-    data?.selectedNotifyList,
+    data.selectedNotifyList,
   ]);
 
   const openCloseNotifyDropDown = useCallback(() => {

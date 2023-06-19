@@ -228,7 +228,7 @@ const LeaveHistory: FC = () => {
               let currentIndex = dateArray[1];
               setData(predata => ({
                 ...predata,
-                selectedMonth: monthArray[parseInt(currentIndex) - 1],
+                selectedMonth: monthArray[parseInt(currentIndex, 10) - 1],
                 showMonthList: false,
               }));
             }}
