@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import Header from '../../../CommonComponent/Header';
+import {ScrollView, View} from 'react-native';
+import {verticalScale} from 'react-native-size-matters';
+import {useIsFocused} from '@react-navigation/native';
+import {Header, Loader} from '@CommonComponent';
 import DropdownLayout from './DropDownLayout';
 import AnnualLeaveLayout from './AnnualLayout';
 import HospitalizeLeaveLayout from './HorizontalLayout';
-import {verticalScale} from 'react-native-size-matters';
 import SickLeaveLayout from './SickLeaveLayout/SickLeaveLayout';
-import {useIsFocused} from '@react-navigation/native';
-import Loader from '../../../CommonComponent/Loader';
 import styles from './styles';
 import strings from '@src/Language/strings';
 

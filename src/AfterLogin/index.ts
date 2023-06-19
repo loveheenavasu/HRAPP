@@ -6,7 +6,7 @@ import ApplyLeave from './Dashboard/ApplyLeave';
 import LeaveSummary from './Dashboard/LeaveSummary';
 import LeaveAdjustment from './Dashboard/LeaveAdjustment';
 import LeaveHistory from './Dashboard/LeaveHistory';
-import UpComingViewAll from './Dashboard/UpComingLeaveLayout/UpComingViewAll';
+import UpComingViewAll from './Dashboard/UpComingLeaveLayout/UpComingViewApp';
 import ViewPublicHolidayLayout from './Dashboard/ViewPublicHoliday';
 
 export {

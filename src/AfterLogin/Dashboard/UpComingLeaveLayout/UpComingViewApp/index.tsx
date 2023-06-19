@@ -1,22 +1,22 @@
 import React from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
+import {Header, Label} from '@CommonComponent';
+import {COLOR} from '@Util';
 import Calender from 'react-native-vector-icons/AntDesign';
 import {scale} from 'react-native-size-matters';
 import {useRoute} from '@react-navigation/native';
-import {Header, Label} from '@CommonComponent';
-import {COLOR} from '@Util';
 import styles from './styles';
 import strings from '@src/Language/strings';
 
-const ViewPublicHolidayLayout = () => {
+const ViewAllLayout = () => {
   const mRoute = useRoute();
   return (
     <>
-      <Header showBackButton={true} title={strings?.NextPublic_Holiday} />
+      <Header showBackButton={true} title={strings?.UpcomingLeave} />
       <View style={styles.sub_main}>
         <FlatList
           data={mRoute?.params?.list}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={index => index.toString()}
           renderItem={({item}) => {
             return (
               <TouchableOpacity style={styles.rowView} onPress={() => null}>
@@ -26,8 +26,8 @@ const ViewPublicHolidayLayout = () => {
                   color={COLOR.LIGHT_GREY}
                 />
                 <View style={styles.list_Sub_Child}>
-                  <Label title={item?.name} style={styles.date_Label} />
-                  <Label title={item?.on} style={styles.day_Label} />
+                  <Label title={item?.date} style={styles.date_Label} />
+                  <Label title={item?.day} style={styles.day_Label} />
                 </View>
               </TouchableOpacity>
             );
@@ -46,4 +46,4 @@ const ViewPublicHolidayLayout = () => {
   );
 };
 
-export default ViewPublicHolidayLayout;
+export default ViewAllLayout;
