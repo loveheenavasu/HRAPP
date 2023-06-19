@@ -84,11 +84,12 @@ interface type {
   Apply: string;
   PleaseSelect_Month: string;
   WeekName: string[];
-  LeaveHistory : string;
-  AnnualLeave : string;
-  TotalLeave : string;
-  BalanceLeave : string;
-
+  LeaveHistory: string;
+  AnnualLeave: string;
+  TotalLeave: string;
+  BalanceLeave: string;
+  Hospitalisation_Leave: string;
+  SickLeave : string;
 }
 const english: type = {
   LoginAccount: 'Login to your Account',
@@ -189,12 +190,14 @@ const english: type = {
     'Sept',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ],
-  LeaveHistory :"Leave History",
-  AnnualLeave :"Annual Leave",
-  TotalLeave :"Total Leave",
-  BalanceLeave :"Balance Leave",
+  LeaveHistory: 'Leave History',
+  AnnualLeave: 'Annual Leave',
+  TotalLeave: 'Total Leave',
+  BalanceLeave: 'Balance Leave',
+  Hospitalisation_Leave: 'Hospitalisation Leave',
+  SickLeave :"Sick Leave"
 };
 
 export default english;

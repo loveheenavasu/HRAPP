@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../../../CommonComponent/Header';
-import COLOR from '../../../Util/Color';
-import DropdownLayout from './DropdownLayout';
-import AnnualLeaveLayout from './AnnualLeaveLayout';
-import HospitalizeLeaveLayout from './HospitalizeLeaveLayout';
+import DropdownLayout from './DropDownLayout';
+import AnnualLeaveLayout from './AnnualLayout';
+import HospitalizeLeaveLayout from './HorizontalLayout';
 import {verticalScale} from 'react-native-size-matters';
-import SickLeaveLayout from './SickLeaveLayout';
+import SickLeaveLayout from './SickLeaveLayout/SickLeaveLayout';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../../../CommonComponent/Loader';
+import styles from './styles';
+import strings from '@src/Language/strings';
 
 const LeaveSummary = () => {
   const mFocus = useIsFocused();
@@ -31,12 +32,12 @@ const LeaveSummary = () => {
 
   return (
     <>
-      <Header showBackButton={true} title="Leave Summary" />
+      <Header showBackButton={true} title={strings?.LeaveSummary} />
       <ScrollView
         contentContainerStyle={{paddingBottom: verticalScale(100)}}
         style={styles.main}>
         <View style={styles.sub_Main}>
-          {showLoader && <Loader />}
+          <Loader Visible={showLoader} />
           <DropdownLayout
             selectedValue={selectedYear}
             showDropdown={showYearDropDown}
@@ -55,18 +56,5 @@ const LeaveSummary = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: COLOR.GREY,
-  },
-  sub_Main: {
-    width: '95%',
-    marginHorizontal: '2.5%',
-    height: '100%',
-    backgroundColor: COLOR.GREY,
-  },
-});
 
 export default LeaveSummary;
