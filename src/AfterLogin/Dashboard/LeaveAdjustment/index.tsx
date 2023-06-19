@@ -1,10 +1,11 @@
 import React from 'react';
-import Header from '../../../CommonComponent/Header';
+import strings from '@src/Language/strings';
+import {Header} from '@CommonComponent';
 
 const LeaveAdjustment = () => {
   return (
     <>
-      <Header showBackButton={true} title="Leave Adjustment" />
+      <Header showBackButton={true} title={strings?.LeaveAdjustment} />
     </>
   );
 };

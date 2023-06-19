@@ -56,6 +56,39 @@ interface type {
   AddEmailId: string;
   SearchEmail: string;
   AddEmail: string;
+  PleaseSelect_LeaveFirst: string;
+  PleaseSelect_LeavePeriod: string;
+  PleaseSelect_LeaveDetails: string;
+  PleaseSelect_NotifyPerson: string;
+  DataSubmit_Successfully: string;
+  Days: string;
+  Weeks: string;
+  Day: string;
+  Annual: string;
+  SelectLeave_Type: string;
+  FullDay: string;
+  HalfDay: string;
+  Pending: string;
+  Taken: string;
+  Balance: string;
+  NegativeBalance: string;
+  Entitlement: string;
+  BalanceAs: string;
+  Adjustment: string;
+  TakenSince: string;
+  LeaveBalance: string;
+  BalancePrevious_Year: string;
+  EarnedLeave_Since: string;
+  PleaseSelect_Year: string;
+  Cancel: string;
+  Apply: string;
+  PleaseSelect_Month: string;
+  WeekName: string[];
+  LeaveHistory : string;
+  AnnualLeave : string;
+  TotalLeave : string;
+  BalanceLeave : string;
+
 }
 const english: type = {
   LoginAccount: 'Login to your Account',
@@ -117,6 +150,51 @@ const english: type = {
   AddEmailId: "Add Email Id's",
   SearchEmail: 'Search Email...',
   AddEmail: 'Add Email',
+  PleaseSelect_LeaveFirst: 'Please select leave unit first',
+  PleaseSelect_LeavePeriod: 'Please select leave period',
+  PleaseSelect_LeaveDetails: 'Please select leave details',
+  PleaseSelect_NotifyPerson: 'Please select atleast one notify person',
+  DataSubmit_Successfully: 'Data submit successfully',
+  Days: 'Days',
+  Weeks: 'Weeks',
+  Day: 'Day',
+  Annual: 'Annual',
+  SelectLeave_Type: 'Select leave type',
+  FullDay: 'Full Day',
+  HalfDay: 'Half Day',
+  Pending: 'Pending',
+  Taken: 'Taken',
+  Balance: 'Balance',
+  NegativeBalance: 'Negative Balance',
+  Entitlement: 'Entitlement',
+  BalanceAs: 'Balance As At',
+  Adjustment: 'Adjustment',
+  TakenSince: 'Taken since',
+  LeaveBalance: 'Leave Balance',
+  BalancePrevious_Year: 'Balance fron previous year',
+  EarnedLeave_Since: 'Earned leave since',
+  PleaseSelect_Year: 'Please select Year',
+  Cancel: 'Cancel',
+  Apply: 'Apply',
+  PleaseSelect_Month: 'Please select Month',
+  WeekName: [
+    'Jan',
+    'Feb',
+    'Mar',
+    'April',
+    'May',
+    'Jun',
+    'Jully',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+  ],
+  LeaveHistory :"Leave History",
+  AnnualLeave :"Annual Leave",
+  TotalLeave :"Total Leave",
+  BalanceLeave :"Balance Leave",
 };
 
 export default english;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   FlatList,
   Keyboard,
@@ -6,14 +6,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles from './styles';
-import Label from '../../../../CommonComponent/Lable';
-import {scale} from 'react-native-size-matters';
-import EditText from '../../../../CommonComponent/EditText';
-import COLOR from '../../../../Util/Color';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
-import CustomButton from '../../../../CommonComponent/CustomButton';
+import {scale} from 'react-native-size-matters';
+import {Label, EditText, CustomButton} from '@CommonComponent';
+import {COLOR} from '@Util';
+import strings from '@src/Language/strings';
+import styles from './styles';
 
 interface Props {
   value: string;
@@ -29,7 +28,7 @@ interface Props {
   showList?: boolean;
   selectedList?: any[];
 }
-const NotifyPersonLayout = ({
+const NotifyPersonLayout: FC<Props> = ({
   value,
   onChangeText,
   list,
@@ -42,16 +41,16 @@ const NotifyPersonLayout = ({
   clickNotifyDropDown,
   showList,
   selectedList,
-}: Props) => {
+}) => {
   return (
     <View style={styles.main}>
-      <Label title="Notify Person" style={styles.title_Label} />
+      <Label title={strings.NotifyPerson} style={styles.title_Label} />
       <View style={styles.edit_Con}>
         <EditText
           inputRef={refNotify}
           Value={value}
           outerBoxStyle={styles.outer_Con}
-          Placholder={'Please enter email id '}
+          Placholder={strings?.EnterEmail}
           ReturnKeyType="done"
           OnSubmit={() => Keyboard.dismiss()}
           OnChangeText={onChangeText}
@@ -93,7 +92,7 @@ const NotifyPersonLayout = ({
               <View style={styles.notFound}>
                 <Label
                   style={styles.not_Found_Label}
-                  title="Not Found, Please try another "
+                  title={strings?.NotFound}
                 />
               </View>
             );
@@ -122,11 +121,11 @@ const NotifyPersonLayout = ({
           );
         })}
       </ScrollView>
-      <Label title="Remark" style={styles.title_Label} />
+      <Label title={strings?.Remark} style={styles.title_Label} />
       <EditText
         outerBoxStyle={styles.remark_outer_Con}
         Value={remarkValue}
-        Placholder="Please enter somethings"
+        Placholder={strings?.EnterSomething}
         multiline={true}
         Style={styles.remark_Edit}
         OnChangeText={onRemarkChange}
@@ -135,7 +134,7 @@ const NotifyPersonLayout = ({
       <CustomButton
         onPress={clickSubmitButton}
         btnStyle={styles.btn}
-        name="Submit"
+        name={strings?.Submit}
       />
     </View>
   );

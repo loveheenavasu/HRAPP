@@ -1,12 +1,12 @@
+import { COLOR } from "@Util";
 import { StyleSheet } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
-import { COLOR } from "@Util";
 
 const styles = StyleSheet.create({
     main: {
       width: '100%',
       maxHeight: verticalScale(500),
-      marginVertical: verticalScale(3),
+      marginTop: verticalScale(6),
       borderRadius: scale(6),
       paddingHorizontal: scale(10),
       backgroundColor: COLOR.WHITE,
@@ -20,18 +20,7 @@ const styles = StyleSheet.create({
       elevation: 9,
       paddingBottom: scale(10),
     },
-    theme: {
-      backgroundColor: '#ffffff',
-      calendarBackground: '#ffffff',
-      textSectionTitleColor: COLOR.PRIMARY,
-      selectedDayBackgroundColor: '#00adf5',
-      selectedDayTextColor: '#ffffff',
-      todayTextColor: '#00adf5',
-      dayTextColor: '#2d4150',
-      textDisabledColor: COLOR.GREY,
-      arrowColor: COLOR.PRIMARY,
-      monthTextColor: COLOR.PRIMARY,
-    },
   });
+
 
   export default styles;

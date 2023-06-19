@@ -1,74 +1,93 @@
-import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import Header from '../../../CommonComponent/Header';
-import COLOR from '../../../Util/Color';
+import React, {FC, useEffect, useState} from 'react';
+import {ScrollView, View} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
+import {COLOR, Toast} from '@Util';
+import {Header, Loader} from '@CommonComponent';
+import strings from '@src/Language/strings';
 import StaffDropDownLayout from './StaffDropDown';
 import YearMonthDropDown from './YearMonthDropDown';
-import Toast from '../../../Util/Helper/ToastType';
 import CalendarListLayout from './CalendarListLayout';
-import Loader from '../../../CommonComponent/Loader';
 import CalenderYearlyLayout from './CalenderYearlyLayout';
-import {useIsFocused} from '@react-navigation/native';
+
+import styles from './styles';
 
 const monthArray: any = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'April',
-  'May',
-  'Jun',
-  'Jully',
-  'Aug',
-  'Sept',
-  'Oct',
-  'Nov',
-  'Dec',
+  strings?.WeekName[1],
+  strings?.WeekName[2],
+  strings?.WeekName[3],
+  strings?.WeekName[4],
+  strings?.WeekName[5],
+  strings?.WeekName[6],
+  strings?.WeekName[7],
+  strings?.WeekName[8],
+  strings?.WeekName[9],
+  strings?.WeekName[10],
+  strings?.WeekName[11],
+  strings?.WeekName[12],
 ];
 
-const LeaveHistory = () => {
-  const [personalRadio, setPersonalRadio] = useState<boolean>(true);
-  const [staffRadio, setStaffRadio] = useState<boolean>(false);
-  const [yearlyRadio, setYearlyRadio] = useState<boolean>(true);
-  const [monthlyRadio, setMonthlyRadio] = useState<boolean>(false);
-  const [selectedMonth, setSelectedMonth] = useState<string>('');
-  const [showYearDropDown, setShowshowYearDropDown] = useState<boolean>(true);
-  const [showYearList, setShowYearList] = useState<boolean>(false);
-  const [selectedYear, setSelectedYear] = useState<string>('');
-  const [showMonthList, setShowMonthList] = useState<boolean>(false);
-  const [currentMonth, setCurrentMonth] = useState<string>('');
-  const [currentYearMonth, setCurrentYearMonth] = useState<string>('');
-  const [showLoader, setShowLoader] = useState<boolean>(false);
-  const [leaveMonthJson, setLeaveMonthJson] = useState<Object>({});
+interface userData {
+  personalRadio: boolean;
+  staffRadio: boolean;
+  yearlyRadio: boolean;
+  monthlyRadio: boolean;
+  showYearDropDown: boolean;
+  showYearList: boolean;
+  showLoader: boolean;
+  showMonthList: boolean;
+  selectedMonth: string;
+  selectedYear: string;
+  currentMonth: string;
+  currentYearMonth: string;
+  leaveMonthJson: Object;
+}
 
+const LeaveHistory: FC = () => {
+  const [data, setData] = useState<userData>({
+    personalRadio: true,
+    staffRadio: false,
+    yearlyRadio: true,
+    monthlyRadio: false,
+    showYearDropDown: true,
+    showYearList: false,
+    showLoader: false,
+    showMonthList: false,
+    selectedMonth: '',
+    selectedYear: '',
+    currentMonth: '',
+    currentYearMonth: '',
+    leaveMonthJson: {},
+  });
   const mFocus = useIsFocused();
 
   useEffect(() => {
-    setSelectedYear('');
-    setSelectedMonth('');
-    setCurrentMonth('');
+    setData({...data, selectedYear: '', selectedMonth: '', currentMonth: ''});
   }, [mFocus]);
 
   const clickApplyYear = () => {
+    const {selectedYear} = data;
     if (!selectedYear) {
       Toast.error('Please select year first');
     } else {
-      setCurrentYearMonth('');
-      setShowLoader(true);
+      setData({
+        ...data,
+        currentYearMonth: '',
+        showLoader: true,
+        showYearList: false,
+      });
       let monthName = selectedYear + '-' + '01' + '-' + '01';
-      setShowYearList(false);
       setTimeout(() => {
-        setCurrentYearMonth(monthName);
-        setShowLoader(false);
+        setData({...data, currentYearMonth: monthName, showLoader: false});
       }, 1200);
     }
   };
 
   const clickApplyMonth = () => {
+    const {selectedMonth} = data;
     if (!selectedMonth) {
       Toast.error('Please select month first');
     } else {
-      setShowLoader(true);
-      setCurrentMonth('');
+      setData({...data, showLoader: true, currentMonth: ''});
       const currentYear = new Date().getFullYear();
       const getDateStr = (month: string, day: string) => {
         const paddedMonth = (monthArray.indexOf(month) + 1)
@@ -102,103 +121,113 @@ const LeaveHistory = () => {
           };
         }
       }
-      setLeaveMonthJson(mark);
-      setShowMonthList(false);
+      setData({...data, showMonthList: false, leaveMonthJson: mark});
       setTimeout(() => {
-        setCurrentMonth(monthName);
-        setShowLoader(false);
+        setData({...data, currentMonth: monthName, showLoader: false});
       }, 1200);
     }
   };
 
   return (
     <>
-      <Header title="Leave History" showBackButton={true} />
+      <Header title={strings?.LeaveHistory} showBackButton={true} />
       <ScrollView style={styles.main}>
         <View style={styles.sub_Main}>
-          {showLoader && <Loader />}
+          <Loader Visible={data?.showLoader} />
           <StaffDropDownLayout
-            personal={personalRadio}
-            staff={staffRadio}
-            yearly={yearlyRadio}
-            monthly={monthlyRadio}
+            personal={data?.personalRadio}
+            staff={data?.staffRadio}
+            yearly={data?.yearlyRadio}
+            monthly={data?.monthlyRadio}
             onClickPersonal={() => {
-              setPersonalRadio(true);
-              setStaffRadio(false);
+              setData({...data, personalRadio: true, staffRadio: false});
             }}
             onClickStaff={() => {
-              setStaffRadio(true);
-              setPersonalRadio(false);
+              setData({...data, personalRadio: false, staffRadio: true});
             }}
             onClickYearly={() => {
-              setYearlyRadio(true);
-              setMonthlyRadio(false);
-              setShowshowYearDropDown(true);
-              setShowMonthList(false);
-              if (currentYearMonth) {
+              setData({
+                ...data,
+                yearlyRadio: true,
+                monthlyRadio: false,
+                showYearDropDown: false,
+                showMonthList: false,
+              });
+
+              if (data?.currentYearMonth) {
                 clickApplyYear();
               }
             }}
             onClickMonthly={() => {
-              setMonthlyRadio(true);
-              setYearlyRadio(false);
-              setShowshowYearDropDown(false);
-              setShowYearList(false);
-              if (currentMonth) {
+              setData({
+                ...data,
+                yearlyRadio: false,
+                monthlyRadio: true,
+                showYearDropDown: false,
+                showMonthList: false,
+              });
+
+              if (data?.currentMonth) {
                 clickApplyMonth();
               }
             }}
           />
           <YearMonthDropDown
-            onClickMonthValue={item => setSelectedMonth(item?.value)}
-            selectedMonth={selectedMonth}
-            showYear={showYearDropDown}
-            onClickDropDown={() => setShowYearList(!showYearList)}
-            showYearList={showYearList}
-            onClickYearValue={item => setSelectedYear(item?.value)}
-            selectedYear={selectedYear}
-            onClickMonthDropDown={() => setShowMonthList(!showMonthList)}
-            showMonthList={showMonthList}
+            onClickMonthValue={item =>
+              setData({...data, selectedMonth: item?.value})
+            }
+            selectedMonth={data?.selectedMonth}
+            showYear={data?.showYearDropDown}
+            onClickDropDown={() =>
+              setData({...data, showYearList: !data?.showYearList})
+            }
+            showYearList={data?.showYearList}
+            onClickYearValue={item =>
+              setData({...data, selectedYear: item?.value})
+            }
+            selectedYear={data?.selectedYear}
+            onClickMonthDropDown={() =>
+              setData({...data, showMonthList: !data?.showMonthList})
+            }
+            showMonthList={data?.showMonthList}
             onClickMonthApply={() => clickApplyMonth()}
             onClickMonthCancel={() => {
-              let dateArray = currentMonth?.split('-');
+              let dateArray = data?.currentMonth?.split('-');
               let currentIndex = dateArray[1];
-              setSelectedMonth(monthArray[parseInt(currentIndex) - 1]);
-              setShowMonthList(false);
+              setData({
+                ...data,
+                selectedMonth: monthArray[parseInt(currentIndex) - 1],
+                showMonthList: false,
+              });
             }}
             onClickYearApply={() => clickApplyYear()}
             onClickYearCancel={() => {
-              let dateArray = currentYearMonth?.split('-');
+              let dateArray = data?.currentYearMonth?.split('-');
               let currentIndex = dateArray[0];
-              setSelectedYear(currentIndex);
-              setShowYearList(false);
+              setData({
+                ...data,
+                selectedYear: currentIndex,
+                showYearList: false,
+              });
             }}
           />
-          {currentMonth && selectedMonth && !showYearDropDown && (
-            <CalendarListLayout
-              currentMonth={currentMonth}
-              leaveDate={leaveMonthJson}
-            />
-          )}
-          {currentYearMonth && selectedYear && showYearDropDown && (
-            <CalenderYearlyLayout currentMonth={currentYearMonth} />
-          )}
+          {data?.currentMonth &&
+            data?.selectedMonth &&
+            !data?.showYearDropDown && (
+              <CalendarListLayout
+                currentMonth={data?.currentMonth}
+                leaveDate={data?.leaveMonthJson}
+              />
+            )}
+          {data?.currentYearMonth &&
+            data?.selectedYear &&
+            data?.showYearDropDown && (
+              <CalenderYearlyLayout currentMonth={data?.currentYearMonth} />
+            )}
         </View>
       </ScrollView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: COLOR.GREY,
-  },
-  sub_Main: {
-    width: '96%',
-    height: '100%',
-    marginHorizontal: '2%',
-  },
-});
 
 export default LeaveHistory;

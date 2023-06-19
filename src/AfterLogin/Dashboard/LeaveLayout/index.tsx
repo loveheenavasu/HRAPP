@@ -7,8 +7,13 @@ import {scale} from 'react-native-size-matters';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Label} from '@CommonComponent';
 import styles from './styles';
+import strings from '@src/Language/strings';
 
-let mArray = ['Apply Leave', 'Leave Summary', 'Leave Adjustment'];
+let mArray = [
+  strings?.ApplyLeave,
+  strings?.LeaveSummary,
+  strings?.LeaveAdjustment,
+];
 
 interface navigationProps {
   ApplyLeave: undefined;

@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import COLOR from '../../../../Util/Color';
 import {scale} from 'react-native-size-matters';
-import Label from '../../../../CommonComponent/Lable';
 import Calender from 'react-native-vector-icons/AntDesign';
 import {Calendar as ViewCalendar} from 'react-native-calendars';
+import {COLOR} from '@Util';
+import {Label, CustomDropdown} from '@CommonComponent';
 import styles from './styles';
-import CustomDropdown from '../../../../CommonComponent/CustomDropDown';
+import strings from '@src/Language/strings';
 
 interface Props {
   showLeaveUnit?: boolean;
@@ -19,27 +19,28 @@ interface Props {
   leaveJson?: Object | {};
   leavePeriodArray?: Object[];
 }
-const LeaveUnitLayout = ({
+
+const LeaveUnitLayout: FC<Props> = ({
   onClickUnit,
   showLeaveCalendar,
   onClickLeavePeriod,
   onClickCalendar,
   leaveJson,
   leavePeriodArray,
-}: Props) => {
+}) => {
   const currentDate = new Date().toISOString().slice(0, 10);
   return (
     <View style={styles.main}>
       <CustomDropdown
-        title="Leave Unit"
+        title={strings?.LeaveUnit}
         onClick={item => onClickUnit(item)}
-        placeHolder="Please select Leave Unit"
+        placeHolder={strings?.SelectLeaveUnit}
         data={[
-          {id: 0, value: 'Days'},
-          {id: 1, value: 'Weeks'},
+          {id: 0, value: strings?.Days},
+          {id: 1, value: strings?.Weeks},
         ]}
       />
-      <Label title="Leave Period" style={styles.leave_Title} />
+      <Label title={strings?.LeavePeriod} style={styles.leave_Title} />
       <TouchableOpacity
         style={styles.leave_Period_Con}
         onPress={onClickLeavePeriod}
@@ -53,10 +54,10 @@ const LeaveUnitLayout = ({
             }
             title={
               leavePeriodArray?.length > 0
-                ? 'Leave Period is ' +
+                ? strings?.LeavePeriodis +
                   leavePeriodArray?.length.toString() +
-                  (leavePeriodArray?.length > 1 ? ' Days' : ' Day')
-                : 'Please select leave Period '
+                  (leavePeriodArray?.length > 1 ? strings?.Days : strings?.Day)
+                : strings?.SelectLeavePeriod
             }
           />
         </View>

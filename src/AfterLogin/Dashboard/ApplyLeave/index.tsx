@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {
   KeyboardAvoidingView,
@@ -18,6 +18,7 @@ import LeaveTypeLayout from './LeaveTypeLayout';
 import LeaveUnitLayout from './LeaveUnitLayout';
 import NotifyPersonLayout from './NotifyPersonLayout';
 import styles from './styles';
+import strings from '@src/Language/strings';
 
 interface dataProps {
   showLeaveType: boolean;
@@ -32,7 +33,7 @@ interface dataProps {
   selectedNotifyList: [];
 }
 
-const ApplyLeave = () => {
+const ApplyLeave  : FC = () => {
   const [data, setData] = useState<dataProps>({
     showLeaveType: false,
     showLeaveUnit: false,
@@ -218,15 +219,15 @@ const ApplyLeave = () => {
     Keyboard.dismiss();
     const isEmpty = selectedLeave.every(item => item.trim() === '');
     if (!selectedLeaveUnit) {
-      Toast.error('Please select leave unit first');
+      Toast.error(strings.PleaseSelect_LeaveFirst);
     } else if (leaveArray?.length === 0) {
-      Toast.error('Please select leave period');
+      Toast.error(strings.PleaseSelect_LeavePeriod);
     } else if (isEmpty) {
-      Toast.error('Please select leave details');
+      Toast.error(strings.PleaseSelect_LeaveDetails);
     } else if (selectedNotifyList?.length === 0) {
-      Toast.error('Please select atleast one notify person');
+      Toast.error(strings.PleaseSelect_NotifyPerson);
     } else {
-      Toast.success('Data submit successfully');
+      Toast.success(strings?.DataSubmit_Successfully);
     }
   }, [
     data?.selectedLeaveUnit,
@@ -245,7 +246,7 @@ const ApplyLeave = () => {
       style={styles.main}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? verticalScale(45) : 0}>
-      <Header showBackButton={true} title="Apply Leave" />
+      <Header showBackButton={true} title={strings.ApplyLeave} />
       <ScrollView
         ref={scrollRef}
         nestedScrollEnabled={true}

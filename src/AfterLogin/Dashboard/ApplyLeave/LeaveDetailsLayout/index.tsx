@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {scale} from 'react-native-size-matters';
-import Label from '../../../../CommonComponent/Lable';
-import DropDown from '../../../../CommonComponent/DropDown';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Label, DropDown} from '@CommonComponent';
 import styles from './styles';
+import strings from '@src/Language/strings';
 
 let leaveArray = [
-  {id: 0, value: 'Full Day'},
-  {id: 1, value: 'Half Day'},
+  {id: 0, value: strings?.FullDay},
+  {id: 1, value: strings?.HalfDay},
 ];
 
 interface Props {
@@ -18,12 +18,12 @@ interface Props {
   selectedLeaveType?: any[];
 }
 
-const LeaveDetailsLayout = ({
+const LeaveDetailsLayout: FC<Props> = ({
   list,
   deleteLeave,
   clickLeaveFullHalf,
   selectedLeaveType,
-}: Props) => {
+}) => {
   const [showDropdown, setShowDropdown] = useState(
     Array(list?.length).fill(false),
   );
@@ -46,7 +46,7 @@ const LeaveDetailsLayout = ({
               let newShowDropdown = new Array(showDropdown.length).fill(false);
               setShowDropdown(newShowDropdown);
             }}
-            placeHolder="Select an option"
+            placeHolder={strings?.SelectOption}
             firstChildStyle={styles.first_Child_Con}
             secondChildStyle={styles.second_Child_Con}
             onClick={() => {
@@ -73,12 +73,9 @@ const LeaveDetailsLayout = ({
 
   return (
     <View style={styles.main}>
-      <Label title="Leave Details" style={styles.title_Label} />
+      <Label title={strings?.LeaveDetails} style={styles.title_Label} />
       {items}
-      <Label
-        title="❗This excludes pubic holidays,non working days and taken leaves."
-        style={styles.warning_Txt}
-      />
+      <Label title={strings?.ThisExclude} style={styles.warning_Txt} />
     </View>
   );
 };
