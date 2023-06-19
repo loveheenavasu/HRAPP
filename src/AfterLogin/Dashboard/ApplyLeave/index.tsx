@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {
   KeyboardAvoidingView,
@@ -33,7 +33,7 @@ interface dataProps {
   selectedNotifyList: [];
 }
 
-const ApplyLeave  : FC = () => {
+const ApplyLeave: FC = () => {
   const [data, setData] = useState<dataProps>({
     showLeaveType: false,
     showLeaveUnit: false,

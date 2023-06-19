@@ -14,7 +14,7 @@ const pieData = [
 const HospitalizeLeaveLayout: FC = () => {
   return (
     <View style={styles.main}>
-      <Label title={strings?.Hospitalisation_Leave} style={styles.title_Label} />
+      <Label title={strings.Hospitalisation_Leave} style={styles.title_Label} />
       <View style={styles.day_Con}>
         <Label title={`12 ${strings?.Days}`} style={styles.day_Label} />
         <Label title={strings?.Balance} style={styles.balance_Label} />

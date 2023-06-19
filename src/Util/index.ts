@@ -1,12 +1,14 @@
 import Images from './Images';
 import COLOR from './Color';
 import Toast from './Helper/ToastType';
-import { NextpubHoli, lastLeaveData, upcomingLeave, HrMailngData } from './DummyData';
+import {
+  NextpubHoli,
+  lastLeaveData,
+  upcomingLeave,
+  HrMailngData,
+} from './DummyData';
 import StorageKey from './StorageKey';
 import * as Storage from './Service/Storage';
-
-
-
 
 export {
   Images,
@@ -17,7 +19,7 @@ export {
   upcomingLeave,
   StorageKey,
   Storage,
-  HrMailngData
+  HrMailngData,
 };
 
 const Util = {
@@ -29,6 +31,6 @@ const Util = {
   upcomingLeave,
   StorageKey,
   Storage,
-  HrMailngData
+  HrMailngData,
 };
 export default Util;

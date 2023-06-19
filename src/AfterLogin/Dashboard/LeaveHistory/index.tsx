@@ -61,7 +61,12 @@ const LeaveHistory: FC = () => {
   const mFocus = useIsFocused();
 
   useEffect(() => {
-    setData({...data, selectedYear: '', selectedMonth: '', currentMonth: ''});
+    setData(predata => ({
+      ...predata,
+      selectedYear: '',
+      selectedMonth: '',
+      currentMonth: '',
+    }));
   }, [mFocus]);
 
   const clickApplyYear = () => {
@@ -69,15 +74,20 @@ const LeaveHistory: FC = () => {
     if (!selectedYear) {
       Toast.error('Please select year first');
     } else {
-      setData({
-        ...data,
+      setData(predata => ({
+        ...predata,
         currentYearMonth: '',
         showLoader: true,
         showYearList: false,
-      });
+      }));
+
       let monthName = selectedYear + '-' + '01' + '-' + '01';
       setTimeout(() => {
-        setData({...data, currentYearMonth: monthName, showLoader: false});
+        setData(predata => ({
+          ...predata,
+          currentYearMonth: monthName,
+          showLoader: false,
+        }));
       }, 1200);
     }
   };
@@ -87,7 +97,7 @@ const LeaveHistory: FC = () => {
     if (!selectedMonth) {
       Toast.error('Please select month first');
     } else {
-      setData({...data, showLoader: true, currentMonth: ''});
+      setData(predata => ({...predata, showLoader: true, currentMonth: ''}));
       const currentYear = new Date().getFullYear();
       const getDateStr = (month: string, day: string) => {
         const paddedMonth = (monthArray.indexOf(month) + 1)
@@ -121,9 +131,17 @@ const LeaveHistory: FC = () => {
           };
         }
       }
-      setData({...data, showMonthList: false, leaveMonthJson: mark});
+      setData(predata => ({
+        ...predata,
+        showMonthList: false,
+        leaveMonthJson: mark,
+      }));
       setTimeout(() => {
-        setData({...data, currentMonth: monthName, showLoader: false});
+        setData(predata => ({
+          ...predata,
+          currentMonth: monthName,
+          showLoader: false,
+        }));
       }, 1200);
     }
   };
@@ -140,32 +158,40 @@ const LeaveHistory: FC = () => {
             yearly={data?.yearlyRadio}
             monthly={data?.monthlyRadio}
             onClickPersonal={() => {
-              setData({...data, personalRadio: true, staffRadio: false});
+              setData(predata => ({
+                ...predata,
+                personalRadio: true,
+                staffRadio: false,
+              }));
             }}
             onClickStaff={() => {
-              setData({...data, personalRadio: false, staffRadio: true});
+              setData(predata => ({
+                ...predata,
+                personalRadio: false,
+                staffRadio: true,
+              }));
             }}
             onClickYearly={() => {
-              setData({
-                ...data,
+              setData(predata => ({
+                ...predata,
                 yearlyRadio: true,
                 monthlyRadio: false,
                 showYearDropDown: false,
                 showMonthList: false,
-              });
+              }));
 
               if (data?.currentYearMonth) {
                 clickApplyYear();
               }
             }}
             onClickMonthly={() => {
-              setData({
-                ...data,
+              setData(predata => ({
+                ...predata,
                 yearlyRadio: false,
                 monthlyRadio: true,
                 showYearDropDown: false,
                 showMonthList: false,
-              });
+              }));
 
               if (data?.currentMonth) {
                 clickApplyMonth();
@@ -174,41 +200,47 @@ const LeaveHistory: FC = () => {
           />
           <YearMonthDropDown
             onClickMonthValue={item =>
-              setData({...data, selectedMonth: item?.value})
+              setData(predata => ({...predata, selectedMonth: item?.value}))
             }
             selectedMonth={data?.selectedMonth}
             showYear={data?.showYearDropDown}
             onClickDropDown={() =>
-              setData({...data, showYearList: !data?.showYearList})
+              setData(predata => ({
+                ...predata,
+                showYearList: !data?.showYearList,
+              }))
             }
             showYearList={data?.showYearList}
             onClickYearValue={item =>
-              setData({...data, selectedYear: item?.value})
+              setData(predata => ({...predata, selectedYear: item?.value}))
             }
             selectedYear={data?.selectedYear}
             onClickMonthDropDown={() =>
-              setData({...data, showMonthList: !data?.showMonthList})
+              setData(predata => ({
+                ...predata,
+                showMonthList: !data?.showMonthList,
+              }))
             }
             showMonthList={data?.showMonthList}
             onClickMonthApply={() => clickApplyMonth()}
             onClickMonthCancel={() => {
               let dateArray = data?.currentMonth?.split('-');
               let currentIndex = dateArray[1];
-              setData({
-                ...data,
+              setData(predata => ({
+                ...predata,
                 selectedMonth: monthArray[parseInt(currentIndex) - 1],
                 showMonthList: false,
-              });
+              }));
             }}
             onClickYearApply={() => clickApplyYear()}
             onClickYearCancel={() => {
               let dateArray = data?.currentYearMonth?.split('-');
               let currentIndex = dateArray[0];
-              setData({
-                ...data,
+              setData(predata => ({
+                ...predata,
                 selectedYear: currentIndex,
                 showYearList: false,
-              });
+              }));
             }}
           />
           {data?.currentMonth &&

@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
 import {StorageKey, Storage} from '@Util';
 import Toast from '../../Util/Helper/ToastType';
 
@@ -74,14 +73,6 @@ export const loginReducer = createSlice({
     });
   },
 });
-
 // Action creators are generated for each case reducer function
-export const {
-  increment,
-  decrement,
-  incrementByAmount,
-  logOut,
-  setUserCredential,
-} = loginReducer.actions;
-
+export const {logOut, setUserCredential} = loginReducer.actions;
 export default loginReducer.reducer;

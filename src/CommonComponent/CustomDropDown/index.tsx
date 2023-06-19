@@ -113,7 +113,7 @@ const Custom: FC<Props> = ({
           name={showModal ? 'caretup' : 'caretdown'}
           size={scale(20)}
           color={COLOR.LIGHT_GREY}
-          style={{opacity: 0.7}}
+          style={dynamicStyles?.opacity}
         />
       </TouchableOpacity>
       {renderDropdown()}

@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { scale, verticalScale } from "react-native-size-matters";
-import { COLOR } from "@Util";
+import {StyleSheet} from 'react-native';
+import {scale, verticalScale} from 'react-native-size-matters';
+import {COLOR} from '@Util';
 
 const DynaimicStyles = (selectedMonth: any) =>
   StyleSheet.create({
@@ -74,4 +74,4 @@ const DynaimicStyles = (selectedMonth: any) =>
     },
   });
 
-  export default DynaimicStyles;
+export default DynaimicStyles;

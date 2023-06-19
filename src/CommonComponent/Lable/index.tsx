@@ -14,7 +14,4 @@ const Label: FC<Props> = ({title, style, maxLines}) => {
     </Text>
   );
 };
-
-
-
 export default Label;

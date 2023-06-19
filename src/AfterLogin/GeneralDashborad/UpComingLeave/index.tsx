@@ -7,8 +7,13 @@ import styles from './styles';
 import {COLOR} from '@Util';
 import {Label} from '@CommonComponent';
 
+interface objectItem {
+  holiday: string;
+  date: string;
+}
+
 interface Props {
-  list?: object[];
+  list?: objectItem[];
 }
 
 const UpcomingLeave: FC<Props> = ({list}) => {
@@ -24,7 +29,7 @@ const UpcomingLeave: FC<Props> = ({list}) => {
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}
         data={list?.slice(0, 3)}
-        renderItem={({item, index}) => {
+        renderItem={({item}) => {
           return (
             <View style={styles.list_Main}>
               <View style={styles.f_Child}>

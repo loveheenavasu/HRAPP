@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {View} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import {PieChart} from 'react-native-gifted-charts';
@@ -11,7 +11,7 @@ const pieData = [
   {value: 16, color: COLOR.PRIMARY, text: '54%'},
   {value: 3.5, color: COLOR.NAVY, text: '30%'},
 ];
-const SickLeaveLayout : FC = () => {
+const SickLeaveLayout: FC = () => {
   return (
     <View style={styles.main}>
       <Label title={strings?.SickLeave} style={styles.title_Label} />

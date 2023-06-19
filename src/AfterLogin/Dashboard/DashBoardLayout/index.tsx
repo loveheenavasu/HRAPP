@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {View} from 'react-native';
 import {Label} from '@CommonComponent';
 import strings from '@src/Language/strings';
 import styles from './styles';
 
-const DashboardLayout : FC = () => {
+const DashboardLayout: FC = () => {
   return (
     <View style={styles.main}>
       <Label title={strings.Dashboard} style={styles.s_Title} />

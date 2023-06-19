@@ -4,10 +4,19 @@ import Label from './Lable';
 import WrapComponent from './WrapComponent';
 import Loader from './Loader';
 import Header from './Header';
-import CustomDropdown  from "./CustomDropDown";
+import CustomDropdown from './CustomDropDown';
 import DropDown from './DropDown';
 
-export {CustomButton, Label, EditText, WrapComponent, Loader, Header, CustomDropdown, DropDown};
+export {
+  CustomButton,
+  Label,
+  EditText,
+  WrapComponent,
+  Loader,
+  Header,
+  CustomDropdown,
+  DropDown,
+};
 
 const CommonComponent = {
   CustomButton,
@@ -17,7 +26,7 @@ const CommonComponent = {
   Loader,
   Header,
   CustomDropdown,
-  DropDown
+  DropDown,
 };
 
 export default CommonComponent;

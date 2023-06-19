@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { scale, verticalScale } from "react-native-size-matters";
-import {COLOR}  from "@Util";
+import {StyleSheet} from 'react-native';
+import {scale, verticalScale} from 'react-native-size-matters';
+import {COLOR} from '@Util';
 
 const dynamicStyles = (selectedValue: string) =>
   StyleSheet.create({
@@ -72,4 +72,4 @@ const dynamicStyles = (selectedValue: string) =>
     },
   });
 
-  export default dynamicStyles;
+export default dynamicStyles;

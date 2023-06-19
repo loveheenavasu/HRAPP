@@ -25,9 +25,7 @@ import {
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
 
-interface beforeStackProps {}
-
-const BeforeStack: FC<beforeStackProps> = () => {
+const BeforeStack = () => {
   return (
     <NavigationContainer>
       <beforeLoginStack.Navigator
@@ -44,9 +42,7 @@ const BeforeStack: FC<beforeStackProps> = () => {
   );
 };
 
-interface afterStackProps {}
-
-const AfterLoginStack: FC<afterStackProps> = () => {
+const AfterLoginStack = () => {
   return (
     <NavigationContainer>
       <afterDrawerLoginStack.Navigator
@@ -115,18 +111,22 @@ const Navigator: FC = () => {
       if (res) {
         let mdata = JSON.parse(res);
         dispatch(setUserCredential({...mdata, userId: '1'}));
-        setData({...data, userId: '1', showLoader: false});
+        setData(prevData => ({...prevData, userId: '1', showLoader: false}));
       } else {
-        setData({...data, showLoader: false});
+        setData(prevData => ({...prevData, showLoader: false}));
       }
     });
   }, [dispatch]);
 
   useEffect(() => {
     if (mUserData?.userId) {
-      setData({...data, userId: mUserData?.userId, showLoader: false});
+      setData(prevData => ({
+        ...prevData,
+        userId: mUserData?.userId,
+        showLoader: false,
+      }));
     } else {
-      setData({...data, userId: ''});
+      setData(prevData => ({...prevData, userId: ''}));
     }
   }, [mUserData?.userId]);
   return (

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
 import {Header, Label} from '@CommonComponent';
 import {COLOR} from '@Util';
@@ -8,7 +8,7 @@ import {useRoute} from '@react-navigation/native';
 import styles from './styles';
 import strings from '@src/Language/strings';
 
-const ViewAllLayout : FC = () => {
+const ViewAllLayout: FC = () => {
   const mRoute = useRoute();
   return (
     <>

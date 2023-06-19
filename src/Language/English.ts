@@ -106,10 +106,10 @@ interface type {
   WhatYouThink: string;
   EnterThought: string;
   DataNot_Found: string;
-  NextPublic_Holiday : string;
-  UpcomingLeave : string;
-  PleaseLink_Here : string;
-  PleasePaste_LinkHere : string;
+  NextPublic_Holiday: string;
+  UpcomingLeave: string;
+  PleaseLink_Here: string;
+  PleasePaste_LinkHere: string;
 }
 const english: type = {
   LoginAccount: 'Login to your Account',
@@ -204,7 +204,7 @@ const english: type = {
     'April',
     'May',
     'Jun',
-    'Jully',
+    'July',
     'Aug',
     'Sept',
     'Oct',
@@ -234,10 +234,10 @@ const english: type = {
   WhatYouThink: 'Hmm.. What are you thinking?',
   EnterThought: 'Enter your thoughts',
   DataNot_Found: 'Data not Found',
-  NextPublic_Holiday :"Next Public Holiday",
-  UpcomingLeave :"Upcoming Leave",
-  PleaseLink_Here:"Please enter link here..",
-  PleasePaste_LinkHere :"Please paste/write your link here"
+  NextPublic_Holiday: 'Next Public Holiday',
+  UpcomingLeave: 'Upcoming Leave',
+  PleaseLink_Here: 'Please enter link here..',
+  PleasePaste_LinkHere: 'Please paste/write your link here',
 };
 
 export default english;

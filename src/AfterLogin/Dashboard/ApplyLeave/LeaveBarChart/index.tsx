@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {View} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import {PieChart} from 'react-native-gifted-charts';
@@ -41,7 +41,7 @@ const leaveData = [
   },
 ];
 
-const LeaveBarChat : FC = () => {
+const LeaveBarChat: FC = () => {
   return (
     <View style={[commonStyle.main, styles.mainsub]}>
       <Label title={strings?.Annual} style={styles.title_Label} />

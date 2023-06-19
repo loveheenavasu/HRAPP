@@ -41,5 +41,4 @@ const HappinesLayout: FC<Props> = ({value, onChangeText}) => {
     </View>
   );
 };
-
 export default HappinesLayout;
