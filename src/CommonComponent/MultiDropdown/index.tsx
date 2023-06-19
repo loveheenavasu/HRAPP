@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ViewStyle} from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
 import COLOR from '../../Util/Color';
+import english from '../../Language/English';
 
 interface Props {
   dataArr: object[];
@@ -17,12 +18,12 @@ const MultiDropDown = (props: Props) => {
       <MultiSelect
         // hideTags
         items={dataArr}
-        uniqueKey="email"
+        uniqueKey={english.Email}
         //   ref={(component) => { this.multiSelect = component }}
         onSelectedItemsChange={onSelectedItemsChange}
         selectedItems={selectedItems}
-        selectText="Add Email Id's"
-        searchInputPlaceholderText="Search Email..."
+        selectText={english.AddEmailId}
+        searchInputPlaceholderText={english.SearchEmail}
         //   onChangeInput={ (text)=> console.log(text)}
         //   altFontFamily="ProximaNova-Light"
         tagRemoveIconColor="#CCC"
@@ -31,10 +32,10 @@ const MultiDropDown = (props: Props) => {
         selectedItemTextColor={COLOR.NAVY}
         selectedItemIconColor={COLOR.NAVY}
         itemTextColor="#000"
-        displayKey="email"
+        displayKey={english.Email}
         //   searchInputStyle={{ color: '#CCC' }}
         submitButtonColor={selectedItems?.length ? COLOR.NAVY : COLOR.DARK_GRAY}
-        submitButtonText="Add Email"
+        submitButtonText={english.AddEmail}
       />
     </View>
   );

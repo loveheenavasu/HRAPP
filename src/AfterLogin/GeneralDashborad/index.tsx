@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -25,7 +25,8 @@ import HappinesLayout from './HappinessLayout';
 import {useEffect, useRef, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import AddCompanyLinkModal from './Modal/AddCompanyLink';
-const GeneralDashboard = () => {
+import strings from '@src/Language/strings';
+const GeneralDashboard :FC= () => {
   const isFocused = useIsFocused();
   const scrollRef = useRef('');
 
@@ -40,7 +41,7 @@ const GeneralDashboard = () => {
       style={styles.main}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={verticalScale(45)}>
-      <Header title="General Dashboard" />
+      <Header title={strings.GeneralDashboard} />
       <ScrollView
         ref={scrollRef}
         nestedScrollEnabled={true}

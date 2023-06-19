@@ -9,6 +9,7 @@ import UpComingLeaveLayout from './UpComingLeaveLayout';
 import LastLeaveTakenLayout from './LastLeaveTakenLayout';
 import PublicHolidayLayout from './PublicHolidayLayout';
 import LeaveLayout from './LeaveLayout';
+import strings from '@src/Language/strings';
 
 const Dashboard: FC = () => {
   const isFocused = useIsFocused();
@@ -19,7 +20,7 @@ const Dashboard: FC = () => {
 
   return (
     <>
-      <Header title="Dashboard" />
+      <Header title={strings.Dashboard} />
       <ScrollView
         ref={scrollRef}
         style={styles.main}

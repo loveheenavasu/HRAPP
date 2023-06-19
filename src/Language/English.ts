@@ -12,7 +12,6 @@ interface type {
   Dashboard: string;
   CheckUpcomingLeaves: string;
   UPCOMINGLEAVE: string;
-  ViewALL: string;
   LASTLEAVE_TAKEN: string;
   ViewHistory: string;
   NEXTPUBLIC_HOLIDAY: string;
@@ -24,7 +23,7 @@ interface type {
   ChangePassword: string;
   Logout: string;
   CheckUpcomig: string;
-  UpcomingLeave: string;
+  UpComingLeave: string;
   ViewAll: string;
   LastLeaveTaken: string;
   NextPublicHoliday: string;
@@ -90,6 +89,23 @@ interface type {
   BalanceLeave: string;
   Hospitalisation_Leave: string;
   SickLeave : string;
+  GeneralDashboard:string;
+  NoUpcomingLeave:string;
+  UpcomingPublicHoliday:string;
+  NoUpcomingPubHoliday:string;
+  Celebrations:string;
+  CompanyLinks:string;
+  NoLinksAvailable:string;
+  AddSomeLinks:string;
+  Edit:string;
+  Add:string;
+  NewHires:string;
+  NoHireToday:string;
+  Happiness:string;
+  HowYouFeel:string;
+  WhatYouThink:string;
+  EnterThought:string
+
 }
 const english: type = {
   LoginAccount: 'Login to your Account',
@@ -106,7 +122,7 @@ const english: type = {
   CheckUpcomingLeaves:
     'Check your upcoming leaves,Leave balance or apply for one',
   UPCOMINGLEAVE: 'UPCOMING LEAVE',
-  ViewALL: 'View ALL',
+  UpComingLeave:'Upcoming Leave',
   LASTLEAVE_TAKEN: 'LAST LEAVE TAKEN',
   ViewHistory: 'View History',
   NEXTPUBLIC_HOLIDAY: 'NEXT PUBLIC HOLIDAY',
@@ -118,7 +134,6 @@ const english: type = {
   ChangePassword: 'Change Password',
   Logout: 'Logout',
   CheckUpcomig: 'Check your upcoming leaves,Leave balance or apply for one',
-  UpcomingLeave: 'UPCOMING LEAVE',
   ViewAll: 'View ALL',
   LastLeaveTaken: 'LAST LEAVE TAKEN',
   NextPublicHoliday: 'NEXT PUBLIC HOLIDAY',
@@ -197,7 +212,23 @@ const english: type = {
   TotalLeave: 'Total Leave',
   BalanceLeave: 'Balance Leave',
   Hospitalisation_Leave: 'Hospitalisation Leave',
-  SickLeave :"Sick Leave"
+  SickLeave :"Sick Leave",
+  GeneralDashboard:'General Dashboard',
+  NoUpcomingLeave:'No Upcoming leave',
+  UpcomingPublicHoliday:'Upcoming Public Holiday',
+  NoUpcomingPubHoliday:'No Upcoming Public Holiday',
+  Celebrations:'Celebrations',
+  CompanyLinks:'Company Links',
+  NoLinksAvailable:"No Links available",
+  AddSomeLinks:'Why Dont you add some links today?',
+  Edit:'Edit',
+  Add:'Add',
+  NewHires:'New Hires',
+  NoHireToday:'No new hires todays',
+  Happiness:'Happiness',
+  HowYouFeel:"How are you feeling recently? Tell us",
+  WhatYouThink:'Hmm.. What are you thinking?',
+  EnterThought:'Enter your thoughts',
 };
 
 export default english;

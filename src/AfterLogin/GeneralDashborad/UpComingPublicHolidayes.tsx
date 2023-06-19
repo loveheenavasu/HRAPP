@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import COLOR from '../../Util/Color';
 import {verticalScale, scale} from 'react-native-size-matters';
 import Calender from 'react-native-vector-icons/AntDesign';
+import strings from '@src/Language/strings';
 interface Props {
   public_Holiday_List?: object[];
 }
-const UpcomingPublicHolidays = (props: Props) => {
-  const {public_Holiday_List} = props;
+const UpcomingPublicHolidays:FC<Props> = ({public_Holiday_List}) => {
   return (
     <View style={styles.main}>
       <View style={styles.title_Con}>
-        <Label style={styles.title_Label} title="Upcoming Public Holiday" />
+        <Label style={styles.title_Label} title={strings.UpcomingPublicHoliday} />
         <TouchableOpacity>
-          <Label style={styles.viewAll_Label} title="View ALL" />
+          <Label style={styles.viewAll_Label} title={strings.ViewAll} />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -46,8 +46,7 @@ const UpcomingPublicHolidays = (props: Props) => {
             <View style={styles.empty_Con}>
               <Label
                 style={styles.not_Found_Label}
-                title="No Upcoming Public Holiday"
-              />
+                title={strings.NoUpcomingPubHoliday}/>
             </View>
           );
         }}

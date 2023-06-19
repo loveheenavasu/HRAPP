@@ -12,6 +12,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {scale, verticalScale} from 'react-native-size-matters';
 import Label from '../Lable';
 import COLOR from '../../Util/Color';
+import english from '../../Language/English';
 
 let timeOut: any = null;
 
@@ -80,7 +81,7 @@ const Toast = () => {
         <View style={styles.toastText}>
           <Label
             style={styles.title}
-            title={status === 'success' ? successHeader : failHeader}
+            title={status === 'success' ? `${english.Success}` :`${english.Failed}`}
           />
           <Label style={styles.msg_Label} title={msg} />
         </View>
