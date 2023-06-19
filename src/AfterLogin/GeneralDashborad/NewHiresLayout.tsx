@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import User from 'react-native-vector-icons/EvilIcons';
+import strings from '@src/Language/strings';
 
+interface objItem{
+  name:string;
+  dept:string;
+  date:string;
+}
 interface Props {
-  list?: object[];
+  list?: objItem[];
 }
 
-const NewHiresLayout = (props: Props) => {
-  const {list} = props;
-
+const NewHiresLayout:FC<Props> = ({list}) => {
   return (
     <View style={styles.main}>
       <View style={styles.sub_Main}>
-        <Label style={styles.title_Label} title="New Hires" />
+        <Label style={styles.title_Label} title={strings.NewHires} />
         <TouchableOpacity>
-          <Label style={styles.viewAll_Label} title="View ALL" />
+          <Label style={styles.viewAll_Label} title={strings.ViewAll} />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -48,7 +52,7 @@ const NewHiresLayout = (props: Props) => {
             <View style={styles.empty_Con}>
               <Label
                 style={styles.not_Found_Label}
-                title="No new hires todays"
+                title={strings.NoHireToday}
               />
             </View>
           );

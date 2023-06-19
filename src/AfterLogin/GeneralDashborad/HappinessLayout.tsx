@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, TouchableOpacity, Keyboard} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -6,19 +6,20 @@ import COLOR from '../../Util/Color';
 import EditText from '../../CommonComponent/EditText';
 import ThumbUp from 'react-native-vector-icons/FontAwesome';
 import Chat from 'react-native-vector-icons/Ionicons';
+import strings from '@src/Language/strings';
 
 interface Props {
   value?: string;
   onChangeText?: () => void;
 }
 
-const HappinesLayout = (props: Props) => {
-  const {value, onChangeText} = props;
+const HappinesLayout:FC<Props> = ({value, onChangeText}) => {
+
   return (
     <View style={styles.main}>
-      <Label style={styles.title_Label} title="Happiness" />
+      <Label style={styles.title_Label} title={strings.Happiness} />
       <Label
-        title="How are you feeling recently? Tell us"
+        title={strings.HowYouFeel}
         style={styles.subTitle_Label}
       />
       <View style={styles.rowViewHand}>
@@ -32,10 +33,10 @@ const HappinesLayout = (props: Props) => {
       <View style={styles.hLine}></View>
       <View style={styles.rowView('flex-start')}>
         <Chat name="chatbubbles-sharp" size={30} color={COLOR.NAVY} />
-        <Label title="Hmm.. What are you thinking?" style={styles.chatTxt} />
+        <Label title={strings.WhatYouThink} style={styles.chatTxt} />
       </View>
       <EditText
-        Placholder="Enter your thoughts"
+        Placholder={strings.EnterThought}
         outerBoxStyle={{marginTop: verticalScale(5)}}
         Value={value}
         OnChangeText={onChangeText}

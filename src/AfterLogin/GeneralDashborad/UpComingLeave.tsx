@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import COLOR from '../../Util/Color';
 import {verticalScale, scale} from 'react-native-size-matters';
 import Calender from 'react-native-vector-icons/AntDesign';
+import strings from '@src/Language/strings';
 
 interface Props {
   list?: object[];
 }
 
-const UpcomingLeave = (props: Props) => {
-  const {list} = props;
+const UpcomingLeave:FC<Props> = ({list}) => {
+ 
   return (
     <View style={styles.main}>
       <View style={styles.sub_Main}>
-        <Label style={styles.title_Label} title="Upcoming Leave" />
+        <Label style={styles.title_Label} title={strings.UpComingLeave} />
         <TouchableOpacity>
-          <Label style={styles.viewAll_Label} title="View ALL" />
+          <Label style={styles.viewAll_Label} title={strings.ViewAll} />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -44,7 +45,7 @@ const UpcomingLeave = (props: Props) => {
         ListEmptyComponent={() => {
           return (
             <View style={styles.empty_Con}>
-              <Label style={styles.not_Found_Label} title="No Upcoming leave" />
+              <Label style={styles.not_Found_Label} title={strings.NoUpcomingLeave} />
             </View>
           );
         }}

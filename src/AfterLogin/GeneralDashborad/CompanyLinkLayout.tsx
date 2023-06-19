@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Label from '../../CommonComponent/Lable';
 import {scale, verticalScale} from 'react-native-size-matters';
 import COLOR from '../../Util/Color';
 import Attach from 'react-native-vector-icons/Ionicons';
 import CustomButton from '../../CommonComponent/CustomButton';
+import strings from '@src/Language/strings';
 interface Props {
   onClickAdd?: () => void;
 }
-const UpComingLink = ({onClickAdd}: Props) => {
+const UpComingLink:FC<Props> = ({onClickAdd}) => {
   return (
     <View style={styles.main}>
-      <View style={{}}>
-        <Label style={styles.title_Label} title="Company Links" />
+       <View style={styles.sub_Main}>
+        <Label style={styles.title_Label} title={strings.CompanyLinks} />
         <TouchableOpacity>
-          <Label style={styles.viewAll_Label} title="View ALL" />
+          <Label style={styles.viewAll_Label} title={strings.ViewAll} />
         </TouchableOpacity>
       </View>
       <>
@@ -26,20 +27,20 @@ const UpComingLink = ({onClickAdd}: Props) => {
             style={styles.attachImg}
           />
         </TouchableOpacity>
-        <Label title="No Links available" style={styles.leaveTxt} />
+        <Label title={strings.NoLinksAvailable} style={styles.leaveTxt} />
         <Label
-          title="Why Dont you add some links today?"
+          title={strings.AddSomeLinks}
           style={styles.leaveTxt}
         />
         <View style={styles.rowView}>
           <CustomButton
-            name="Add"
+            name={strings.Add}
             btnStyle={styles.add_Button}
             addLogo
             txtStyle={{marginLeft: scale(7)}}
             onPress={onClickAdd}
           />
-          <CustomButton name="Edit" btnStyle={styles.edit_Button} />
+          <CustomButton name={strings.Edit} btnStyle={styles.edit_Button} />
         </View>
       </>
     </View>
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: scale(11),
     opacity: 0.8,
+    
   },
   attachImg: {
     alignSelf: 'center',
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
     width: scale(80),
     padding: verticalScale(7),
   },
+ 
 });
 
 export default UpComingLink;
