@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -6,26 +6,26 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
-import COLOR from '../../../../Util/Color';
-import Label from '../../../../CommonComponent/Lable';
-import {scale, verticalScale} from 'react-native-size-matters';
-import EditText from '../../../../CommonComponent/EditText';
-import CustomButton from '../../../../CommonComponent/CustomButton';
+import {scale} from 'react-native-size-matters';
+import {Label, CustomButton, EditText} from '@CommonComponent';
+import {COLOR} from '@Util';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import styles from './styles';
+import strings from '@src/Language/strings';
+
 interface Props {
   showModal: boolean;
   onClickCancel?: () => void;
   onClickSubmit?: () => void;
 }
-const AddCompanyLinkModal = ({
+const AddCompanyLinkModal: FC<Props> = ({
   showModal,
   onClickCancel,
   onClickSubmit,
-}: Props) => {
+}) => {
   return (
     <Modal visible={showModal} transparent={true} animationType="slide">
       <SafeAreaView style={styles.second_main}>
@@ -36,17 +36,17 @@ const AddCompanyLinkModal = ({
             <View style={styles.sub_Main}>
               <Label
                 style={styles.title_Label}
-                title="Please paste/write your link here"
+                title={strings?.PleasePaste_LinkHere}
               />
               <EditText
                 outerBoxStyle={{marginTop: scale(10)}}
                 Value=""
-                Placholder="Please enter link here.."
+                Placholder={strings?.PleaseLink_Here}
                 ReturnKeyType="done"
                 OnSubmit={() => Keyboard.dismiss()}
               />
               <CustomButton
-                name="Submit"
+                name={strings?.Submit}
                 btnStyle={styles.button_Con}
                 onPress={onClickSubmit}
               />
@@ -62,46 +62,5 @@ const AddCompanyLinkModal = ({
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(52, 52, 52, 0.8)',
-  },
-  sub_Main: {
-    width: '90%',
-    marginHorizontal: '5%',
-    borderRadius: scale(10),
-    padding: scale(10),
-    backgroundColor: COLOR.WHITE,
-    marginTop: verticalScale(200),
-  },
-  second_main: {
-    flex: 1,
-  },
-  title_Label: {
-    marginVertical: 0,
-    marginLeft: scale(4),
-  },
-  button_Con: {
-    height: verticalScale(40),
-    width: '99%',
-    marginHorizontal: '.5%',
-    marginTop: verticalScale(10),
-  },
-  circle_Con: {
-    position: 'absolute',
-    top: scale(-10),
-    height: scale(40),
-    width: scale(40),
-    borderRadius: scale(20),
-    backgroundColor: COLOR.PRIMARY,
-    right: scale(-10),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default AddCompanyLinkModal;

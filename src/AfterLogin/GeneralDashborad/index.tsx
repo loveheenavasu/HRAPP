@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  StyleSheet,
   View,
 } from 'react-native';
 import {
@@ -13,12 +12,11 @@ import {
   pubHoliArr,
   NewHireArr,
 } from '../../Util/DummyData';
-import Header from '../../CommonComponent/Header';
-import COLOR from '../../Util/Color';
+import {Header} from '@CommonComponent';
 import {verticalScale} from 'react-native-size-matters';
 import UpcomingLeave from './UpComingLeave';
-import UpcomingPublicHolidays from './UpComingPublicHolidayes';
-import CelebrationLayout from './CelebrartionLayout';
+import UpcomingPublicHolidays from './UpComingPublicHoliday';
+import CelebrationLayout from './CelebrationLayout';
 import CompanyLinkLayout from './CompanyLinkLayout';
 import NewHiresLayout from './NewHiresLayout';
 import HappinesLayout from './HappinessLayout';
@@ -26,14 +24,15 @@ import {useEffect, useRef, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import AddCompanyLinkModal from './Modal/AddCompanyLink';
 import strings from '@src/Language/strings';
-const GeneralDashboard :FC= () => {
-  const isFocused = useIsFocused();
-  const scrollRef = useRef('');
+import styles from './styles';
 
+const GeneralDashboard: FC = () => {
+  const isFocused = useIsFocused();
+  const scrollRef = useRef<ScrollView>(null);
   const [showAddLinkModal, setShowAddLinkModal] = useState<boolean>(false);
 
   useEffect(() => {
-    scrollRef.current.scrollTo({x: 0, y: 0, animated: true});
+    scrollRef?.current?.scrollTo({x: 0, y: 0, animated: true});
   }, [isFocused]);
 
   return (
@@ -72,23 +71,5 @@ const GeneralDashboard :FC= () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  content_Con: {
-    paddingBottom: verticalScale(100),
-    flexGrow: 1,
-  },
-  sub_Main: {
-    width: '94%',
-    marginHorizontal: '3%',
-  },
-  scroll_Con: {
-    backgroundColor: COLOR.GREY,
-    flex: 1,
-  },
-});
 
 export default GeneralDashboard;
