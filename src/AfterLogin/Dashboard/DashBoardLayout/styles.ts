@@ -1,21 +1,6 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {scale, verticalScale} from 'react-native-size-matters';
-import COLOR from '../../Util/Color';
-import Label from '../../CommonComponent/Lable';
-import english from '../../Language/English';
-
-const DashboardLayout = () => {
-  return (
-    <View style={styles.main}>
-      <Label title={english.Dashboard} style={styles.s_Title} />
-      <Label
-        title={english.CheckUpcomig}
-        style={styles.des}
-      />
-    </View>
-  );
-};
+import { StyleSheet } from 'react-native';
+import { verticalScale, scale } from 'react-native-size-matters';
+import { COLOR } from '@Util';
 
 const styles = StyleSheet.create({
   main: {
@@ -55,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DashboardLayout;
+export default styles;

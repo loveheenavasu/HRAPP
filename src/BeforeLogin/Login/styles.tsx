@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
-import COLOR from '../../Util/Color';
+import {COLOR} from '@Util';
 
 const styles = StyleSheet.create({
   main_Con: {
@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     color: COLOR.PRIMARY,
     fontSize: scale(12),
     textDecorationLine: 'underline',
+  },
+  button_Con: {
+    height: verticalScale(38),
   },
 });
 

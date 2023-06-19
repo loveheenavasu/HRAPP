@@ -1,98 +1,104 @@
-import React, {useRef, useState} from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  KeyboardAvoidingView,
-  ScrollView,
-  Platform,
-  Keyboard,
-} from 'react-native';
-import EditText from '../../CommonComponent/EditText';
-import Label from '../../CommonComponent/Lable';
-import styles from './styles';
-import CustomButton from '../../CommonComponent/CustomButton';
+import React, {FC, useRef, useState} from 'react';
+import {TouchableOpacity, View, Keyboard, TextInput} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import Images from '../../Util/Images';
-import {isEmailValid} from '../../Util/Validator';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserLogin} from '../../Redux/Action/loginReducer';
-import {RootState} from '../../Redux/store';
-import Loader from '../../CommonComponent/Loader';
-import {verticalScale} from 'react-native-size-matters';
-import {TextInput} from 'react-native-gesture-handler';
-import Toast from '../../Util/Helper/ToastType';
+import {
+  CustomButton,
+  Label,
+  EditText,
+  WrapComponent,
+  Loader,
+} from '@CommonComponent';
+import {isEmailValid} from '@Validator';
+import {Images, Toast} from '@Util';
+import styles from './styles';
+import {getUserLogin} from '@src/Redux/Action/loginReducer';
+import {AppDispatch, RootState} from '@src/Redux/store';
+import strings from '@src/Language/strings';
 
-const Login = () => {
-  const dispatch = useDispatch();
+interface userData {
+  email: string;
+  password: string;
+  showPassword: boolean;
+}
+
+const Login: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const mUserData = useSelector((state: RootState) => state.loginReducer);
-  const [email, setEmail] = useState<string>('');
-  const [password, setpassword] = useState<string>('');
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const passwordRef = useRef<TextInput | null>(null);
+  const [loginData, setLoginData] = useState<userData>({
+    email: '',
+    password: '',
+    showPassword: true,
+  });
+
+  const passwordRef = useRef<TextInput>(null);
 
   const submit = () => {
+    const {email, password} = loginData;
     if (!email?.trim() && !password?.trim()) {
-      Toast.error('All fields are required');
-    } else if (!email.trim()) {
-      Toast.error('Please enter Email');
+      Toast.error(strings.AllFieldsRequired);
+    } else if (!email?.trim()) {
+      Toast.error(strings.PleaseEmail);
     } else if (!isEmailValid(email.trim())) {
-      Toast.error('Please enter valid Email');
+      Toast.error(strings.ValidEmail);
     } else if (!password.trim()) {
-      Toast.error('Please enter password');
+      Toast.error(strings.PleasePassword);
     } else {
       dispatch(
-        getUserLogin({email: email, name: 'Test Kumar', password: password}),
+        getUserLogin({
+          email: loginData?.email,
+          name: 'Guest',
+          password: loginData?.password,
+        }),
       );
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.main_Con}>
-      {mUserData?.hideLoader && <Loader />}
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <View style={styles.main}>
-          <Label title="Login to your Account" style={styles.title} />
-          <FastImage
-            style={styles.logo_Con}
-            source={Images.LoginDemoIcon}
-            resizeMode={FastImage.resizeMode.contain}
-          />
-          <EditText
-            Placholder="Email id"
-            Value={email}
-            OnChangeText={e => setEmail(e.trim())}
-            showImg
-            OnSubmit={() => passwordRef?.current.focus()}
-            ReturnKeyType="next"
-          />
-          <EditText
-            inputRef={passwordRef}
-            Placholder="Password"
-            Value={password}
-            OnChangeText={e => setpassword(e)}
-            showImg
-            showEye={true}
-            onClickSecure={() => setShowPassword(!showPassword)}
-            SecureText={showPassword}
-            OnSubmit={() => Keyboard.dismiss()}
-            ReturnKeyType="done"
-          />
-          <TouchableOpacity style={styles.forgotTxtBox}>
-            <Text style={styles.forgotTxt}>Forgot My Password</Text>
-          </TouchableOpacity>
-          <CustomButton
-            name="Login"
-            onPress={() => submit()}
-            btnStyle={{
-              height: verticalScale(38),
-            }}
-          />
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <WrapComponent>
+      <View style={styles.main}>
+        <Label title={strings.LoginAccount} style={styles.title} />
+        <FastImage
+          style={styles.logo_Con}
+          source={Images.LoginDemoIcon}
+          resizeMode={FastImage.resizeMode.contain}
+        />
+        <EditText
+          Placholder={strings.Email}
+          Value={loginData?.email}
+          OnChangeText={e => setLoginData({...loginData, email: e.trim()})}
+          showImg
+          OnSubmit={() => passwordRef?.current?.focus()}
+          ReturnKeyType="next"
+        />
+        <EditText
+          inputRef={passwordRef}
+          Placholder={strings.Password}
+          Value={loginData?.password}
+          OnChangeText={e => setLoginData({...loginData, password: e.trim()})}
+          showImg
+          showEye={true}
+          onClickSecure={() =>
+            setLoginData({
+              ...loginData,
+              showPassword: !loginData.showPassword,
+            })
+          }
+          SecureText={loginData.showPassword}
+          OnSubmit={() => Keyboard.dismiss()}
+          ReturnKeyType="done"
+        />
+        <TouchableOpacity style={styles.forgotTxtBox}>
+          <Label title={strings.ForgotPassword} style={styles.forgotTxt} />
+        </TouchableOpacity>
+        <CustomButton
+          name={strings.Login}
+          onPress={() => submit()}
+          btnStyle={styles.button_Con}
+        />
+        <Loader Visible={mUserData.hideLoader} />
+      </View>
+    </WrapComponent>
   );
 };
 export default Login;

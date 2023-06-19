@@ -1,29 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Login from './BeforeLogin/Login';
-import Dashboard from './AfterLogin/Dashboard';
-import * as Storage from './Service/Storage';
-import {UserData} from './Util/StorageKey';
-import CustomDrawerContent from './AfterLogin/CustomDrawer';
 import {scale} from 'react-native-size-matters';
-import Loader from './CommonComponent/Loader';
 import {useSelector, useDispatch} from 'react-redux';
-import {setUserCredential} from './Redux/Action/loginReducer';
-import GeneralDashboard from './AfterLogin/GeneralDashborad';
-import ChangePassword from './AfterLogin/ChangePassword';
-import ApplyLeave from './AfterLogin/Dashboard/ApplyLeave';
-import LeaveSummary from './AfterLogin/Dashboard/LeaveSummary';
-import LeaveAdjustment from './AfterLogin/Dashboard/LeaveAdjustment';
-import LeaveHistory from './AfterLogin/Dashboard/LeaveHistory';
-import UpComingViewAll from './AfterLogin/Dashboard/UpComingLeaveLayout/UpComingViewAll';
-import ViewPublicHolidayLayout from './AfterLogin/Dashboard/ViewPublicHoliday';
+import {StorageKey, Storage} from '@Util';
+import {Loader} from '@CommonComponent';
+import {setUserCredential} from '@src/Redux/Action/loginReducer';
+import {AppDispatch, RootState} from '@src/Redux/store';
+import Login from '@src/BeforeLogin/Login';
+import {
+  Dashboard,
+  CustomDrawerContent,
+  GeneralDashboard,
+  ChangePassword,
+  ApplyLeave,
+  LeaveSummary,
+  LeaveAdjustment,
+  LeaveHistory,
+  UpComingViewAll,
+  ViewPublicHolidayLayout,
+} from '@src/AfterLogin';
 
 const beforeLoginStack = createNativeStackNavigator();
 const afterDrawerLoginStack = createDrawerNavigator();
 
-const BeforeStack = () => {
+interface beforeStackProps {}
+
+const BeforeStack: FC<beforeStackProps> = () => {
   return (
     <NavigationContainer>
       <beforeLoginStack.Navigator
@@ -40,7 +44,9 @@ const BeforeStack = () => {
   );
 };
 
-const AfterLoginStack = () => {
+interface afterStackProps {}
+
+const AfterLoginStack: FC<afterStackProps> = () => {
   return (
     <NavigationContainer>
       <afterDrawerLoginStack.Navigator
@@ -90,36 +96,48 @@ const AfterLoginStack = () => {
   );
 };
 
-const Navigator = () => {
-  const dispatch = useDispatch();
-  const mUserData = useSelector(state => state.loginReducer);
-  const [userId, setUserId] = useState('');
-  const [showLoader, setShowLoader] = useState(true);
+interface dataProps {
+  userId: string;
+  showLoader: boolean;
+}
+
+const Navigator: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const mUserData = useSelector((state: RootState) => state.loginReducer);
+
+  const [data, setData] = useState<dataProps>({
+    userId: '',
+    showLoader: true,
+  });
 
   useEffect(() => {
-    Storage.getData(UserData).then(res => {
-      let mdata = JSON.parse(res);
+    Storage.getData(StorageKey.UserData).then(res => {
       if (res) {
+        let mdata = JSON.parse(res);
         dispatch(setUserCredential({...mdata, userId: '1'}));
-        setUserId('1');
-        setShowLoader(false);
+        setData({...data, userId: '1', showLoader: false});
       } else {
-        setShowLoader(false);
+        setData({...data, showLoader: false});
       }
     });
   }, [dispatch]);
 
   useEffect(() => {
     if (mUserData?.userId) {
-      setUserId(mUserData?.userId);
+      setData({...data, userId: mUserData?.userId, showLoader: false});
     } else {
-      setUserId('');
+      setData({...data, userId: ''});
     }
   }, [mUserData?.userId]);
-
   return (
     <>
-      {showLoader ? <Loader /> : userId ? <AfterLoginStack /> : <BeforeStack />}
+      {data?.showLoader ? (
+        <Loader Visible={data?.showLoader} />
+      ) : data?.userId ? (
+        <AfterLoginStack />
+      ) : (
+        <BeforeStack />
+      )}
     </>
   );
 };

@@ -1,42 +1,55 @@
 import React from 'react';
 import {useCallback, useEffect, useRef, useState} from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
-import Header from '../../../CommonComponent/Header';
-import COLOR from '../../../Util/Color';
-import {verticalScale} from 'react-native-size-matters';
 import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
   View,
   TextInput,
-  StyleSheet,
+  ScrollView,
 } from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
+import {verticalScale} from 'react-native-size-matters';
+import {Header} from '@CommonComponent';
+import {COLOR, HrMailngData, Toast} from '@Util';
 import LeaveDetailsLayout from './LeaveDetailsLayout';
-import {HrMailngData} from '../../../Util/DummyData';
 import LeaveBarChat from './LeaveBarChart';
 import LeaveTypeLayout from './LeaveTypeLayout';
 import LeaveUnitLayout from './LeaveUnitLayout';
 import NotifyPersonLayout from './NotifyPersonLayout';
-import {useIsFocused} from '@react-navigation/native';
-import Toast from '../../../Util/Helper/ToastType';
+import styles from './styles';
+
+interface dataProps {
+  showLeaveType: boolean;
+  showLeaveUnit: boolean;
+  showLeaveCalendar: boolean;
+  selectedLeaveUnit: string;
+  leaveJson: Object;
+  leaveArray: [];
+  notifyPersonName: string;
+  remark: string;
+  showNotifyList: boolean;
+  selectedNotifyList: [];
+}
 
 const ApplyLeave = () => {
-  const [showLeaveType, setShowLeaveType] = useState<boolean>(false);
-  const [showLeaveUnit, setShowLeaveUnit] = useState<boolean>(false);
-  const [selectedLeaveUnit, setSelectedLeaveUnit] = useState<string>('');
-  const [showLeaveCalendar, setShowLeaveCalendar] = useState<boolean>(false);
-  const [leaveJson, setLeaveJson] = useState<Object>({});
-  const [leaveArray, setLeaveArray] = useState<any>([]);
-  const [selectedLeave, setSelectedLeave] = useState(
-    Array(leaveArray?.length).fill(''),
-  );
-  const [notifyPersonName, setNotifyPersoneName] = useState<string>('');
-  const [notifyList, setNotifyList] = useState<any>(HrMailngData);
-  const [remark, setRemark] = useState<string>('');
-  const [showNotifyList, setShowNotifyList] = useState<boolean>(false);
-  const [selectedNotifyList, setSelectedNotifyList] = useState<any>([]);
+  const [data, setData] = useState<dataProps>({
+    showLeaveType: false,
+    showLeaveUnit: false,
+    showLeaveCalendar: false,
+    selectedLeaveUnit: '',
+    leaveJson: {},
+    leaveArray: [],
+    notifyPersonName: '',
+    remark: '',
+    showNotifyList: false,
+    selectedNotifyList: [],
+  });
 
+  const [selectedLeave, setSelectedLeave] = useState(
+    Array(data?.leaveArray?.length).fill(''),
+  );
+  const [notifyList, setNotifyList] = useState<any>(HrMailngData);
   const scrollRef = useRef<ScrollView>(null);
   const remarkRef = useRef<TextInput>(null);
   const notifyRemark = useRef<TextInput>(null);
@@ -44,9 +57,7 @@ const ApplyLeave = () => {
 
   useEffect(() => {
     scrollRef?.current?.scrollTo({x: 0, y: 0, animated: true});
-    setLeaveArray([]);
-    setLeaveJson({});
-    setSelectedLeaveUnit('');
+    setData({...data, leaveArray: [], leaveJson: {}, selectedLeaveUnit: ''});
   }, [focus]);
 
   useEffect(() => {
@@ -65,25 +76,24 @@ const ApplyLeave = () => {
   }, []);
 
   const clickUnit = useCallback(item => {
-    setSelectedLeaveUnit(item?.value);
-    setShowLeaveUnit(false);
+    setData({...data, selectedLeaveUnit: item?.value, showLeaveUnit: false});
   }, []);
 
   const showHideLeaveUnit = useCallback(() => {
-    setShowLeaveUnit(!showLeaveUnit);
-  }, [showLeaveUnit]);
+    setData({...data, showLeaveUnit: !data.showLeaveUnit});
+  }, [data?.showLeaveUnit]);
 
   const showHideLeaveCalendar = useCallback(() => {
-    setShowLeaveCalendar(!showLeaveCalendar);
-  }, [showLeaveCalendar]);
+    setData({...data, showLeaveCalendar: !data?.showLeaveCalendar});
+  }, [data?.showLeaveCalendar]);
 
   const clickLeaveType = useCallback((item: any) => {
-    setShowLeaveType(false);
+    setData({...data, showLeaveType: false});
   }, []);
 
   const clickCalendar = useCallback(
     (item: any) => {
-      let mLeaveArray = leaveArray;
+      let mLeaveArray = data?.leaveArray;
       if (mLeaveArray?.includes(item?.dateString)) {
         let mNewArray = mLeaveArray.filter(function (ITEM: any) {
           return ITEM !== item?.dateString;
@@ -92,7 +102,7 @@ const ApplyLeave = () => {
       } else {
         mLeaveArray.push(item?.dateString);
       }
-      setLeaveArray(mLeaveArray);
+      setData({...data, leaveArray: data?.mLeaveArray});
       let mark: any = {};
       for (let index = 0; index < mLeaveArray.length; index++) {
         mark[mLeaveArray[index]] = {
@@ -103,10 +113,10 @@ const ApplyLeave = () => {
           selectedColor: COLOR.PRIMARY,
         };
       }
-      setLeaveJson(mark);
-      setSelectedLeave(Array(leaveArray?.length).fill(''));
+      setData({...data, leaveJson: mark});
+      setSelectedLeave(Array(data?.leaveArray?.length).fill(''));
     },
-    [leaveArray],
+    [data?.leaveArray],
   );
 
   const clickLeaveOption = useCallback(
@@ -120,15 +130,15 @@ const ApplyLeave = () => {
 
   const clickDeleteLeave = useCallback(
     (index: number) => {
-      const index1 = leaveArray.indexOf(index);
+      const index1 = data?.leaveArray.indexOf(index);
       let newSelectedLeave = selectedLeave.filter((INDEX, item) => {
         return item !== index1;
       });
       setSelectedLeave(newSelectedLeave);
-      let newArary = leaveArray.filter(item => {
+      let newArary = data?.leaveArray.filter(item => {
         return item !== index;
       });
-      setLeaveArray(newArary);
+      setData({...data, leaveArray: newArary});
       let mark: any = {};
       for (let index = 0; index < newArary.length; index++) {
         mark[newArary[index]] = {
@@ -139,14 +149,14 @@ const ApplyLeave = () => {
           selectedColor: COLOR.PRIMARY,
         };
       }
-      setLeaveJson(mark);
+      setData({...data, leaveJson: mark});
     },
-    [leaveArray, selectedLeave],
+    [data?.leaveArray, selectedLeave],
   );
   const editNotifyPerson = useCallback(
     (txt: string) => {
-      setNotifyPersoneName(txt);
-      setShowNotifyList(true);
+      const {selectedNotifyList} = data;
+      setData({...data, notifyPersonName: txt, showNotifyList: true});
       if (txt) {
         let newArray = HrMailngData.filter(item => {
           const itemData = item.email.toUpperCase();
@@ -166,17 +176,18 @@ const ApplyLeave = () => {
         setNotifyList(updatedNotifyList);
       }
     },
-    [showNotifyList, selectedNotifyList],
+    [data?.showNotifyList, data?.selectedNotifyList],
   );
 
   const editRemark = useCallback((txt: string) => {
-    setRemark(txt);
+    setData({...data, remark: txt});
   }, []);
 
   const clickCheckBox = useCallback(
     (ITEM: any) => {
+      const {selectedNotifyList} = data;
       let newArray = [];
-      let selectedId = [...selectedNotifyList];
+      let selectedId = [...data?.selectedNotifyList];
       for (let index = 0; index < notifyList.length; index++) {
         if (notifyList[index]?.id === ITEM?.id) {
           newArray.push({
@@ -186,12 +197,12 @@ const ApplyLeave = () => {
           });
           if (!notifyList[index].selected) {
             selectedId.push(ITEM?.id);
-            setSelectedNotifyList(selectedId);
+            setData({...data, selectedNotifyList: selectedId});
           } else {
             const updatedArray = selectedNotifyList.filter(
               item => item !== notifyList[index].id,
             );
-            setSelectedNotifyList(updatedArray);
+            setData({...data, selectedNotifyList: updatedArray});
           }
         } else {
           newArray.push(notifyList[index]);
@@ -199,10 +210,11 @@ const ApplyLeave = () => {
       }
       setNotifyList(newArray);
     },
-    [notifyList, selectedNotifyList],
+    [notifyList, data?.selectedNotifyList],
   );
 
   const clickSubmit = useCallback(() => {
+    const {selectedLeaveUnit, leaveArray, selectedNotifyList} = data;
     Keyboard.dismiss();
     const isEmpty = selectedLeave.every(item => item.trim() === '');
     if (!selectedLeaveUnit) {
@@ -216,12 +228,17 @@ const ApplyLeave = () => {
     } else {
       Toast.success('Data submit successfully');
     }
-  }, [selectedLeaveUnit, leaveArray, selectedLeave, selectedNotifyList]);
+  }, [
+    data?.selectedLeaveUnit,
+    data?.leaveArray,
+    selectedLeave,
+    data?.selectedNotifyList,
+  ]);
 
   const openCloseNotifyDropDown = useCallback(() => {
     Keyboard.dismiss();
-    setShowNotifyList(!showNotifyList);
-  }, [showNotifyList]);
+    setData({...data, showNotifyList: !data?.showNotifyList});
+  }, [data?.showNotifyList]);
 
   return (
     <KeyboardAvoidingView
@@ -238,37 +255,37 @@ const ApplyLeave = () => {
         <View style={styles.main_Child}>
           <LeaveTypeLayout onClickType={clickLeaveType} />
           <LeaveUnitLayout
-            selectedUnit={selectedLeaveUnit}
+            selectedUnit={data?.selectedLeaveUnit}
             onClickUnit={clickUnit}
             onClickLeaveUnit={showHideLeaveUnit}
-            showLeaveUnit={showLeaveUnit}
-            showLeaveCalendar={showLeaveCalendar}
+            showLeaveUnit={data?.showLeaveUnit}
+            showLeaveCalendar={data?.showLeaveCalendar}
             onClickLeavePeriod={showHideLeaveCalendar}
             onClickCalendar={clickCalendar}
-            leaveJson={leaveJson}
-            leavePeriodArray={leaveArray}
+            leaveJson={data?.leaveJson}
+            leavePeriodArray={data?.leaveArray}
           />
-          {!showLeaveCalendar && (
+          {!data?.showLeaveCalendar && (
             <LeaveDetailsLayout
-              list={leaveArray}
+              list={data?.leaveArray}
               selectedLeaveType={selectedLeave}
               clickLeaveFullHalf={clickLeaveOption}
               deleteLeave={clickDeleteLeave}
             />
           )}
           <NotifyPersonLayout
-            value={notifyPersonName}
+            value={data?.notifyPersonName}
             onChangeText={editNotifyPerson}
             list={notifyList}
             onClickCheckBox={clickCheckBox}
-            remarkValue={remark}
+            remarkValue={data?.remark}
             onRemarkChange={editRemark}
             refRemark={remarkRef}
             refNotify={notifyRemark}
             clickSubmitButton={clickSubmit}
             clickNotifyDropDown={openCloseNotifyDropDown}
-            showList={showNotifyList}
-            selectedList={selectedNotifyList}
+            showList={data?.showNotifyList}
+            selectedList={data?.selectedNotifyList}
           />
           <LeaveBarChat />
         </View>
@@ -277,21 +294,4 @@ const ApplyLeave = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
-  sub_Main: {
-    backgroundColor: COLOR.GREY,
-    flex: 1,
-  },
-  content_Con: {
-    paddingBottom: verticalScale(100),
-  },
-  main_Child: {
-    width: '96%',
-    height: '100%',
-    marginHorizontal: '2%',
-  },
-});
 export default ApplyLeave;

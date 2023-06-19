@@ -1,17 +1,23 @@
-import React from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {FC} from 'react';
+import {View, TouchableOpacity} from 'react-native';
 import Summary from 'react-native-vector-icons/Ionicons';
 import Calender from 'react-native-vector-icons/AntDesign';
 import Adjust from 'react-native-vector-icons/Feather';
-import Label from '../../CommonComponent/Lable';
-import {scale, verticalScale} from 'react-native-size-matters';
-import COLOR from '../../Util/Color';
-import {useNavigation} from '@react-navigation/native';
+import {scale} from 'react-native-size-matters';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {Label} from '@CommonComponent';
+import styles from './styles';
 
 let mArray = ['Apply Leave', 'Leave Summary', 'Leave Adjustment'];
 
-const LeaveLayout = () => {
-  const navigation = useNavigation<any>();
+interface navigationProps {
+  ApplyLeave: undefined;
+  LeaveSummary: undefined;
+  LeaveAdjustment: undefined;
+}
+
+const LeaveLayout: FC = () => {
+  const navigation = useNavigation<NavigationProp<navigationProps>>();
   return (
     <View style={styles.main}>
       <View style={styles.rowView}>
@@ -52,47 +58,5 @@ const LeaveLayout = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    width: '100%',
-    maxHeight: verticalScale(500),
-    marginVertical: verticalScale(3),
-    borderRadius: scale(6),
-    paddingHorizontal: scale(10),
-    backgroundColor: COLOR.WHITE,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.32,
-    shadowRadius: 5.46,
-    elevation: 9,
-    paddingBottom: scale(10),
-  },
-  rowView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: scale(5),
-    marginVertical: verticalScale(5),
-    justifyContent: 'space-around',
-  },
-  Leave_Menu_wrap: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: verticalScale(10),
-  },
-  leaveTxt: {
-    marginTop: verticalScale(3),
-    marginBottom: 0,
-    color: COLOR.BLACK,
-    opacity: 0.9,
-    fontSize: scale(12),
-  },
-  icon: {
-    opacity: 0.6,
-  },
-});
 
 export default LeaveLayout;
