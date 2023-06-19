@@ -58,7 +58,12 @@ const ApplyLeave: FC = () => {
 
   useEffect(() => {
     scrollRef?.current?.scrollTo({x: 0, y: 0, animated: true});
-    setData({...data, leaveArray: [], leaveJson: {}, selectedLeaveUnit: ''});
+    setData(predata => ({
+      ...predata,
+      leaveArray: [],
+      leaveJson: {},
+      selectedLeaveUnit: '',
+    }));
   }, [focus]);
 
   useEffect(() => {
@@ -77,19 +82,26 @@ const ApplyLeave: FC = () => {
   }, []);
 
   const clickUnit = useCallback(item => {
-    setData({...data, selectedLeaveUnit: item?.value, showLeaveUnit: false});
+    setData(predata => ({
+      ...predata,
+      selectedLeaveUnit: item?.value,
+      showLeaveUnit: false,
+    }));
   }, []);
 
   const showHideLeaveUnit = useCallback(() => {
-    setData({...data, showLeaveUnit: !data.showLeaveUnit});
+    setData(predata => ({...predata, showLeaveUnit: !data.showLeaveUnit}));
   }, [data?.showLeaveUnit]);
 
   const showHideLeaveCalendar = useCallback(() => {
-    setData({...data, showLeaveCalendar: !data?.showLeaveCalendar});
+    setData(predata => ({
+      ...predata,
+      showLeaveCalendar: !data?.showLeaveCalendar,
+    }));
   }, [data?.showLeaveCalendar]);
 
-  const clickLeaveType = useCallback((item: any) => {
-    setData({...data, showLeaveType: false});
+  const clickLeaveType = useCallback(() => {
+    setData(predata => ({...predata, showLeaveType: false}));
   }, []);
 
   const clickCalendar = useCallback(
@@ -103,7 +115,7 @@ const ApplyLeave: FC = () => {
       } else {
         mLeaveArray.push(item?.dateString);
       }
-      setData({...data, leaveArray: data?.mLeaveArray});
+      setData(predata => ({...predata, leaveArray: mLeaveArray}));
       let mark: any = {};
       for (let index = 0; index < mLeaveArray.length; index++) {
         mark[mLeaveArray[index]] = {
@@ -114,7 +126,7 @@ const ApplyLeave: FC = () => {
           selectedColor: COLOR.PRIMARY,
         };
       }
-      setData({...data, leaveJson: mark});
+      setData(predata => ({...predata, leaveJson: mark}));
       setSelectedLeave(Array(data?.leaveArray?.length).fill(''));
     },
     [data?.leaveArray],
@@ -139,10 +151,10 @@ const ApplyLeave: FC = () => {
       let newArary = data?.leaveArray.filter(item => {
         return item !== index;
       });
-      setData({...data, leaveArray: newArary});
+      setData(predata => ({...predata, leaveArray: newArary}));
       let mark: any = {};
-      for (let index = 0; index < newArary.length; index++) {
-        mark[newArary[index]] = {
+      for (let index3 = 0; index3 < newArary.length; index3++) {
+        mark[newArary[index3]] = {
           color: COLOR.PRIMARY,
           textColor: COLOR.WHITE,
           selected: true,
@@ -150,14 +162,18 @@ const ApplyLeave: FC = () => {
           selectedColor: COLOR.PRIMARY,
         };
       }
-      setData({...data, leaveJson: mark});
+      setData(predata => ({...predata, leaveJson: mark}));
     },
     [data?.leaveArray, selectedLeave],
   );
   const editNotifyPerson = useCallback(
     (txt: string) => {
       const {selectedNotifyList} = data;
-      setData({...data, notifyPersonName: txt, showNotifyList: true});
+      setData(predata => ({
+        ...predata,
+        notifyPersonName: txt,
+        showNotifyList: true,
+      }));
       if (txt) {
         let newArray = HrMailngData.filter(item => {
           const itemData = item.email.toUpperCase();
@@ -181,7 +197,7 @@ const ApplyLeave: FC = () => {
   );
 
   const editRemark = useCallback((txt: string) => {
-    setData({...data, remark: txt});
+    setData(predata => ({...predata, remark: txt}));
   }, []);
 
   const clickCheckBox = useCallback(
@@ -198,12 +214,15 @@ const ApplyLeave: FC = () => {
           });
           if (!notifyList[index].selected) {
             selectedId.push(ITEM?.id);
-            setData({...data, selectedNotifyList: selectedId});
+            setData(predata => ({...predata, selectedNotifyList: selectedId}));
           } else {
             const updatedArray = selectedNotifyList.filter(
               item => item !== notifyList[index].id,
             );
-            setData({...data, selectedNotifyList: updatedArray});
+            setData(predata => ({
+              ...predata,
+              selectedNotifyList: updatedArray,
+            }));
           }
         } else {
           newArray.push(notifyList[index]);
@@ -238,7 +257,7 @@ const ApplyLeave: FC = () => {
 
   const openCloseNotifyDropDown = useCallback(() => {
     Keyboard.dismiss();
-    setData({...data, showNotifyList: !data?.showNotifyList});
+    setData(predata => ({...predata, showNotifyList: !data?.showNotifyList}));
   }, [data?.showNotifyList]);
 
   return (
@@ -286,7 +305,6 @@ const ApplyLeave: FC = () => {
             clickSubmitButton={clickSubmit}
             clickNotifyDropDown={openCloseNotifyDropDown}
             showList={data?.showNotifyList}
-            selectedList={data?.selectedNotifyList}
           />
           <LeaveBarChat />
         </View>

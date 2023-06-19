@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import COLOR from '../../../../Util/Color';
 import {scale, verticalScale} from 'react-native-size-matters';
+import {COLOR} from '@Util';
 
 const styles = StyleSheet.create({
   main: {
@@ -114,11 +114,11 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderColor: COLOR.BLACK,
   },
-  upIcon_Con:{
+  upIcon_Con: {
     width: '10%',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });
 
 export default styles;

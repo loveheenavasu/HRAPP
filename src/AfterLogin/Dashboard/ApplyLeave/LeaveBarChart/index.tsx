@@ -41,7 +41,7 @@ const leaveData = [
   },
 ];
 
-const LeaveBarChat: FC = () => {
+const LeaveBarChart: FC = () => {
   return (
     <View style={[commonStyle.main, styles.mainsub]}>
       <Label title={strings?.Annual} style={styles.title_Label} />
@@ -53,29 +53,27 @@ const LeaveBarChat: FC = () => {
           textBackgroundColor="white"
           textBackgroundRadius={22}
           data={pieData}
-          fontStyle={'normal'}
+          fontStyle="normal"
           radius={scale(80)}
           labelsPosition="mid"
         />
       </View>
       <View style={commonStyle.rowView}>
-        {detailsData?.map(i => {
-          return (
-            <>
-              <View style={[styles.rect, {backgroundColor: i?.color}]}></View>
-              <Label title={i.text} style={styles.total_Leave_Label} />
-            </>
-          );
-        })}
+        {detailsData?.map(i => (
+          <React.Fragment key={i.id}>
+            <View style={[styles.rect, {backgroundColor: i?.color}]} />
+            <Label title={i.text} style={styles.total_Leave_Label} />
+          </React.Fragment>
+        ))}
       </View>
-      {leaveData?.map((item, index) => (
-        <View key={index} style={styles.list_Main}>
-          <Label title={item?.title} style={styles.total_Leave_Label} />
-          <Label title={item?.txt} style={styles.total_Leave_Label} />
+      {leaveData?.map(item => (
+        <View key={item.id} style={styles.list_Main}>
+          <Label title={item.title} style={styles.total_Leave_Label} />
+          <Label title={item.txt} style={styles.total_Leave_Label} />
         </View>
       ))}
     </View>
   );
 };
 
-export default LeaveBarChat;
+export default LeaveBarChart;

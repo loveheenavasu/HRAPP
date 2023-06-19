@@ -50,8 +50,8 @@ const LeaveDetailsLayout: FC<Props> = ({
             firstChildStyle={styles.first_Child_Con}
             secondChildStyle={styles.second_Child_Con}
             onClick={() => {
-              let newShowDropdown = showDropdown.map((value, idx) =>
-                idx === index ? !value : false,
+              let newShowDropdown = showDropdown.map((Value, idx) =>
+                idx === index ? !Value : false,
               );
               setShowDropdown(newShowDropdown);
             }}

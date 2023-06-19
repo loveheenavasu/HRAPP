@@ -58,7 +58,7 @@ const DropDown: FC<Props> = ({
             <TouchableOpacity
               key={index}
               style={[
-                parseInt(selectedValue) === item?.value
+                parseInt(selectedValue, 10) === item?.value
                   ? styles.year_Value_ConTwo
                   : styles.year_Value_Con,
               ]}

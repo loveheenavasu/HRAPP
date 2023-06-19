@@ -102,7 +102,7 @@ const LeaveHistory: FC = () => {
       const getDateStr = (month: string, day: string) => {
         const paddedMonth = (monthArray.indexOf(month) + 1)
           .toString()
-          .padStart(2, '0');
+          .padStart(2, '0', 10);
         return `${currentYear}-${paddedMonth}-${day}`;
       };
       const monthName = getDateStr(selectedMonth, '01');
