@@ -32,7 +32,7 @@ const UpComingLeaveLayout: FC<Props> = ({list}) => {
         <Label title={strings.UPCOMINGLEAVE} style={styles.s_Title} />
         <TouchableOpacity
           onPress={() => navigation.navigate('UpComingViewAll', {list: list})}>
-          <Label style={styles.viewAll_Label} title={strings.ViewALL} />
+          <Label style={styles.viewAll_Label} title={strings.ViewAll} />
         </TouchableOpacity>
       </View>
       <FlatList

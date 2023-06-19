@@ -1,26 +1,24 @@
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {
-  StyleSheet,
   View,
   DeviceEventEmitter,
   Animated,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {scale, verticalScale} from 'react-native-size-matters';
-import Label from '../Lable';
-import COLOR from '../../Util/Color';
-import english from '../../Language/English';
+import {COLOR} from '@Util';
+import {Label} from '@CommonComponent';
+import styles from './styles';
+import strings from '@src/Language/strings';
 
 let timeOut: any = null;
 
-const Toast = () => {
+const Toast: FC = () => {
   const {height: windowHeight} = Dimensions.get('screen');
   const popAnim = useRef(new Animated.Value(windowHeight * -1)).current;
-  const successHeader = 'Success!';
-  const failHeader = 'Failed!';
   const [status, setStatus] = useState<string>('');
   const [msg, setMessage] = useState<string>('');
 
@@ -81,7 +79,9 @@ const Toast = () => {
         <View style={styles.toastText}>
           <Label
             style={styles.title}
-            title={status === 'success' ? `${english.Success}` :`${english.Failed}`}
+            title={
+              status === 'success' ? `${strings.Success}` : `${strings.Failed}`
+            }
           />
           <Label style={styles.msg_Label} title={msg} />
         </View>
@@ -92,47 +92,5 @@ const Toast = () => {
     </Animated.View>
   );
 };
-const styles = StyleSheet.create({
-  toast_Con: {
-    width: '90%',
-    marginHorizontal: '5%',
-    height: verticalScale(60),
-    backgroundColor: COLOR.PRIMARY,
-    zIndex: 99999,
-    borderRadius: scale(10),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    position: 'absolute',
-    top: 0,
-  },
-  toastRow: {
-    width: '90%',
-    height: '100%',
-    marginHorizontal: '5%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  toastText: {
-    width: '70%',
-    padding: 2,
-  },
-  title: {
-    fontWeight: 'bold',
-    marginVertical: scale(2),
-    color: COLOR.WHITE,
-    opacity: 0.8,
-  },
-  msg_Label: {
-    marginVertical: 0,
-    color: COLOR.WHITE,
-  },
-});
 
 export default Toast;

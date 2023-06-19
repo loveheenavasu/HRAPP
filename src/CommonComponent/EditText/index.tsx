@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   TextInput,
-  StyleSheet,
   TextStyle,
   KeyboardTypeOptions,
   View,
   ViewStyle,
   TouchableOpacity,
 } from 'react-native';
-import COLOR from '../../Util/Color';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {scale} from 'react-native-size-matters';
 import User from 'react-native-vector-icons/FontAwesome';
 import Password from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {COLOR} from '@Util';
+import styles from './styles';
+
 interface Props {
   Placholder?: string;
   Value: string | undefined;
@@ -30,24 +31,22 @@ interface Props {
   multiline?: boolean;
 }
 
-function EditText(props: Props): JSX.Element {
-  const {
-    Placholder,
-    Value,
-    OnChangeText,
-    Style,
-    inputRef,
-    ReturnKeyType,
-    OnSubmit,
-    KeyboradType,
-    showImg,
-    showEye,
-    onClickSecure,
-    SecureText,
-    outerBoxStyle,
-    multiline,
-  } = props;
-
+const EditText: FC<Props> = ({
+  Placholder,
+  Value,
+  OnChangeText,
+  Style,
+  inputRef,
+  ReturnKeyType,
+  OnSubmit,
+  KeyboradType,
+  showImg,
+  showEye,
+  onClickSecure,
+  SecureText,
+  outerBoxStyle,
+  multiline,
+}) => {
   return (
     <>
       <View style={[styles.inputBox, {...outerBoxStyle}]}>
@@ -92,36 +91,6 @@ function EditText(props: Props): JSX.Element {
       </View>
     </>
   );
-}
-
-const styles = StyleSheet.create({
-  main: {
-    height: verticalScale(40),
-    fontSize: scale(13),
-    flex: 1,
-    color: COLOR.BLACK,
-  },
-  inputBox: {
-    flexDirection: 'row',
-    paddingHorizontal: '2%',
-    borderWidth: scale(0.6),
-    marginTop: verticalScale(20),
-    width: '98%',
-    alignSelf: 'center',
-    borderRadius: 7,
-    borderColor: COLOR.BLACK,
-    fontSize: scale(17),
-  },
-  imgBox: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: scale(6),
-  },
-  eyeBox: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: scale(4),
-  },
-});
+};
 
 export default EditText;

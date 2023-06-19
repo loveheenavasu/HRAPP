@@ -1,12 +1,6 @@
 import React, {FC} from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import {COLOR} from '@Util';
-import {verticalScale} from 'react-native-size-matters';
+import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import styles from './styles';
 
 interface Props {
   children: React.ReactNode;
@@ -20,14 +14,5 @@ const WrapComponent: FC<Props> = ({children}) => {
     </KeyboardAvoidingView>
   );
 };
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: COLOR.WHITE,
-  },
-  scroll: {
-    flexGrow: 1,
-    paddingBottom: verticalScale(80),
-  },
-});
+
 export default WrapComponent;

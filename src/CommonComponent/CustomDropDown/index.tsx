@@ -1,10 +1,11 @@
 import React, {FC, useRef, useState} from 'react';
 import {FlatList, Modal, TextStyle} from 'react-native';
-import {View, TouchableOpacity, ViewStyle, StyleSheet} from 'react-native';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {View, TouchableOpacity, ViewStyle} from 'react-native';
+import {scale} from 'react-native-size-matters';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import COLOR from '../../Util/Color';
-import Label from '../Lable';
+import styles from './styles';
+import {COLOR} from '@Util';
+import {Label} from '@CommonComponent';
 
 interface Props {
   containerStyle?: ViewStyle;
@@ -120,64 +121,4 @@ const Custom: FC<Props> = ({
   );
 };
 
-const styles = (
-  selected: string,
-  dropdownWidth: number,
-  dropdownTop: number,
-  dropdownLeft: number,
-) =>
-  StyleSheet.create({
-    main: {
-      width: '100%',
-      height: verticalScale(40),
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexDirection: 'row',
-      paddingHorizontal: scale(10),
-      borderColor: COLOR.LIGHT_GREY,
-      borderWidth: scale(0.5),
-      borderRadius: scale(5),
-    },
-    overLay_Con: {
-      height: '100%',
-      width: '100%',
-    },
-    label: {
-      fontSize: 14,
-      color: '#000',
-    },
-    dropdown: {
-      position: 'absolute',
-      backgroundColor: '#fff',
-      shadowColor: '#000000',
-      shadowRadius: 4,
-      shadowOffset: {height: 4, width: 0},
-      shadowOpacity: 0.5,
-      minHeight: verticalScale(40),
-      justifyContent: 'center',
-      width: dropdownWidth,
-      top: dropdownTop,
-      left: dropdownLeft,
-      elevation: 7,
-    },
-    list_Con: {
-      width: '100%',
-      height: verticalScale(40),
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-      borderBottomWidth: scale(0.5),
-      borderBottomColor: COLOR.LIGHT_GREY,
-      paddingHorizontal: scale(10),
-    },
-    title_Lable: {
-      color: selected ? COLOR.BLACK : COLOR.LIGHT_GREY,
-      opacity: selected ? 0.8 : 1,
-      maxWidth: '80%',
-      marginVertical: 0,
-    },
-    list_Label: {
-      marginVertical: 0,
-      paddingLeft: scale(5),
-    },
-  });
 export default Custom;

@@ -1,14 +1,10 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ViewStyle,
-  TextStyle,
-} from 'react-native';
-import COLOR from '../../Util/Color';
+import React, {FC} from 'react';
+import {Text, TouchableOpacity, ViewStyle, TextStyle} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import Plus from 'react-native-vector-icons/AntDesign';
+import styles from './styles';
+import {COLOR} from '@Util';
+
 interface Props {
   onPress?: (txt: any) => void;
   name: string;
@@ -17,8 +13,13 @@ interface Props {
   addLogo?: boolean;
 }
 
-const CustomButton = (props: Props) => {
-  const {name, onPress, btnStyle, txtStyle, addLogo} = props;
+const CustomButton: FC<Props> = ({
+  name,
+  onPress,
+  btnStyle,
+  txtStyle,
+  addLogo,
+}) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.btn, {...btnStyle}]}>
       {addLogo && <Plus name="plus" size={scale(11)} color={COLOR.WHITE} />}
@@ -28,18 +29,3 @@ const CustomButton = (props: Props) => {
 };
 
 export default CustomButton;
-
-const styles = StyleSheet.create({
-  btn: {
-    alignSelf: 'center',
-    width: '100%',
-    backgroundColor: COLOR.PRIMARY,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 7,
-  },
-  txt: {
-    color: COLOR.WHITE,
-    fontSize: scale(14),
-  },
-});

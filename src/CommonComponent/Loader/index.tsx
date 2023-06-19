@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import {COLOR} from '@Util';
+import styles from './styles';
 
 interface Props {
   Visible: boolean;
@@ -17,18 +18,5 @@ const Loader: FC<Props> = ({Visible}) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    zIndex: 99999,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default Loader;
